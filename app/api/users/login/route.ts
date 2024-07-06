@@ -5,6 +5,7 @@ import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 
 import { sendOtpEmail } from "@/utils/otpHnadler";
+import { generateToken } from "@/utils/jwtHandler";
 
 // Define the Zod schema for request validation
 const loginSchema = z.object({
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
     await user.save()
     // Create a session or JWT token here for the user
     // This is a placeholder. You would typically use a library to handle sessions or JWT tokens.
-    const token = "your_jwt_token_or_session_id";
+    const token = await generateToken(user);
 
     return NextResponse.json(
       { message: "Login successful", token },
