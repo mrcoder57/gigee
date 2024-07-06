@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 import { z } from "zod";
-import { transporter } from "@/utils/otpHnadler";
 import { sendOtpEmail } from "@/utils/otpHnadler";
 // const signUpSchema = z.object({
 //   username: z.string().min(3, "Username must be at least 3 characters long"),
@@ -48,6 +47,8 @@ export async function POST(req: NextRequest) {
   try {
     await newUser.save();
     await sendOtpEmail(email);
+    
+   
     return NextResponse.json(
       { message: "User created successfully", newUser },
       { status: 201 }
