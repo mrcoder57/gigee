@@ -1,7 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 
 type Props = {};
@@ -28,7 +27,7 @@ const UserMenu = (props: Props) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+           
           </div>
         </div>
       </div>
