@@ -9,11 +9,13 @@ export const transporter = nodemailer.createTransport({
     pass: process.env.pass,
   },
 });
-
-export const sendOtpEmail = async (email: string) => {
+export const generateOtp=()=>{
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  return otp
+}
+export const sendOtpEmail = async (email: string,otp:string) => {
   try {
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    console.log(email);
+   
     await transporter.sendMail({
       from: "gigbnbverifi@gmail.com",
       to: email,

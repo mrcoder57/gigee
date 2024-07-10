@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 import { z } from "zod";
-import { sendOtpEmail } from "@/utils/otpHnadler";
+import { generateOtp, sendOtpEmail } from "@/utils/otpHnadler";
 // const signUpSchema = z.object({
 //   username: z.string().min(3, "Username must be at least 3 characters long"),
 //   email: z.string().email("Invalid email address"),
@@ -11,7 +11,7 @@ import { sendOtpEmail } from "@/utils/otpHnadler";
 // });
 
 export async function POST(req: NextRequest) {
-  const { username, email, password } = await req.json();
+  const { username, email, password,userRole } = await req.json();
 
   if (!username || !email || !password) {
     return NextResponse.json(
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   }
 
   
-  const otp=await sendOtpEmail(email)
+  const otp=await generateOtp();
 
  
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -42,11 +42,12 @@ export async function POST(req: NextRequest) {
     email,
     password: hashedPassword,
     otp: otp,
+    userRole:userRole
   });
 
   try {
     await newUser.save();
-    await sendOtpEmail(email);
+    await sendOtpEmail(email,otp);
     
    
     return NextResponse.json(
