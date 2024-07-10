@@ -4,7 +4,7 @@ import { verifyToken } from "@/utils/jwtHandler";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-export const gigSchema = z.object({
+ const gigSchema = z.object({
   title: z.string().nonempty(),
   description: z.string().nonempty(),
   price: z.number().positive(),
