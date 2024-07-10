@@ -75,50 +75,50 @@ export async function DELETE(req: any, { params }: any) {
   }
 }
 
-export async function PUT(req: any, { params }: any) {
-  try {
-    await connectToDb();
+// export async function PUT(req: any, { params }: any) {
+//   try {
+//     await connectToDb();
 
-    const tokenError = verifyToken(req);
-    if (tokenError) {
-      return NextResponse.json(tokenError, { status: 401 });
-    }
+//     const tokenError = verifyToken(req);
+//     if (tokenError) {
+//       return NextResponse.json(tokenError, { status: 401 });
+//     }
 
-    const { gigId } = params;
-    const userId = req.userId;
-    const isAdmin = req.isAdmin;
+//     const { gigId } = params;
+//     const userId = req.userId;
+//     const isAdmin = req.isAdmin;
 
-    const { title, description, price, images } = await req.json();
+//     const { title, description, price, images } = await req.json();
 
-    const gig = await Gig.findById(gigId);
-    if (!gig) {
-      return NextResponse.json({ message: "Gig not found" }, { status: 404 });
-    }
+//     const gig = await Gig.findById(gigId);
+//     if (!gig) {
+//       return NextResponse.json({ message: "Gig not found" }, { status: 404 });
+//     }
 
-    if ((gig as any).userId.toString() !== userId && !isAdmin) {
-      return NextResponse.json(
-        { message: "Access denied. You are not the owner or an admin." },
-        { status: 403 }
-      );
-    }
+//     if ((gig as any).userId.toString() !== userId && !isAdmin) {
+//       return NextResponse.json(
+//         { message: "Access denied. You are not the owner or an admin." },
+//         { status: 403 }
+//       );
+//     }
 
-    const parsedData = gigSchema.parse({ title, description, price, images });
+//     const parsedData = gigSchema.parse({ title, description, price, images });
 
-    gig.title = parsedData.title;
-    gig.description = parsedData.description;
-    gig.price = parsedData.price;
-    (gig as any).images = parsedData.images;
+//     gig.title = parsedData.title;
+//     gig.description = parsedData.description;
+//     gig.price = parsedData.price;
+//     (gig as any).images = parsedData.images;
 
-    await gig.save();
+//     await gig.save();
 
-    return NextResponse.json(
-      { message: "Gig updated successfully", gig },
-      { status: 200 }
-    );
-  } catch (error:any) {
-    return NextResponse.json(
-      { message: "An error occurred", error: error.message },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json(
+//       { message: "Gig updated successfully", gig },
+//       { status: 200 }
+//     );
+//   } catch (error:any) {
+//     return NextResponse.json(
+//       { message: "An error occurred", error: error.message },
+//       { status: 500 }
+//     );
+//   }
+// }
