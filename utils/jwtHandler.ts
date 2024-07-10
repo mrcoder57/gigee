@@ -17,12 +17,3 @@ interface TokenPayload {
   email: string;
 }
 
-export const verifyToken = (token: string) => {
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
-    const { userId, email } = decoded;
-    return { valid: true, decoded: { userId, email } };
-  } catch (error) {
-    return { valid: false, error };
-  }
-};

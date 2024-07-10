@@ -1,9 +1,10 @@
 import connectToDb from "@/dbConfig/dbCon";
 import Gig from "@/models/gigMOdel";
 
-import { verifyToken } from "@/utils/jwtHandler";
+import { verifyToken } from "@/middleware/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { CustomNextRequest } from "@/middleware/auth";
 
 const gigSchema = z.object({
   title: z.string().nonempty(),
@@ -36,13 +37,16 @@ export async function GET(req: NextRequest, { params }: any) {
   }
 }
 
-export async function DELETE(req: any, { params }: any) {
+export async function DELETE(
+  req: any,
+  { params }: { params: { gigId: string } }
+) {
   await connectToDb();
 
   const tokenError = verifyToken(req);
-  console.log(req.headers)
+
   if (tokenError) {
-    return NextResponse.json(tokenError, { status: 401 });
+    return NextResponse.json({ message: tokenError }, { status: 401 });
   }
 
   const { gigId } = params;
@@ -69,15 +73,14 @@ export async function DELETE(req: any, { params }: any) {
       { message: "Gig deleted successfully" },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { message: "An error occurred", error },
+      { message: "An error occurred", error: error.message },
       { status: 500 }
     );
   }
 }
-
-export async function PUT(req: any, { params }: any) {
+export async function PUT(req: any, { params }: { params: { gigId: string } }) {
   try {
     await connectToDb();
 
