@@ -76,22 +76,21 @@ export async function DELETE(req: any, { params }: any) {
 }
 
 export async function PUT(req: any, { params }: any) {
-  await connectToDb();
-
-  const tokenError = verifyToken(req);
-  if (tokenError) {
-    return tokenError;
-  }
-
-  const { gigId } = params;
-  const userId = req.userId;
-  const isAdmin = req.isAdmin;
-
-  const { title, description, price, images } = await req.json();
-
   try {
-    const gig = await Gig.findById(gigId);
+    await connectToDb();
 
+    const tokenError = verifyToken(req);
+    if (tokenError) {
+      return NextResponse.json(tokenError, { status: 401 });
+    }
+
+    const { gigId } = params;
+    const userId = req.userId;
+    const isAdmin = req.isAdmin;
+
+    const { title, description, price, images } = await req.json();
+
+    const gig = await Gig.findById(gigId);
     if (!gig) {
       return NextResponse.json({ message: "Gig not found" }, { status: 404 });
     }
@@ -116,9 +115,9 @@ export async function PUT(req: any, { params }: any) {
       { message: "Gig updated successfully", gig },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error:any) {
     return NextResponse.json(
-      { message: "An error occurred", error },
+      { message: "An error occurred", error: error.message },
       { status: 500 }
     );
   }
