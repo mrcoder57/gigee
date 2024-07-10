@@ -9,7 +9,7 @@ export const generateToken = (user: any) => {
   };
 
   // Generate the token with an expiration time (e.g., 1 hour)
-  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "30d" });
   return token;
 };
 interface TokenPayload {
