@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import { z } from "zod";
 import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
-
-import { sendOtpEmail } from "@/utils/otpHnadler";
 import { generateToken } from "@/utils/jwtHandler";
 
 // Define the Zod schema for request validation
@@ -35,9 +33,7 @@ export async function POST(req: Request) {
         { status: 401 }
       );
     }
-    const otp=await sendOtpEmail(email);
-    user.otp=otp
-    await user.save()
+  
     // Create a session or JWT token here for the user
     // This is a placeholder. You would typically use a library to handle sessions or JWT tokens.
     const token = await generateToken(user);
