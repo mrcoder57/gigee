@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
+import { Model } from "mongoose";
+import Nodel from "@/components/nodals/nodel";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Nodel/>
         <Navbar/>
+        
+        
         {children}</body>
     </html>
   );
