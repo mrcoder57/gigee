@@ -22,13 +22,13 @@ export function Login() {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your profile here. Click save when youre done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Name
+              Email
             </Label>
             <Input
               id="name"
@@ -38,7 +38,7 @@ export function Login() {
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Username
+              Password
             </Label>
             <Input
               id="username"
