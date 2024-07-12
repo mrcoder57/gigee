@@ -12,6 +12,7 @@
     "@types/mongoose": "^5.11.97",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
+    "cloudinary": "^2.2.0",
     "clsx": "^2.1.1",
     "input-otp": "^1.2.4",
     "jsonwebtoken": "^9.0.2",
