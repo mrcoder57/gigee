@@ -13,6 +13,8 @@ export async function uploadImage(imageFile: File): Promise<string> {
       body: formData
     });
 
+
+    
     if (!response.ok) {
       const data = await response.json();
       console.error('Failed to upload image:', data.error.message);
