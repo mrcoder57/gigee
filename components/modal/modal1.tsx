@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import MediaCard from "../ui/card"
 
 export function Login() {
-  return (
+  return (<div className=" hidden lg:block ">
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Edit Profile</Button>
@@ -52,5 +53,7 @@ export function Login() {
         </DialogFooter>
       </DialogContent>
     </Dialog>
+    
+    </div>
   )
 }
