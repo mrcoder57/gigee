@@ -12,7 +12,21 @@ const Search = () => {
             any week
           </div>
           <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-            <div className="hidden sm:block">Add guest</div>
+            <form>
+              <label
+                htmlFor="guestName"
+                className="block text-sm font-medium text-gray-700"
+              >
+               
+              </label>
+              <input
+                type="text"
+                id="guestName"
+                name="guestName"
+                className="mt-1 block w-full py-2 px-3  bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Add guest:"
+              />
+            </form>
             <div className="p-2 bg-rose-500 rounded-full text-white">
               <BiSearch size={18} />
             </div>
