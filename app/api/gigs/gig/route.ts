@@ -7,6 +7,7 @@ import { verifyToken } from '@/middleware/auth';
  const gigSchema = z.object({
   title: z.string().nonempty(),
   description: z.string().nonempty(),
+  location: z.string(),
   price: z.number().positive(),
   images: z.array(z.string()).optional(),
 });
@@ -21,7 +22,7 @@ export async function POST(req:any) {
   }
   const parsedBody = await req.json();
 
-  const { title, description, price, images } = gigSchema.parse(parsedBody);
+  const { title, description, price, images,location } = gigSchema.parse(parsedBody);
   const userId = req.userId;
 
   console.log(userId)
@@ -38,6 +39,7 @@ export async function POST(req:any) {
       description: description,
       price: price,
       userId,
+      location:location,
       images:images,
     });
 
