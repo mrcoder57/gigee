@@ -14,7 +14,7 @@ export function verifyToken(req: CustomNextRequest) {
   const authHeader = req.headers.get("Authorization");
   
   const token = authHeader;
-  console.log("token",token);
+  
   if (!token) {
     return NextResponse.json(
       { message: "Access denied. No token provided." },
