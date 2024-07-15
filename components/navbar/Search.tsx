@@ -7,15 +7,13 @@ const Search = () => {
       {/* Corrected border class */}
       <div className="border-[1px] rounded-full  w-full md:w-auto py-2  shadow-sm hover:shadow-md transition cursor-pointer">
         <div className="flex flex-row items-center justify-between">
-          <div className="sm:hidden lg:block font-semibold text-center px-6">
+         <a href="#">
+         <div className="sm:block hidden font-semibold text-center px-6">
             
-          <input 
-        type="text" 
-        placeholder="Anywhere"
-        className="w-full sm:w-1/2 md:w-1/3 lg:w-auto" // Full width on small screens, half width on medium screens, third width on large screens, auto width on extra-large screens
-    />
-            
-          </div>
+            About us
+              
+            </div>
+         </a>
           <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
             Any week
           </div>
