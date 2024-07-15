@@ -6,8 +6,8 @@ import Bid from "@/models/bidsModel";
 import Gig from "@/models/gigMOdel";
 
 export const bidSchema = z.object({
-  gigId: z.string().nonempty(),
-  userId: z.string().nonempty(),
+  // gigId: z.string(),
+  // userId: z.string(),
   amount: z.number().positive(),
   message: z.string().optional(),
 });
@@ -16,16 +16,34 @@ export async function POST(
   { params }: { params: { gigId: string } }
 ) {
   await connectToDb();
+
   const tokenError = verifyToken(req);
   if (tokenError) {
     return tokenError;
   }
-  const parsedBody = await req.json();
 
-  const { amount, message } = bidSchema.parse(parsedBody);
+  const parsedBody = bidSchema.safeParse(await req.json());
   const userId = req.userId;
-  const { gigId } = params;
+// console.log("user",userId)
+  if (!parsedBody.success) {
+    return NextResponse.json(
+      { message: "Validation error", errors: parsedBody.error.errors },
+      { status: 400 }
+    );
+  }
+
+  if (!userId) {
+    return NextResponse.json(
+      { message: "userId is required" },
+      { status: 400 }
+    );
+  }
+
+  const { amount, message } = parsedBody.data;
+
   try {
+    const { gigId } = params;
+// console.log(gigId)
     const bid = await Bid.create({
       gigId,
       userId,
@@ -34,16 +52,15 @@ export async function POST(
     });
 
     return NextResponse.json({ success: true, data: bid }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json(
-      { message: "error creating Bid ", error },
+      { message: "error creating Bid", error: error.message },
       { status: 500 }
     );
   }
 }
-
 export async function GET(
-  req: CustomNextRequest,
+  req: any,
   { params }: { params: { gigId: string } }
 ) {
   await connectToDb();

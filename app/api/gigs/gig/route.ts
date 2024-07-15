@@ -25,7 +25,7 @@ export async function POST(req:any) {
   const { title, description, price, images,location } = gigSchema.parse(parsedBody);
   const userId = req.userId;
 
-  console.log(userId)
+  console.log("user",userId)
 
   if (!userId) {
    return NextResponse.json({ message: 'userId is required' },{ status: 400 });
@@ -50,7 +50,7 @@ export async function POST(req:any) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Error logging in", error: error },
+      { message: "Error creating gig", error: error },
       { status: 500 }
     );
   }
