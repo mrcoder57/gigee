@@ -5,9 +5,15 @@ import { z } from "zod";
 import Bid from "@/models/bidsModel";
 import Gig from "@/models/gigMOdel";
 
+<<<<<<< HEAD
 export const bidSchema = z.object({
   // gigId: z.string(),
   // userId: z.string(),
+=======
+ const bidSchema = z.object({
+  gigId: z.string().nonempty(),
+  userId: z.string().nonempty(),
+>>>>>>> f8d807362cccb7ece2337d510d797fc1e1025f07
   amount: z.number().positive(),
   message: z.string().optional(),
 });
