@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/theme/darktheme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,8 @@ export default function RootLayout({
         <div className=" ">
           <Navbar />
         </div>
-        {children}
-
+            {children}
+      
         <Footer />
       </body>
     </html>
