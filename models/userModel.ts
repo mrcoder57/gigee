@@ -6,7 +6,6 @@ export interface IUser extends Document {
   password: string;
   isVerified: boolean;
   otp?: string;
-
   otpExpiry?: Date;
   isAdmin:boolean;
  userRole: 'seller' | 'consumer';
