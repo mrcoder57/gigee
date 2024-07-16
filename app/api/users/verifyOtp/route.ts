@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       );
     }
     user.otp = undefined;
+    user.isVerified=true
     user.otpExpiry = undefined;
     await user.save();
     const token = await generateToken(user);
