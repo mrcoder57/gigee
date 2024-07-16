@@ -8,7 +8,7 @@ const Search = () => {
       <div className="border-[1px] rounded-full  w-full md:w-auto py-2  shadow-sm hover:shadow-md transition cursor-pointer">
         <div className="flex flex-row items-center justify-between">
           <div className="sm:block hidden font-semibold text-center px-6">
-            <Link href="/pages/sign-up"> sign up</Link>
+           baad m sochenge
           </div>
 
           <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">

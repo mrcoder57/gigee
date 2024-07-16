@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,11 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export function Login() {
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  console.log(email)
   return (
     <div className=" hidden lg:block ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="ghost">Login</Button>
+          <Button variant="link">Login</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -33,8 +37,10 @@ export function Login() {
               </Label>
               <Input
                 id="name"
-                defaultValue="Pedro Duarte"
+                defaultValue="example@gmail.com"
                 className="col-span-3"
+                value={email}
+                onChange={((e)=>{setEmail(e.target.value)})}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -45,6 +51,9 @@ export function Login() {
                 id="username"
                 defaultValue="@peduarte"
                 className="col-span-3"
+                type="password"
+                value={password}
+                onChange={((e)=>{setPassword(e.target.value)})}
               />
             </div>
           </div>
