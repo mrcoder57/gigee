@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios"
+import axios from "axios";
 
 export function Signup() {
   const [email, setEmail] = useState("");
@@ -20,47 +20,44 @@ export function Signup() {
   const [username, setUsername] = useState("");
   const [otp, setOtp] = useState("");
   const [userRole, setUserRole] = useState("");
-  const [isDisable,setIsdisable]=useState(true)
+  const [isDisable, setIsdisable] = useState(true);
   const [error, setError] = useState(null);
-
-  const handleSubmit = async (event:any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('/api/users/signup', {
+      const response = await axios.post("/api/users/sign", {
         email,
         password,
         username,
         userRole,
       });
 
-     console.log(response.data)
-        setIsdisable(false);
-        setError(null);
-      
-    } catch (err:any) {
-      setError(err.response?.data?.message || 'An error occurred');
+      console.log(response.data);
+      setIsdisable(false);
+      setError(null);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred");
     }
   };
-  const handleOtp = async (event:any) => {
+  const handleOtp = async (event: any) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('/api/users/verifyOtp', {
+      const response = await axios.post("/api/users/verifyOtp", {
         email,
-        otp
+        otp,
       });
 
-     console.log(response.data)
-        setIsdisable(false);
-        setError(null);
-      
-    } catch (err:any) {
-      setError(err.response?.data?.message || 'An error occurred');
+      //  console.log(response.data)
+      setIsdisable(false);
+      setError(null);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred");
     }
   };
   return (
-    <div className=" hidden lg:block ">
+    <div className=" block ">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="link">Signup</Button>
@@ -168,8 +165,12 @@ export function Signup() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant='ghost' type="submit" onClick={handleSubmit}>Send-otp</Button>
-            <Button type="submit" disabled={isDisable} onClick={handleOtp}>Signup</Button>
+            <Button variant="ghost" type="submit" onClick={handleSubmit}>
+              Send-otp
+            </Button>
+            <Button type="submit" disabled={isDisable} onClick={handleOtp}>
+              Signup
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
