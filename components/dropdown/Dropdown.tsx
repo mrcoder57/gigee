@@ -10,6 +10,7 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 import { Login } from "../modal/modal1";
 import { Signup } from "../modal/sign-up";
+import { ModeToggle } from "../theme-toggle/mode-toggle";
 const Dropdown = () => {
   return (
     <DropdownMenu>
@@ -24,10 +25,10 @@ const Dropdown = () => {
         <DropdownMenuLabel>
           <Login />
         </DropdownMenuLabel>
-        <DropdownMenuItem>login</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuItem>
+         
+        </DropdownMenuItem>
+       
       </DropdownMenuContent>
     </DropdownMenu>
   );
