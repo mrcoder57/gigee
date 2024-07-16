@@ -22,6 +22,7 @@ function navbar() {
           >
             <Logo />
             <Search />
+           
             <Usermenu />
             {/* <Login></Login> */}
           </div>
