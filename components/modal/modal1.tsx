@@ -18,7 +18,7 @@ export function Login() {
   const [password,setPassword]=useState("");
   console.log(email)
   return (
-    <div className=" hidden lg:block ">
+    <div className="  lg:block ">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="link">Login</Button>
