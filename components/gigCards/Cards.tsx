@@ -13,15 +13,14 @@ const Cards = () => {
   return (
     <div>
       <div className=" flex h-auto lg:w-80 md:w-64 w-64 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="relative w-full h-64">
-          <Image
-            src="/images/sample.jpg"
-            alt="aman"
-            layout="responsive"
-            width={320}
-            height={600}
-            objectFit="cover"
-          />
+        <div className="relative w-full h-[310px]">
+        <Image
+          src="/images/sample.jpg"
+          alt="VIP with Kevin Hart"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg"
+        />
         </div>
       </div>
       <CardHeader>
