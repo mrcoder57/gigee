@@ -23,7 +23,7 @@ export function Login() {
         <DialogTrigger asChild>
           <Button variant="link">Login</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
             <DialogTitle>Login</DialogTitle>
             <DialogDescription>

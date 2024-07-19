@@ -6,7 +6,7 @@ import { Share } from "./share";
 const Hero = () => {
   return (
     <div className="flex flex-col w-full mx-auto ">
-      <div className=" flex flex-row mt-10 justify-between mx-20">
+      <div className=" flex flex-row mt-10 justify-between lg:mx-20 mx-5">
         <p className=" mt-16 text-2xl font-semibold ">Go VIP with Kevin Hart</p>
         <div className=" mt-16"><Share/></div>
       </div>

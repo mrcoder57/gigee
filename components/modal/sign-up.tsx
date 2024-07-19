@@ -13,6 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
+import { toast } from "sonner"
+
 
 export function Signup() {
   const [email, setEmail] = useState("");
@@ -34,10 +36,12 @@ export function Signup() {
       });
 
       console.log(response.data);
+      toast.success("otp sent successfully")
       setIsdisable(false);
       setError(null);
     } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred");
+      setError(err.message || "An error occurred");
+      toast.error(err.message)
     }
   };
   const handleOtp = async (event: any) => {
