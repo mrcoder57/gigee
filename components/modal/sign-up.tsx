@@ -28,7 +28,7 @@ export function Signup() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/api/users/sign", {
+      const response = await axios.post("/api/users/signup", {
         email,
         password,
         username,
@@ -40,8 +40,14 @@ export function Signup() {
       setIsdisable(false);
       setError(null);
     } catch (err: any) {
-      setError(err.message || "An error occurred");
-      toast.error(err.message)
+      if (err.response) {
+       
+        setError(err.response.data.message || "An error occurred");
+        toast.error(err.response.data.message);
+      } else {
+        setError(err.message || "An error occurred");
+        toast.error(err.message);
+      }
     }
   };
   const handleOtp = async (event: any) => {
@@ -102,21 +108,6 @@ export function Signup() {
                 }}
               />
             </div>
-            {/* <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Email
-              </Label>
-              <Input
-                id="name"
-                defaultValue="example@gmail.com"
-                className="col-span-3"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </div> */}
-
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Password
