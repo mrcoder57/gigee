@@ -23,10 +23,9 @@ export default function RootLayout({
         <div className=" ">
           <Navbar />
         </div>
-           <main> {children}</main>
-            <Toaster />
-      <Footer/>
-     
+        <main> {children}</main>
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );
