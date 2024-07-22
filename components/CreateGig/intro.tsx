@@ -19,7 +19,7 @@ const Intro = () => {
           </span>
         </h2>
       </div>
-      <div className="mt-10 mb-5">
+      <div className="mt-10 mb-5 lg:mx-8">
         <Slider
           defaultValue={sliderValue}
           max={10000}
