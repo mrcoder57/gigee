@@ -12,7 +12,7 @@ const gigSchema = z.object({
   location:z.string(),
   statusActive:z.boolean(),
   price: z.number().positive(),
-  images: z.array(z.string()).optional(),
+  image: z.array(z.string()).optional(),
 });
 
 export async function GET(req: NextRequest, { params }: any) {
@@ -95,7 +95,7 @@ export async function PUT(req: any, { params }: { params: { gigId: string } }) {
     const userId = req.userId;
     const isAdmin = req.isAdmin;
 
-    const { title, description, price, images,location,statusActive } = await req.json();
+    const { title, description, price, image,location,statusActive } = await req.json();
 
     const gig = await Gig.findById(gigId);
     if (!gig) {
@@ -109,14 +109,13 @@ export async function PUT(req: any, { params }: { params: { gigId: string } }) {
       );
     }
 
-    const parsedData = gigSchema.parse({ title, description, price, images,location,statusActive });
-
+    const parsedData = gigSchema.parse({ title, description, price, image,location,statusActive });
     gig.title = parsedData.title;
     gig.description = parsedData.description;
     gig.price = parsedData.price;
     gig.location=parsedData.location;
     gig.statusActive=parsedData.statusActive;
-    (gig as any).images = parsedData.images;
+    (gig as any).images = parsedData.image;
 
     await gig.save();
 

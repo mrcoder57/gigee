@@ -9,7 +9,7 @@ import { verifyToken } from '@/middleware/auth';
   description: z.string().nonempty(),
   location: z.string(),
   price: z.number().positive(),
-  images: z.array(z.string()).optional(),
+  image: z.array(z.string()).optional(),
 });
 
 export async function POST(req:any) {
@@ -22,7 +22,7 @@ export async function POST(req:any) {
   }
   const parsedBody = await req.json();
 
-  const { title, description, price, images,location } = gigSchema.parse(parsedBody);
+  const { title, description, price, image,location } = gigSchema.parse(parsedBody);
   const userId = req.userId;
 
   console.log("user",userId)
@@ -40,7 +40,7 @@ export async function POST(req:any) {
       price: price,
       userId,
       location:location,
-      images:images,
+      images:image,
     });
 
     await newGig.save();
