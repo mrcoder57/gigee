@@ -9,7 +9,7 @@ export interface IGig extends Document {
   createdAt: Date;
   updatedAt: Date;
   userId: IUser["_id"]; 
-  images: string[];
+  image: string;
 }
 
 const gigSchema: Schema<IGig> = new Schema(
@@ -39,8 +39,8 @@ const gigSchema: Schema<IGig> = new Schema(
       ref: "User",
       required: true,
     },
-    images: {
-      type: [String],
+    image: {
+      type: String,
       required: false,
     },
   },
