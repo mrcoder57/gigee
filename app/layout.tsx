@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar/navbar";
 import { ThemeProvider } from "@/components/theme/darktheme";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "GIGBNB",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body >
         <div className=" ">
           <Navbar />
         </div>
