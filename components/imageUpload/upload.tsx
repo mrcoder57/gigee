@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import { useState, ChangeEvent, FormEvent } from 'react';
-import { uploadImage } from '@/middleware/cloudinary'; 
+import { useState, ChangeEvent, FormEvent } from "react";
+import { uploadImage } from "@/middleware/cloudinary";
+import { toast } from "sonner"
 
-export default function UploadComponent() {
+interface UploadComponentProps {
+  onImageUpload: (url: string) => void;
+}
+
+const UploadComponent: React.FC<UploadComponentProps> = ({ onImageUpload }) => {
   const [image, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -18,18 +23,23 @@ export default function UploadComponent() {
     if (image) {
       try {
         const url = await uploadImage(image);
-        await setImageUrl(url);
+        setImageUrl(url);
+        onImageUpload(url); 
+        toast.success("image upload successfully")
       } catch (error) {
-        console.error('Error uploading image:', error);
+        console.error("Error uploading image:", error);
       }
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-48 p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="file-upload" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="file-upload"
+            className="block text-sm font-medium text-gray-700"
+          >
             Choose an image
           </label>
           <input
@@ -44,7 +54,7 @@ export default function UploadComponent() {
         <div>
           <button
             type="submit"
-            className="inline-block bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md transition duration-300"
+            className="inline-block bg-[#FF5A5F] hover:bg-[#ce565a] text-white py-2 px-4 rounded-md transition duration-300"
           >
             Upload
           </button>
@@ -53,16 +63,26 @@ export default function UploadComponent() {
       {imageUrl && (
         <div className="mt-4">
           <p className="text-sm text-gray-500">
-            Image URL:{' '}
-            <a href={imageUrl} target="_blank" rel="noopener noreferrer" className="text-blue-500">
+            Image URL:{" "}
+            <a
+              href={imageUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500"
+            >
               {imageUrl}
             </a>
           </p>
-          <img src={imageUrl} alt="Uploaded" className="mt-2 rounded-lg" style={{ maxWidth: '100%' }} />
+          <img
+            src={imageUrl}
+            alt="Uploaded"
+            className="mt-2 rounded-lg"
+            style={{ maxWidth: "100%" }}
+          />
         </div>
       )}
     </div>
-
-    
   );
-}
+};
+
+export default UploadComponent;
