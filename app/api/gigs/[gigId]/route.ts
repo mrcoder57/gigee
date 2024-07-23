@@ -12,7 +12,7 @@ const gigSchema = z.object({
   location:z.string(),
   statusActive:z.boolean(),
   price: z.number().positive(),
-  image: z.array(z.string()).optional(),
+  image:z.string(),
 });
 
 export async function GET(req: NextRequest, { params }: any) {
@@ -115,7 +115,7 @@ export async function PUT(req: any, { params }: { params: { gigId: string } }) {
     gig.price = parsedData.price;
     gig.location=parsedData.location;
     gig.statusActive=parsedData.statusActive;
-    (gig as any).images = parsedData.image;
+    (gig as any).image = parsedData.image;
 
     await gig.save();
 
