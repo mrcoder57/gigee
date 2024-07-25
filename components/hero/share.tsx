@@ -27,7 +27,7 @@ const Share: React.FC<GigProps> = ({ gigId }) => {
     if (inputRef.current) {
       inputRef.current.select();
       document.execCommand("copy");
-      toast.error("Link copied to clipboard!")
+      toast.success("Link copied to clipboard!")
     }
   };
   return (
