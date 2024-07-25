@@ -1,6 +1,7 @@
-import { CopyIcon } from "@radix-ui/react-icons"
+"use client"
+import { CopyIcon } from "@radix-ui/react-icons";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -10,18 +11,31 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { AiOutlineShareAlt } from "react-icons/ai"
-export function Share() {
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { useRef } from "react";
+import { toast } from "sonner";
+interface GigProps {
+  gigId: string;
+}
+const Share: React.FC<GigProps> = ({ gigId }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const copyToClipboard = () => {
+    if (inputRef.current) {
+      inputRef.current.select();
+      document.execCommand("copy");
+      toast.error("Link copied to clipboard!")
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="link">
-        <AiOutlineShareAlt size={20} />
-        
-        Share
+          <AiOutlineShareAlt size={20} />
+          Share
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -38,23 +52,25 @@ export function Share() {
             </Label>
             <Input
               id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
+              ref={inputRef}
+              defaultValue={`https://gigbnb.vercel.app/${gigId}`}
               readOnly
             />
           </div>
-          <Button type="submit" size="sm" className="px-3">
+          <Button type="submit" size="sm" className="px-3" onClick={copyToClipboard}>
             <span className="sr-only">Copy</span>
             <CopyIcon className="h-4 w-4" />
           </Button>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
+            <Button type="button" variant="secondary" >
               Close
             </Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
+export default Share;
