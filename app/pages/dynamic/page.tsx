@@ -6,10 +6,10 @@ import Status from '@/components/hero/status-card'
 const page = () => {
   return (
     <div className=' flex flex-col'>
-        <Hero/>
+        <Hero gigId='4677889ffsb'/>
         <div className=' flex lg:flex-row flex-col-reverse justify-around lg:gap-20 gap-7 lg:mx-20 mx-5'>
         <Content/>
-        <Status state='okk' isDisable={false}/>
+        <Status state='okk' isDisable={false} gigId='4677889ffsb'/>
         </div>
        
     </div>
