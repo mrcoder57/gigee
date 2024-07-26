@@ -3,7 +3,6 @@ import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import Usermenu from "./Usermenu";
-import { Login } from "@/components/modal/modal1";
 
 function navbar() {
   return (
@@ -22,9 +21,8 @@ function navbar() {
           >
             <Logo />
             <Search />
-           
+
             <Usermenu />
-            {/* <Login></Login> */}
           </div>
         </Container>
       </div>
