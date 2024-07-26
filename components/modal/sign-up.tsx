@@ -13,9 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
-import { toast } from "sonner"
-
-
+import { toast } from "sonner";
+import { Signupuser, verifyOtp } from "@/utils/api-handler";
 export function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,47 +22,38 @@ export function Signup() {
   const [otp, setOtp] = useState("");
   const [userRole, setUserRole] = useState("");
   const [isDisable, setIsdisable] = useState(true);
-  const [error, setError] = useState(null);
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/api/users/signup", {
-        email,
-        password,
-        username,
-        userRole,
-      });
-
-      console.log(response.data);
-      toast.success("otp sent successfully")
+      const response = await Signupuser(email, password, username, userRole);
+      console.log(response);
+      toast.success("OTP sent successfully");
       setIsdisable(false);
-      setError(null);
     } catch (err: any) {
-      if (err.response) {
-       
-        setError(err.response.data.message || "An error occurred");
-        toast.error(err.response.data.message);
-      } else {
-        setError(err.message || "An error occurred");
+      if (err.message) {
         toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
       }
     }
   };
+
   const handleOtp = async (event: any) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/api/users/verifyOtp", {
-        email,
-        otp,
-      });
+      const response = await verifyOtp(email, otp);
 
-      //  console.log(response.data)
+      console.log(response.data);
       setIsdisable(false);
-      setError(null);
     } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred");
+      if (err.message) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
     }
   };
   return (
