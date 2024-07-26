@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Login } from "@/components/modal/modal1";
+import { Login } from "@/components/modal/login";
 import { Avatar } from "@mui/material";
 import Dropdown from "../dropdown/Dropdown";
 

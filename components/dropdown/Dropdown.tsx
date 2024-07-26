@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Login } from "../modal/modal1";
+import { Login } from "../modal/login";
 import { Signup } from "../modal/sign-up";
 import { ModeToggle } from "../theme-toggle/mode-toggle";
 const Dropdown = () => {
