@@ -2,7 +2,7 @@ import connectToDb from "@/dbConfig/dbCon";
 import Gig from "@/models/gigMOdel";
 import { NextResponse } from "next/server";
 
-export async function POST(req: any) {
+export async function GET(req: any) {
   await connectToDb();
 
   try {
