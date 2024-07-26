@@ -4,8 +4,8 @@ import { z } from "zod";
 import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 import { generateToken } from "@/utils/jwtHandler";
+import { generateOtp, sendOtpEmail } from "@/utils/otpHnadler";
 
-// Define the Zod schema for request validation
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
@@ -13,7 +13,6 @@ const loginSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    // Parse and validate the request body
     const parsedBody = await req.json();
     const { email, password } = loginSchema.parse(parsedBody);
 
@@ -33,9 +32,27 @@ export async function POST(req: Request) {
         { status: 401 }
       );
     }
-  
-    // Create a session or JWT token here for the user
-    // This is a placeholder. You would typically use a library to handle sessions or JWT tokens.
+
+    if (!user.isVerified) {
+      const otp = await generateOtp();
+      user.otp = otp;
+      await user.save();
+      await sendOtpEmail(email, otp);
+
+      return NextResponse.json(
+        {
+          message: "User not verified. OTP sent to email.",
+          user: {
+            email: user.email,
+            isVerified: user.isVerified,
+            otpSent: true,
+          },
+        },
+
+        { status: 200 }
+      );
+    }
+
     const token = await generateToken(user);
 
     return NextResponse.json(
