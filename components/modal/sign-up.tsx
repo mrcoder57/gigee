@@ -12,9 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { Signupuser, verifyOtp } from "@/utils/api-handler";
+import axios from "axios";
 export function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,13 +28,20 @@ export function Signup() {
     event.preventDefault();
 
     try {
-      const response = await Signupuser(email, password, username, userRole);
+      console.log(userRole)
+      const response = await axios.post("/api/users/signup", {
+        "username":username,
+        "email":email,
+        "userRole":userRole,
+        "password":password
+       });
       console.log(response);
       toast.success("OTP sent successfully");
       setIsdisable(false);
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
+        console.log(err)
       } else {
         toast.error("An unknown error occurred");
       }
@@ -45,9 +53,9 @@ export function Signup() {
 
     try {
       const response = await verifyOtp(email, otp);
-
-      console.log(response.data);
       setIsdisable(false);
+      Cookies.set("token", response.token);
+      toast.success("user verified and Logged In ")
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
@@ -71,11 +79,11 @@ export function Signup() {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
+              <Label htmlFor="email" className="text-right">
                 Email
               </Label>
               <Input
-                id="name"
+                id="email"
                 defaultValue="example@gmail.com"
                 className="col-span-3"
                 value={email}
@@ -99,11 +107,11 @@ export function Signup() {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
+              <Label htmlFor="password" className="text-right">
                 Password
               </Label>
               <Input
-                id="username"
+                id="password"
                 defaultValue="@peduarte"
                 className="col-span-3"
                 type="password"
@@ -114,7 +122,7 @@ export function Signup() {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
+              <Label htmlFor="role" className="text-right">
                 User Role
               </Label>
               <select
@@ -133,11 +141,11 @@ export function Signup() {
               </select>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
+              <Label htmlFor="otp" className="text-right">
                 One Time Password
               </Label>
               <Input
-                id="username"
+                id="otp"
                 defaultValue="@peduarte"
                 className="col-span-3"
                 type="text"

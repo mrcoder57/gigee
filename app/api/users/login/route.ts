@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   try {
     const parsedBody = await req.json();
     const { email, password } = loginSchema.parse(parsedBody);
-
+  
     await connectToDb();
 
     const user = await User.findOne({ email });
