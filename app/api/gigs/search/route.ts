@@ -1,37 +1,46 @@
 import connectToDb from "@/dbConfig/dbCon";
 import Gig from "@/models/gigMOdel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-export async function GET(req: any) {
+const querySchema = z.object({
+  query: z.string().min(1, "Query parameter is required"),
+});
+
+export async function GET(req: NextRequest) {
   await connectToDb();
 
   try {
-    const { query } = req.query;
+    const url = new URL(req.url);
+    const queryParams = Object.fromEntries(url.searchParams.entries());
 
-    let gigs;
-    if (query) {
-      gigs = await Gig.find({
-        $or: [
-          { title: { $regex: query, $options: "i" } },
-          { location: { $regex: query, $options: "i" } },
-        ],
-      }).limit(10);
-    } else {
+    const parsedQuery = querySchema.safeParse(queryParams);
+
+    if (!parsedQuery.success) {
       return NextResponse.json(
-        { message: "seacrh query required" },
+        { message: "Invalid query parameter", errors: parsedQuery.error.errors },
         { status: 400 }
       );
     }
 
+    const { query } = parsedQuery.data;
+
+    const gigs = await Gig.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { location: { $regex: query, $options: "i" } },
+      ],
+    });
+
     return NextResponse.json(
-      { message: "search results", gigs },
-      { status: 400 }
+      { message: "Search results", gigs },
+      { status: 200 }
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "userId is required" },
-      { status: 400 }
+      { message: "Error fetching API", error },
+      { status: 500 }
     );
   }
 }
