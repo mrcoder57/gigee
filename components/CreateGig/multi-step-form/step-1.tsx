@@ -25,7 +25,7 @@ const Step1: React.FC<{
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
-              Email
+              Title
             </Label>
             <Input
               id="email"
