@@ -17,7 +17,7 @@ interface cardProps{
 const Cards:React.FC<cardProps> = ({image,title,price,userId}) => {
   return (
     <div>
-      <div className=" flex h-auto lg:w-72 md:w-[300px] w-[300px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className=" flex h-auto lg:w-72 md:w-64 w-64 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
         <Image
           src="/images/sample.jpg"
