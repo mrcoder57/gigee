@@ -23,7 +23,7 @@ export function Login() {
   const [isVerified, setIsVerified] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleLogin = async (event:any) => {
+  const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
       const response = await Loginuser(email, password);
@@ -33,9 +33,8 @@ export function Login() {
       } else {
         toast.success("Login successful");
         Cookies.set("token", response.token);
-        console.log(response.token)
       }
-    } catch (error:any) {
+    } catch (error: any) {
       setError(error.message || "An error occurred during login");
       toast.error(error.message || "An error occurred during login");
     }
@@ -48,11 +47,11 @@ export function Login() {
 
       console.log(response.token);
       Cookies.set("token", response.token);
-      toast.success("user verified and Logged In ")
+      toast.success("user verified and Logged In ");
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
-        console.log(err.message)
+        console.log(err.message);
       } else {
         toast.error("An unknown error occurred");
       }
