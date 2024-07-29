@@ -56,6 +56,7 @@ export function Signup() {
       setIsdisable(false);
       Cookies.set("token", response.token);
       toast.success("user verified and Logged In ")
+      Cookies.set("userId", response.userId);
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);

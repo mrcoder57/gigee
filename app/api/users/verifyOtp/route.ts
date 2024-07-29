@@ -34,8 +34,9 @@ export async function POST(req: NextRequest) {
     user.otpExpiry = undefined;
     await user.save();
     const token = await generateToken(user);
+    const userId=user._id
     return NextResponse.json(
-      { message: "otp verified successfully", token },
+      { message: "otp verified successfully", token,userId },
       { status: 200 }
     );
   } catch (error) {

@@ -54,9 +54,9 @@ export async function POST(req: Request) {
     }
 
     const token = await generateToken(user);
-
+      const userId=user._id
     return NextResponse.json(
-      { message: "Login successful", token },
+      { message: "Login successful", token,userId },
       { status: 200 }
     );
   } catch (error) {

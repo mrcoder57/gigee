@@ -33,6 +33,8 @@ export function Login() {
       } else {
         toast.success("Login successful");
         Cookies.set("token", response.token);
+        Cookies.set("userId", response.userId);
+        // console.log(response.userId)
       }
     } catch (error: any) {
       setError(error.message || "An error occurred during login");
@@ -45,8 +47,10 @@ export function Login() {
     try {
       const response = await verifyOtp(email, otp);
 
-      console.log(response.token);
+      // console.log(response.token);
+      // console.log(response.userId);
       Cookies.set("token", response.token);
+      Cookies.set("userId", response.userId);
       toast.success("user verified and Logged In ");
     } catch (err: any) {
       if (err.message) {
