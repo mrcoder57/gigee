@@ -70,3 +70,16 @@ export const getGigs=async()=>{
     throw new Error("Network or server error");
   }
 }
+export const getGigbyId=async(gigId:string)=>{
+  try {
+    const response = await axios.get(`/api/gigs/${gigId}` );
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(
+        error.response.data.message || "An error occurred during fetching gigs"
+      );
+    }
+    throw new Error("Network or server error");
+  }
+}   
