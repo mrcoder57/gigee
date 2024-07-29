@@ -18,7 +18,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { useRef } from "react";
 import { toast } from "sonner";
 interface GigProps {
-  gigId: string;
+  gigId: string ;
 }
 const Share: React.FC<GigProps> = ({ gigId }) => {
   const inputRef = useRef<HTMLInputElement>(null);
