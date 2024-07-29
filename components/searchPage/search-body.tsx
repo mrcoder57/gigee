@@ -75,6 +75,7 @@ const Searchbody: React.FC<SearchProps> = ({ query }) => {
         {gigs.map((gig) => (
           <Cards
             key={gig._id}
+            gigId={gig._id}
             image={gig.image}
             userId={gig.userId}
             title={gig.title}
