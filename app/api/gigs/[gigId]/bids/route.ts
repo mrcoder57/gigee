@@ -5,10 +5,7 @@ import { z } from "zod";
 import Bid from "@/models/bidsModel";
 import Gig from "@/models/gigMOdel";
 
- const bidSchema = z.object({
-  gigId: z.string().nonempty(),
-  userId: z.string().nonempty(),
-
+const bidSchema = z.object({
   amount: z.number().positive(),
   message: z.string().optional(),
 });
@@ -25,7 +22,9 @@ export async function POST(
 
   const parsedBody = bidSchema.safeParse(await req.json());
   const userId = req.userId;
-// console.log("user",userId)
+  // console.log("user", userId);
+  // const { gigId } = params;
+  // console.log("gig", gigId);
   if (!parsedBody.success) {
     return NextResponse.json(
       { message: "Validation error", errors: parsedBody.error.errors },
@@ -44,7 +43,7 @@ export async function POST(
 
   try {
     const { gigId } = params;
-// console.log(gigId)
+    console.log("gig", gigId);
     const bid = await Bid.create({
       gigId,
       userId,
@@ -60,10 +59,7 @@ export async function POST(
     );
   }
 }
-export async function GET(
-  req: any,
-  { params }: { params: { gigId: string } }
-) {
+export async function GET(req: any, { params }: { params: { gigId: string } }) {
   await connectToDb();
 
   // Verify the token
