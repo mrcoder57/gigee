@@ -32,8 +32,9 @@ export function Login() {
         toast.success("OTP sent successfully, please verify");
       } else {
         toast.success("Login successful");
-        Cookies.set("token", response.token);
-        Cookies.set("userId", response.userId);
+        Cookies.set("token", response.token, { expires: 30 });
+        Cookies.set("userId", response.userId, { expires: 30 });
+        
         // console.log(response.userId)
       }
     } catch (error: any) {
@@ -49,8 +50,9 @@ export function Login() {
 
       // console.log(response.token);
       // console.log(response.userId);
-      Cookies.set("token", response.token);
-      Cookies.set("userId", response.userId);
+      Cookies.set("token", response.token, { expires: 30 });
+      Cookies.set("userId", response.userId, { expires: 30 });
+      
       toast.success("user verified and Logged In ");
     } catch (err: any) {
       if (err.message) {

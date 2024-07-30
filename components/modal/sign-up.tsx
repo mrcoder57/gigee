@@ -28,20 +28,20 @@ export function Signup() {
     event.preventDefault();
 
     try {
-      console.log(userRole)
+      console.log(userRole);
       const response = await axios.post("/api/users/signup", {
-        "username":username,
-        "email":email,
-        "userRole":userRole,
-        "password":password
-       });
+        username: username,
+        email: email,
+        userRole: userRole,
+        password: password,
+      });
       console.log(response);
       toast.success("OTP sent successfully");
       setIsdisable(false);
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
-        console.log(err)
+        console.log(err);
       } else {
         toast.error("An unknown error occurred");
       }
@@ -55,8 +55,9 @@ export function Signup() {
       const response = await verifyOtp(email, otp);
       setIsdisable(false);
       Cookies.set("token", response.token);
-      toast.success("user verified and Logged In ")
-      Cookies.set("userId", response.userId);
+      toast.success("user verified and Logged In ");
+      Cookies.set("token", response.token, { expires: 30 });
+      Cookies.set("userId", response.userId, { expires: 30 });
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
