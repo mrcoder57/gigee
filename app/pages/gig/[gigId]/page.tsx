@@ -6,6 +6,7 @@ import Status from "@/components/hero/status-card";
 import { useParams } from "next/navigation";
 import { getGigbyId } from "@/utils/api-handler";
 import { toast } from "sonner";
+import Bidcards from "@/components/hero/bidsgrp";
 
 interface Gig {
   image: string;
