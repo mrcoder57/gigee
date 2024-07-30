@@ -50,7 +50,7 @@ const Page = () => {
   return (
     <div className="flex flex-col">
       <Hero gigId={gigId} image={gig.image} title={gig.title} />
-      <div className="flex lg:flex-row flex-col-reverse justify-around lg:gap-20 gap-7 lg:mx-20 mx-5">
+      <div className="flex lg:flex-row flex-col-reverse justify-around lg:gap-20 gap-7 lg:mx-15 mx-5">
         <Content
           location={gig.location}
           gigId={gigId}
