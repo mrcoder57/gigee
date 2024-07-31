@@ -67,7 +67,7 @@ export function Signup() {
     }
   };
   return (
-    <div className=" block ">
+    <div className=" block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="link">Signup</Button>

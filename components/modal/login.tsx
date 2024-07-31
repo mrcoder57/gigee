@@ -64,7 +64,7 @@ export function Login() {
     }
   };
   return (
-    <div className="lg:block">
+    <div className="lg:block bg-white">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="link">Login</Button>
