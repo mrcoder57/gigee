@@ -17,28 +17,12 @@ import {
 } from "@/components/ui/dialog";
 
 const ProfileBody = () => {
-  const [isAdding, setIsAdding] = useState(false);
-  const fileInputRef = useRef(null); // Create a ref for the file input
-
  
-
-
-  const handleBadgeClick = () => {
-    fileInputRef.current.click(); // Trigger the file input click
-  };
-
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-    if (files.length > 0) {
-      // Handle the selected file (e.g., upload it or preview)
-      console.log("Selected file:", files[1]);
-    }
-  };
 
   return (
     <div className=" flex lg:gap-10 mt-20  justify-center lg:flex-row  flex-col ">
       <div className="relative  lg:mt-24 mb-11  justify-center  flex  ">
-        <div className="w-48 h-48 relative items-center justify-center ">
+        <div className="lg:w-72 lg:h-72 h-64 w-64 relative items-center justify-center ">
           <Image
             src="/images/sample.jpg"
             alt="VIP with Kevin Hart"
@@ -48,22 +32,14 @@ const ProfileBody = () => {
           />
         </div>
 
-        <div className=" absolute  top-44 rounded-full bg-slate-500 flex flex-col">
+        <div className=" absolute  lg:top-64 top-52 rounded-full bg-slate-500 flex flex-col">
           <Badge
             variant="outline"
             className="w-16 cursor-pointer"
-            onClick={handleBadgeClick}
+           
           >
             <IoCamera size={20} /> Add
           </Badge>
-
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            className="hidden" // Hide the default file input
-            accept="image/*" // Optional: Restrict file types (e.g., images)
-          />
         </div>
 
         <hr></hr>
