@@ -78,16 +78,10 @@ const ProfileBody = () => {
           </div>
           <div>
             <h3 className="font-bold text-gray-500">
-              The information you share will be used across Airbnb to help other
+              The information you share will be used across Gigee to help other
               <br></br>
-              guests and Hosts get to know you.{" "}
-              <span>
-                {" "}
-                <a href="#">
-                  {" "}
-                  <u> Learn more</u>
-                </a>{" "}
-              </span>
+              Employers and clients get to know you.{" "}
+  
             </h3>
           </div>
           <div className=" flex   mt-10">
