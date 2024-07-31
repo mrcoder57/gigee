@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
+import { IoAdd } from "react-icons/io5";
 interface FormData {
   name: string;
   phone: string;
@@ -141,7 +141,7 @@ const ProfileForm: React.FC = () => {
       <div className=" flex lg:flex-row flex-col gap-10">
         <div className="col-span-2 gap-3">
           <label className="block text-sm font-medium text-gray-700">
-            Socials
+            Plateforms I am most active on
           </label>
           {socials.map((social, index) => (
             <Input
@@ -152,13 +152,13 @@ const ProfileForm: React.FC = () => {
               className="gap-3"
             />
           ))}
-          <Button type="button" onClick={addSocialInput} variant="link">
-            Add
+          <Button type="button" onClick={addSocialInput} className=" mt-3 rounded-full p-[18px]  border-2 border-dotted border-gray-400 shadow-md">
+          <IoAdd size={20} /> Add
           </Button>
         </div>
         <div className="col-span-2 gap-3">
           <label className="block text-sm font-medium text-gray-700">
-            Languages
+            Languages I speak
           </label>
           {languages.map((language, index) => (
             <Input
@@ -169,8 +169,8 @@ const ProfileForm: React.FC = () => {
               className=" gap-3"
             />
           ))}
-          <Button type="button" onClick={addLanguageInput} variant="link">
-            Add
+          <Button type="button" onClick={addLanguageInput}  className=" mt-3 rounded-full p-[18px]  border-2 border-dotted border-gray-400 shadow-md">
+            <IoAdd size={20}/> Add
           </Button>
         </div>
       </div>
