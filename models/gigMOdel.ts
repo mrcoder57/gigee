@@ -4,11 +4,12 @@ export interface IGig extends Document {
   title: string;
   description: string;
   price: number;
-  location:string;
-  statusActive:boolean;
+  location: string;
+  statusActive: boolean;
+  creatorName: string;
   createdAt: Date;
   updatedAt: Date;
-  userId: IUser["_id"]; 
+  userId: IUser["_id"];
   image: string;
 }
 
@@ -26,13 +27,13 @@ const gigSchema: Schema<IGig> = new Schema(
       type: Number,
       required: true,
     },
-    location:{
-      type:String,
-      required:true
+    location: {
+      type: String,
+      required: true,
     },
-    statusActive:{
-      type:Boolean,
-      default:true
+    statusActive: {
+      type: Boolean,
+      default: true,
     },
     userId: {
       type: Schema.Types.ObjectId,
@@ -40,6 +41,10 @@ const gigSchema: Schema<IGig> = new Schema(
       required: true,
     },
     image: {
+      type: String,
+      required: false,
+    },
+    creatorName: {
       type: String,
       required: false,
     },

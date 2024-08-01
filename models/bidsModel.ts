@@ -6,7 +6,8 @@ export interface IBid extends Document {
   gigId: IGig["_id"]; // Reference to the Gig model
   userId: IUser["_id"]; // Reference to the User model
   amount: number;
-  message:String
+  message: String;
+  biderName: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -28,9 +29,10 @@ const bidSchema: Schema<IBid> = new Schema(
       required: true,
     },
     message: {
-        type: String,
-        required: false,
-      },
+      type: String,
+      required: false,
+    },
+    biderName: { type: String, required: false },
   },
   {
     timestamps: true,
