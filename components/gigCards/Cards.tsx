@@ -15,8 +15,16 @@ interface cardProps {
   title: string;
   userId: string;
   price: number;
+  creatorName: string;
 }
-const Cards: React.FC<cardProps> = ({ gigId, image, title, price, userId }) => {
+const Cards: React.FC<cardProps> = ({
+  gigId,
+  image,
+  title,
+  price,
+  userId,
+  creatorName,
+}) => {
   return (
     <div>
       <div className=" flex h-auto lg:w-72 md:w-[300px] w-[300px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -30,13 +38,15 @@ const Cards: React.FC<cardProps> = ({ gigId, image, title, price, userId }) => {
           />
         </div>
       </div>
-      <CardHeader>
+      <CardHeader className=" ml-[-17px]">
         <Link href={`/pages/gig/${gigId}`}>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className=" first-letter:capitalize">{title}</CardTitle>
         </Link>
-        <CardDescription>hosted by {userId}</CardDescription>
+        <CardDescription className=" first-letter:capitalize">
+          hosted by <span className=" first-letter:capitalize">{creatorName || "creator"}</span>{" "}
+        </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className=" ml-[-17px] mt-[-10px]">
         <p>${price}</p>
       </CardContent>
       {/* <CardFooter>
