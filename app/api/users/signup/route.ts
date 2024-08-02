@@ -4,6 +4,7 @@ import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 import { z } from "zod";
 import { generateOtp, sendOtpEmail } from "@/utils/otpHnadler";
+import Profile from "@/models/profileModel";
 // const signUpSchema = z.object({
 //   username: z.string().min(3, "Username must be at least 3 characters long"),
 //   email: z.string().email("Invalid email address"),
@@ -11,7 +12,7 @@ import { generateOtp, sendOtpEmail } from "@/utils/otpHnadler";
 // });
 
 export async function POST(req: NextRequest) {
-  const { username, email, password,userRole } = await req.json();
+  const { username, email, password, userRole } = await req.json();
 
   if (!username || !email || !password) {
     return NextResponse.json(
@@ -31,33 +32,37 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  
-  const otp=await generateOtp();
-
- 
+  const otp = await generateOtp();
   const hashedPassword = await bcrypt.hash(password, 10);
- 
+
   const newUser = new User({
     username,
     email,
     password: hashedPassword,
     otp: otp,
-    userRole:userRole
+    userRole: userRole
   });
 
   try {
-    await newUser.save();
-    await sendOtpEmail(email,otp);
-    
-   
+    const savedUser = await newUser.save();
+    await sendOtpEmail(email, otp);
+
+    const newProfile = new Profile({
+      userId: savedUser._id,
+      name: username,
+      email: email
+    });
+
+    await newProfile.save();
+
     return NextResponse.json(
-      { message: "User created successfully", newUser },
+      { message: "User and profile created successfully", newUser: savedUser },
       { status: 201 }
     );
-    
+
   } catch (error: any) {
     return NextResponse.json(
-      { message: "Error creating user ", error },
+      { message: "Error creating user and profile", error },
       { status: 500 }
     );
   }
