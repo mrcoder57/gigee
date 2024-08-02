@@ -74,9 +74,9 @@ export function Signup() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Login</DialogTitle>
+            <DialogTitle>Sign up</DialogTitle>
             <DialogDescription>
-              Please provide with your login crendentials
+             create your account on Gigee
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -160,12 +160,16 @@ export function Signup() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="ghost" type="submit" onClick={handleSubmit}>
-              Send-otp
-            </Button>
-            <Button type="submit" disabled={isDisable} onClick={handleOtp}>
-              Signup
-            </Button>
+            {isDisable && (
+              <Button variant="ghost" type="submit" onClick={handleSubmit}>
+                Send-otp
+              </Button>
+            )}
+            {!isDisable && (
+              <Button type="submit" onClick={handleOtp}>
+                Signup
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
