@@ -3,6 +3,7 @@ import connectToDb from "@/dbConfig/dbCon";
 import Gig from "@/models/gigMOdel";
 import { z } from "zod";
 import { verifyToken } from "@/middleware/auth";
+import Profile from "@/models/profileModel";
 
 const gigSchema = z.object({
   title: z.string().nonempty(),
@@ -36,12 +37,20 @@ export async function POST(req: any) {
   }
 
   try {
+    const profile = await Profile.findOne({ userId }).select("name");
+    if (!profile) {
+      return NextResponse.json(
+        { message: "Profile not found" },
+        { status: 404 }
+      );
+    }
     const newGig = new Gig({
       title: title,
       description: description,
       price: price,
       userId,
       location: location,
+      creatorName: profile.name,
       image: image,
     });
 
