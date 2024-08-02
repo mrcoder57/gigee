@@ -4,6 +4,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { z } from "zod";
 import Bid from "@/models/bidsModel";
 import Gig from "@/models/gigMOdel";
+import Profile from "@/models/profileModel";
 
 const bidSchema = z.object({
   amount: z.number().positive(),
@@ -42,6 +43,13 @@ export async function POST(
   const { amount, message } = parsedBody.data;
 
   try {
+    const profile = await Profile.findOne({ userId }).select("name");
+    if (!profile) {
+      return NextResponse.json(
+        { message: "Profile not found" },
+        { status: 404 }
+      );
+    }
     const { gigId } = params;
     console.log("gig", gigId);
     const bid = await Bid.create({
@@ -49,6 +57,7 @@ export async function POST(
       userId,
       amount,
       message,
+      biderName:profile.name
     });
 
     return NextResponse.json({ success: true, data: bid }, { status: 201 });
