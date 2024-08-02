@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className=" ">
+        <div className=" overflow-x-hidden ">
           <Navbar />
         </div>
         <main> {children}</main>
