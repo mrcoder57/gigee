@@ -1,27 +1,51 @@
 import mongoose, { Schema, Document } from "mongoose";
-import Bid from "./bidsModel";
-import Gig from "./gigMOdel";
+
+import { IUser } from "./userModel"; 
 
 interface IProfile extends Document {
-  userId: string;
+  userId: IUser["_id"];
   email: string;
   name: string;
-  phone: string;
-  city: string;
-  education: string;
+  phone?: string; 
+  city?: string;
+  work?: string;
+  education?: string;
   languages: string[];
   socials: string[];
-  Bids: mongoose.Types.ObjectId[];
+  Bids: mongoose.Types.ObjectId[]; 
   Gigs: mongoose.Types.ObjectId[];
 }
 
 const ProfileSchema: Schema<IProfile> = new Schema({
-  userId: { type: String, required: true },
-  email: { type: String, required: true },
-  name: { type: String, required: true },
-  phone: { type: String },
-  city: { type: String },
-  education: { type: String },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: false,
+  },
+  city: {
+    type: String,
+    required: false,
+  },
+  work: {
+    type: String,
+    required: false,
+  },
+  education: {
+    type: String,
+    required: false,
+  },
   languages: [{ type: String }],
   socials: [{ type: String }],
   Bids: [{ type: mongoose.Schema.Types.ObjectId, ref: "Bid" }],
