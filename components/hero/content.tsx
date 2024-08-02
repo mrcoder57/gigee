@@ -10,12 +10,14 @@ interface contentProps {
   userId: string;
   gigId: string;
   description: string;
+  creatorName:string
 }
 
 const Content: React.FC<contentProps> = ({
   gigId,
   location,
   userId,
+  creatorName,
   description,
 }) => {
   const [isOwner, setIsOwner] = useState(false);
@@ -33,7 +35,7 @@ const Content: React.FC<contentProps> = ({
       <div className="flex flex-col">
         <div>
           <p className="mt-10 text-2xl font-semibold">
-            Los Angeles, California, USA {location}
+            {location}
           </p>
         </div>
       </div>
@@ -51,8 +53,8 @@ const Content: React.FC<contentProps> = ({
           />
         </div>
         <div className="flex flex-col">
-          <p className="text-xl font-semibold">Hosted by {userId}</p>
-          <p className="text-gray-600 text-sm">{userId}</p>
+          <p className="text-xl font-semibold">Hosted by {creatorName}</p>
+          <p className="text-gray-600 text-sm">{creatorName}</p>
         </div>
       </div>
       

@@ -16,6 +16,7 @@ interface Gig {
   location: string;
   amount: number;
   userId: string;
+  creatorName:string
 }
 
 const Page = () => {
@@ -57,6 +58,7 @@ const Page = () => {
           gigId={gigId}
           userId={gig.userId}
           description={gig.description}
+          creatorName={gig.creatorName}
         />
         <Status state="okk" isDisable={false} gigId={gigId} />
       </div>

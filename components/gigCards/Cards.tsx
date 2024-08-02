@@ -43,7 +43,7 @@ const Cards: React.FC<cardProps> = ({
           <CardTitle className=" first-letter:capitalize">{title}</CardTitle>
         </Link>
         <CardDescription className=" first-letter:capitalize">
-          hosted by <span className=" first-letter:capitalize">{creatorName || "creator"}</span>{" "}
+          hosted by <span className="  first-letter:capitalize">{creatorName || "Creator"}</span>{" "}
         </CardDescription>
       </CardHeader>
       <CardContent className=" ml-[-17px] mt-[-10px]">
