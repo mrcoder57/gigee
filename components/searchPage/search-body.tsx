@@ -11,6 +11,7 @@ interface Gig {
   userId: string;
   title: string;
   price: number;
+  creatorName:string
 }
 
 interface SearchProps {
@@ -80,6 +81,7 @@ const Searchbody: React.FC<SearchProps> = ({ query }) => {
             userId={gig.userId}
             title={gig.title}
             price={gig.price}
+            creatorName={gig.creatorName}
           />
         ))}
       </div>

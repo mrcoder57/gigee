@@ -10,6 +10,7 @@ interface Gig {
   userId: string;
   title: string;
   price: number;
+  creatorName:string
 }
 const Body = () => {
   const [gigs, setGigs] = useState<Gig[]>([]);
@@ -35,11 +36,11 @@ const Body = () => {
     return <Skeletons />;
   }
   return (
-    <div className="my-12 p-2 bg-white">
+    <div className="my-12 py-1 bg-white overflow-x-hidden">
       {gigs.length === 0 ? (
         <div className="text-center">No gigs available at the moment.</div>
       ) : (
-        <div className="grid mt-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 desktop:grid-cols-5 gap-10 justify-around lg:ml-5 lg:gap-y-16 gap-y-8">
+        <div className="grid mt-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 overflow-x-hidden">
           {gigs.map((gig) => (
             <Cards
               key={gig._id}
@@ -48,6 +49,7 @@ const Body = () => {
               userId={gig.userId}
               title={gig.title}
               price={gig.price}
+              creatorName={gig.creatorName}
             />
           ))}
         </div>
