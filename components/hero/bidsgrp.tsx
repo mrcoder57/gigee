@@ -36,8 +36,8 @@ const Bidcards: React.FC<BidProps> = ({ gigId }) => {
   }, [gigId]);
     if (bids.length === 0) {
       return (
-        <div className="flex flex-col h-full w-full">
-          <h2 className="text-center text-slate-600 text-2xl mb-10 ">
+        <div className="flex mt-10 flex-col h-full w-full">
+          <h2 className=" text-slate-600 text-2xl mb-10 ">
             bids: 0
           </h2>
         </div>

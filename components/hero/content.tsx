@@ -30,9 +30,9 @@ const Content: React.FC<contentProps> = ({
   }, [userId]);
 
   return (
-    <div className="flex flex-col max-w-[750px] mb-20">
+    <div className="flex flex-col justify-center lg:ml-5 max-w-[750px] mb-20">
       {/* Location */}
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center ">
         <div>
           <p className="mt-10 text-2xl font-semibold">
             {location}
@@ -42,7 +42,7 @@ const Content: React.FC<contentProps> = ({
       
       {/* User Portion */}
       <Separator orientation="horizontal" className="mt-8" />
-      <div className="flex flex-row h-24 gap-4 items-center">
+      <div className="flex flex-row h-24 gap-4 items-center mt-2 mb-1">
         <div className="w-16 h-16 relative items-center justify-center">
           <Image
             src="/images/sample.jpg"

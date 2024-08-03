@@ -29,13 +29,23 @@ const Cards: React.FC<cardProps> = ({
     <div>
       <div className=" flex h-auto lg:w-72 md:w-[300px] w-[300px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
-          <Image
-            src="/images/sample.jpg"
-            alt={title}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
-          />
+        {image ? (
+            <Image
+              src={image}
+              alt={title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          ) : (
+            <Image
+              src="/images/sample.jpg"
+              alt="Sample"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          )}
         </div>
       </div>
       <CardHeader className=" ml-[-17px]">
