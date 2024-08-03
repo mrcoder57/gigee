@@ -14,6 +14,7 @@ const profileSchema = z.object({
   city: z.string().optional(),
   work: z.string().optional(),
   education: z.string().optional(),
+  profilePic: z.string().optional(),
   languages: z.array(z.string()).optional(),
   socials: z.array(z.string()).optional(),
   Bids: z.array(z.string()).optional(),
