@@ -25,26 +25,28 @@ const Step2: React.FC<{
       <CardContent>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
+            <Label htmlFor="price" className="text-right">
               price
             </Label>
             <Input
               id="price"
+              type="number"
               name="price"
               className="col-span-3"
+              
               value={values.price}
               onChange={handleChange}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="password" className="text-right">
+            <Label htmlFor="location" className="text-right">
               location
             </Label>
             <Input
               id="location"
               name="location"
               className="col-span-3"
-              type="password"
+              type="text"
               value={values.location}
               onChange={handleChange}
             />

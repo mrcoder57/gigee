@@ -24,12 +24,13 @@ const Step1: React.FC<{
       <CardContent>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
+            <Label htmlFor="title" className="text-right">
               Title
             </Label>
             <Input
-              id="email"
-              name="email"
+              id="title"
+              name="title"
+              type="text"
               className="col-span-3"
               value={values.title}
               onChange={handleChange}
