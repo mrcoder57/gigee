@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import Step1 from "./step-1";
 import Step2 from "./step-2";
 import Step3 from "./step-3";
-
+import axios from "axios";
+import { toast } from "sonner";
+import { config } from "@/utils/api-handler";
+import Cookies from "js-cookie";
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
@@ -11,7 +14,7 @@ const MultiStepForm: React.FC = () => {
     description: "",
     location: "",
     price: 0,
-    images: "",
+    image: "",
   });
 
   const nextStep = () => setStep((prevStep) => prevStep + 1);
@@ -19,16 +22,38 @@ const MultiStepForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: name === "price" ? Number(value) : value });
   };
+  
 
   const handleImageUpload = (url: string) => {
-    setFormValues({ ...formValues, images: url });
+    setFormValues({ ...formValues, image: url });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     console.log(formValues);
+    try {
+      const Token = Cookies.get("token");
+      const { title, description, location, price, image } = formValues;
+      // console.log(Token)
+      const response = await axios.post("/api/gigs/gig",{
+        title,
+        description,
+        location,
+        price,
+        image
+      },config)
+      console.log(response);
+      toast.success("gig created successfully");
+    } catch (err: any) {
+      if (err.message) {
+        toast.error(err.message);
+        console.log(err);
+      } else {
+        toast.error("An unknown error occurred");
+      }
+    }
   };
 
   switch (step) {
