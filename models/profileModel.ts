@@ -10,6 +10,7 @@ interface IProfile extends Document {
   city?: string;
   work?: string;
   education?: string;
+  profilePic?:string
   languages: string[];
   socials: string[];
   Bids: mongoose.Types.ObjectId[]; 
@@ -43,6 +44,10 @@ const ProfileSchema: Schema<IProfile> = new Schema({
     required: false,
   },
   education: {
+    type: String,
+    required: false,
+  },
+  profilePic: {
     type: String,
     required: false,
   },
