@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { getGigbyId } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Bidcards from "@/components/hero/bidsgrp";
+import Gigskeleton from "@/components/skeleton/Gigskeleton";
 
 interface Gig {
   image: string;
@@ -25,12 +26,14 @@ const Page = () => {
 
   const [gig, setGig] = useState<Gig | null>(null);
   const [status, setStatus] = useState("");
+  const [loading,setLoading]=useState(true)
 
   const getGig = async () => {
     try {
       const response = await getGigbyId(gigId);
       console.log(response.data);
       setGig(response.data.gig);
+      setLoading(false)
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
@@ -45,10 +48,14 @@ const Page = () => {
     getGig();
   }, [gigId]);
 
+  if (loading) {
+    return <Gigskeleton />;
+  }
   if (!gig) {
     return <div>Loading...</div>;
   }
 
+ 
   return (
     <div className="flex flex-col">
       <Hero gigId={gigId} image={gig.image} title={gig.title} />
