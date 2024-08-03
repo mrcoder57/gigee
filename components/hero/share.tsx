@@ -53,7 +53,7 @@ const Share: React.FC<GigProps> = ({ gigId }) => {
             <Input
               id="link"
               ref={inputRef}
-              defaultValue={`https://gigbnb.vercel.app/${gigId}`}
+              defaultValue={`https://gigbnb.vercel.app/pages/gig/${gigId}`}
               readOnly
             />
           </div>
