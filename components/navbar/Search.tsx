@@ -10,7 +10,6 @@ const Search = () => {
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-    
       router.push(`/pages/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
@@ -18,8 +17,8 @@ const Search = () => {
     <div>
       <div className="border-[1px] rounded-full  w-full md:w-auto py-2  shadow-sm hover:shadow-md transition cursor-pointer">
         <div className="flex flex-row items-center justify-between">
-          <div className="sm:block hidden font-semibold text-center px-6">
-            baad m sochenge
+          <div className="sm:block hidden text-sm font-semibold text-center px-6">
+            <Link href="/pages/create-gig"> Create</Link>
           </div>
 
           <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
@@ -43,7 +42,10 @@ const Search = () => {
               />
             </form>
             <div className=" bg-rose-500 rounded-full text-white">
-              <button className=" p-2 h-full w-full rounded-full" onClick={handleSearch}>
+              <button
+                className=" p-2 h-full w-full rounded-full"
+                onClick={handleSearch}
+              >
                 <BiSearch size={18} />
               </button>
             </div>
