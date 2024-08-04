@@ -14,16 +14,19 @@ interface Ibids {
   amount: number;
   message: string;
   createdAt: string;
+  biderName:string
 }
-const Bids: React.FC<Ibids> = ({ bidId, userId, message, createdAt }) => {
+const Bids: React.FC<Ibids> = ({ bidId, userId, message, createdAt,biderName }) => {
+  const formattedDate = new Date(createdAt).toLocaleDateString();
+  const slicedMessage = message.length > 100 ? `${message.slice(0, 100)}...` : message;
   return (
-    <div className=" mt-5 w-[360px] h-[200px] shadow-sm ">
+    <div className=" mt-5 w-[360px] h-[180px] shadow-md border-gray-400 rounded-lg ">
       <CardHeader className=" my-4">
-        <CardTitle>{userId}</CardTitle>
-        <CardDescription>{message}</CardDescription>
+        <CardTitle className=" first-letter:capitalize">{biderName}</CardTitle>
+        <CardDescription>{slicedMessage}</CardDescription>
       </CardHeader>
-      <CardContent className="">
-        <p>{createdAt}</p>
+      <CardContent className=" mt-[-25px]">
+        <p>Date: {formattedDate}</p>
       </CardContent>
     </div>
   );
