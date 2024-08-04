@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
   DropdownMenu,
@@ -12,7 +13,11 @@ import { Login } from "../modal/login";
 import { Signup } from "../modal/sign-up";
 import { ModeToggle } from "../theme-toggle/mode-toggle";
 import AddButton from "../profile/profilepic";
+import Link from "next/link";
+import Cookies from "js-cookie";
+
 const Dropdown = () => {
+  const userId=Cookies.get("userId");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -26,10 +31,17 @@ const Dropdown = () => {
         <DropdownMenuLabel>
           <Login />
         </DropdownMenuLabel>
+        {/* <DropdownMenuLabel className=" text-center font-semibold">
+          <Link href={`/pages/profile/${userId}`}>
+          <span>Edit Profile</span>
+          </Link>
+        </DropdownMenuLabel> */}
         
-        <DropdownMenuItem>
-         
-        </DropdownMenuItem>
+         <DropdownMenuItem className=" text-center font-semibold">
+         <Link href={`/pages/profile/${userId}`}>
+          <span className=" text-center font-semibold">Edit Profile</span>
+          </Link>
+        </DropdownMenuItem> 
        
       </DropdownMenuContent>
     </DropdownMenu>
