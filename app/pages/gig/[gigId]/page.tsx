@@ -13,9 +13,9 @@ interface Gig {
   image: string;
   title: string;
   description: string;
-  statusActive: string;
+  statusActive: boolean;
   location: string;
-  amount: number;
+  price: number;
   userId: string;
   creatorName:string
 }
@@ -25,7 +25,7 @@ const Page = () => {
   const gigId = Array.isArray(params.gigId) ? params.gigId[0] : params.gigId;
 
   const [gig, setGig] = useState<Gig | null>(null);
-  const [status, setStatus] = useState("");
+  
   const [loading,setLoading]=useState(true)
 
   const getGig = async () => {
@@ -67,7 +67,7 @@ const Page = () => {
           description={gig.description}
           creatorName={gig.creatorName}
         />
-        <Status state="okk" isDisable={false} gigId={gigId} />
+        <Status amount={gig.price} isDisable={gig.statusActive} gigId={gigId} />
       </div>
     </div>
   );
