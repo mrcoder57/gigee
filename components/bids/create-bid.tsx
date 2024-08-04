@@ -13,6 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea"; // Fixed import path
+import axios from "axios";
+import { config } from "@/utils/api-handler";
+import { toast } from "sonner";
 
 interface BidProps {
   isDisable: boolean;
@@ -20,10 +23,33 @@ interface BidProps {
 }
 
 const Bid: React.FC<BidProps> = ({ isDisable, gigId }) => {
-  const [amount, setAmount] = useState("");
+ 
   const [message, setMessage] = useState("");
+  const [amount, setAmount] = useState<number | "">('');
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAmount(value === '' ? '' : parseFloat(value));
+  };
   console.log(amount);
     console.log("gigid",gigId)
+    const createBid=async()=>{
+      console.log(amount,message)
+      try {
+        const response = await axios.post(`/api/gigs/${gigId}/bids`,{
+          amount,message
+        },config)
+        console.log(response);
+        toast.success("Bid created successfully");
+      } catch (err: any) {
+        if (err.message) {
+          toast.error(err.message);
+          console.log(err);
+        } else {
+          toast.error("An unknown error occurred");
+        }
+      }
+    }
   return (
     <div className="lg:block">
       <Dialog>
@@ -43,7 +69,7 @@ const Bid: React.FC<BidProps> = ({ isDisable, gigId }) => {
                 className="col-span-3"
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={handleAmountChange}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -58,7 +84,7 @@ const Bid: React.FC<BidProps> = ({ isDisable, gigId }) => {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={isDisable}>Bid</Button>
+            <Button type="submit" disabled={isDisable} onClick={createBid}>Bid</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
