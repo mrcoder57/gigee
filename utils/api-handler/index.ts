@@ -103,3 +103,16 @@ export const getBids = async (gigId: string) => {
     throw new Error("Network or server error");
   }
 };
+export const getProfile=async(userId:string)=>{
+  try {
+    const response = await axios.get(`/api/profile/${userId}`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(
+        error.response.data.message || "An error occurred during fetching profile"
+      );
+    }
+    throw new Error("Network or server error");
+  }
+}

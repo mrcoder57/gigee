@@ -3,22 +3,36 @@ import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { IoAdd } from "react-icons/io5";
-interface FormData {
-  name: string;
-  phone: string;
-  socials: string[];
-  languages: string[];
+
+interface ProfileData {
+  _city: string;
+  _education: string;
+  _email: string;
+  _languages: string[];
+  _name: string;
+  _phone: string;
+  _socials: string[];
+  _work: string;
 }
 
-const ProfileForm: React.FC = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [education, setEducation] = useState("");
-  const [city, setCity] = useState("");
-  const [work,setWork]=useState("")
-  const [hobby,setHobby]=useState("")
-  const [socials, setSocials] = useState<string[]>([]);
-  const [languages, setLanguages] = useState<string[]>([]);
+const ProfileForm: React.FC<ProfileData> = ({
+  _city,
+  _education,
+  _email,
+  _languages,
+  _name,
+  _phone,
+  _socials,
+  _work,
+}) => {
+  const [name, setName] = useState(_name);
+  const [phone, setPhone] = useState(_phone);
+  const [education, setEducation] = useState(_education);
+  const [city, setCity] = useState(_city);
+  const [work, setWork] = useState(_work);
+  const [hobby, setHobby] = useState(""); // No default value from props
+  const [socials, setSocials] = useState<string[]>(_socials);
+  const [languages, setLanguages] = useState<string[]>(_languages);
 
   const handleSocialChange = (index: number, value: string) => {
     const newSocials = [...socials];
@@ -42,12 +56,9 @@ const ProfileForm: React.FC = () => {
 
   return (
     <form className="flex flex-col mx-auto p-4 col-span-2 bg-white shadow-md md:w-[450px] lg:w-full w-[300px] rounded-lg space-y-4 lg:space-y-0 lg:gap-4">
-      <div className=" flex lg:flex-row flex-col  gap-10">
+      <div className="flex lg:flex-row flex-col gap-10">
         <div className="col-span-2">
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Name
           </label>
           <Input
@@ -59,10 +70,7 @@ const ProfileForm: React.FC = () => {
           />
         </div>
         <div className="col-span-2">
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
             Phone
           </label>
           <Input
@@ -74,13 +82,10 @@ const ProfileForm: React.FC = () => {
           />
         </div>
       </div>
-      <div className=" flex lg:flex-row flex-col gap-10">
+      <div className="flex lg:flex-row flex-col gap-10">
         <div className="col-span-2">
-          <label
-            htmlFor="education"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Where i went to school?
+          <label htmlFor="education" className="block text-sm font-medium text-gray-700">
+            Where I went to school?
           </label>
           <Input
             type="text"
@@ -91,11 +96,8 @@ const ProfileForm: React.FC = () => {
           />
         </div>
         <div className="col-span-2">
-          <label
-            htmlFor="city"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Where i live?
+          <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+            Where I live?
           </label>
           <Input
             type="text"
@@ -106,28 +108,22 @@ const ProfileForm: React.FC = () => {
           />
         </div>
       </div>
-      <div className=" flex lg:flex-row flex-col gap-10">
+      <div className="flex lg:flex-row flex-col gap-10">
         <div className="col-span-2">
-          <label
-            htmlFor="education"
-            className="block text-sm font-medium text-gray-700"
-          >
-            I spent most of time on
+          <label htmlFor="hobby" className="block text-sm font-medium text-gray-700">
+            I spend most of my time on
           </label>
           <Input
             type="text"
-            id="education"
-            name="education"
+            id="hobby"
+            name="hobby"
             value={hobby}
             onChange={(e) => setHobby(e.target.value)}
           />
         </div>
         <div className="col-span-2">
-          <label
-            htmlFor="work"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Kind of Work i do
+          <label htmlFor="work" className="block text-sm font-medium text-gray-700">
+            Kind of work I do
           </label>
           <Input
             type="text"
@@ -138,10 +134,10 @@ const ProfileForm: React.FC = () => {
           />
         </div>
       </div>
-      <div className=" flex lg:flex-row flex-col gap-10">
+      <div className="flex lg:flex-row flex-col gap-10">
         <div className="col-span-2 gap-3">
           <label className="block text-sm font-medium text-gray-700">
-            Plateforms I am most active on
+            Platforms I am most active on
           </label>
           {socials.map((social, index) => (
             <Input
@@ -149,11 +145,15 @@ const ProfileForm: React.FC = () => {
               type="text"
               value={social}
               onChange={(e) => handleSocialChange(index, e.target.value)}
-              className="gap-3"
+              className="gap-3 mt-2"
             />
           ))}
-          <Button type="button" onClick={addSocialInput} className=" mt-3 rounded-full p-[18px]  border-2 border-dotted border-gray-400 shadow-md">
-          <IoAdd size={20} /> Add
+          <Button
+            type="button"
+            onClick={addSocialInput}
+            className="mt-3 rounded-full p-[18px] border-2 border-dotted border-gray-400 shadow-md"
+          >
+            <IoAdd size={20} /> Add
           </Button>
         </div>
         <div className="col-span-2 gap-3">
@@ -166,19 +166,20 @@ const ProfileForm: React.FC = () => {
               type="text"
               value={language}
               onChange={(e) => handleLanguageChange(index, e.target.value)}
-              className=" gap-3"
+              className="gap-3 mt-2"
             />
           ))}
-          <Button type="button" onClick={addLanguageInput}  className=" mt-3 rounded-full p-[18px]  border-2 border-dotted border-gray-400 shadow-md">
-            <IoAdd size={20}/> Add
+          <Button
+            type="button"
+            onClick={addLanguageInput}
+            className="mt-3 rounded-full p-[18px] border-2 border-dotted border-gray-400 shadow-md"
+          >
+            <IoAdd size={20} /> Add
           </Button>
         </div>
       </div>
       <div className="col-span-2">
-        <Button
-          type="submit"
-          variant="submit"
-        >
+        <Button type="submit" variant="submit">
           Submit
         </Button>
       </div>
