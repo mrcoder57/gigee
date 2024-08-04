@@ -9,6 +9,7 @@ interface Ibids {
   amount: number;
   message: string;
   createdAt: string;
+  biderName:string
 }
 import Bids from "./bids";
 import { getBids } from "@/utils/api-handler";
@@ -55,6 +56,7 @@ const Bidcards: React.FC<BidProps> = ({ gigId }) => {
           createdAt={bid.createdAt}
           amount={bid.amount}
           message={bid.message}
+          biderName={bid.biderName}
         />
       ))}
     </div>
