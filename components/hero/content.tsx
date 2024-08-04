@@ -62,8 +62,9 @@ const Content: React.FC<contentProps> = ({
         <Separator orientation="horizontal" />
         <p className="text-sm mt-8">{description}</p>
       </div>
-      
+      <div className="mt-5">
       {isOwner && <Bidcards gigId={gigId} />}
+      </div>
     </div>
   );
 };
