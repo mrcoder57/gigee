@@ -4,6 +4,7 @@ import ProfileBody from "@/components/profile/profilepic";
 import { useParams } from "next/navigation";
 import { getProfile } from "@/utils/api-handler";
 import { toast } from "sonner";
+import ProfileSkel from "@/components/skeleton/profileSkeleton";
 
 interface ProfileData {
   city: string;
@@ -24,12 +25,14 @@ const Profile = () => {
     ? params.userId[0]
     : params.userId;
   const [profile, setProfile] = useState<ProfileData | null>(null);
+  const [loading,setLoading]=useState(true)
 
   const fetchProfile = async () => {
     try {
       const response = await getProfile(userId);
       setProfile(response.data.profile);
       console.log(response.data);
+      setLoading(false)
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
@@ -43,9 +46,13 @@ const Profile = () => {
   useEffect(() => {
     fetchProfile();
   }, [userId]);
+  if(loading){
+    return <ProfileSkel/>
+}
   if (!profile) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div>
