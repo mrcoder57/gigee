@@ -32,7 +32,10 @@ export async function GET(req: CustomNextRequest, { params }: { params: { bidId:
     }
    
 
-    return NextResponse.json({ success: true, data: bid });
+    return NextResponse.json(
+      { message: "Bid fetched successfully", bid },
+      { status: 200 }
+    );
   } catch (error:any) {
     return NextResponse.json({ success: false, error: error.message });
   }
