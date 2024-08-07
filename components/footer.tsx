@@ -12,7 +12,7 @@ const Footer = () => {
         <Separator orientation="horizontal" className="bg-gray-200 mt-4 " /> 
     <footer className="bg-slate-100 font-medium py-8  w-full ">
      
-      <div className="container mx-auto mt-10 px-4">
+      <div className="container mx-auto mt-10 ">
         <div className="flex flex-col md:flex-row justify-between">
           {/* Logo and Description */}
           <div className="mb-6 md:mb-0">

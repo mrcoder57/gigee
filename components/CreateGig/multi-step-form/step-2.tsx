@@ -57,7 +57,7 @@ const Step2: React.FC<{
         <Button variant="outline" onClick={prevStep}>
           Previous
         </Button>
-        <Button onClick={nextStep}>Next</Button>
+        <Button onClick={nextStep} variant="ghost">Next</Button>
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ const Step1: React.FC<{
         </div>
       </CardContent>
       <div className=" flex items-center justify-center mb-5">
-        <Button onClick={nextStep}>Next</Button>
+        <Button onClick={nextStep} variant="ghost">Next</Button>
       </div>
     </div>
   );
