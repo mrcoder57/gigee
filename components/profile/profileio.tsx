@@ -1,8 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,FormEvent } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { IoAdd } from "react-icons/io5";
+import { toast } from "sonner";
+import axios from "axios";
+import { config } from "@/utils/api-handler";
 
 interface ProfileData {
   _city: string;
@@ -13,6 +16,7 @@ interface ProfileData {
   _phone: string;
   _socials: string[];
   _work: string;
+  userId:string
 }
 
 const ProfileForm: React.FC<ProfileData> = ({
@@ -24,13 +28,14 @@ const ProfileForm: React.FC<ProfileData> = ({
   _phone,
   _socials,
   _work,
+  userId
 }) => {
   const [name, setName] = useState(_name);
   const [phone, setPhone] = useState(_phone);
   const [education, setEducation] = useState(_education);
   const [city, setCity] = useState(_city);
   const [work, setWork] = useState(_work);
-  const [hobby, setHobby] = useState(""); // No default value from props
+  const [email, setEmail] = useState(_email); 
   const [socials, setSocials] = useState<string[]>(_socials);
   const [languages, setLanguages] = useState<string[]>(_languages);
 
@@ -53,7 +58,34 @@ const ProfileForm: React.FC<ProfileData> = ({
   const addLanguageInput = () => {
     setLanguages([...languages, ""]);
   };
+  const updateProfile = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `/api/profile/${userId}`,
+        {
+          city: city,
+          education: education,
+          languages:languages,
+          name:name,
+          phone:phone,
+          socials:socials,
+          userId:userId,
+          work: work,
+        },
+        config
+      );
 
+      toast.success("profile updated successfully");
+    } catch (err: any) {
+      if (err.message) {
+        toast.error(err.message);
+        console.log(err.message);
+      } else {
+        toast.error("An unknown error occurred");
+      }
+    }
+  };
   return (
     <form className="flex flex-col mx-auto p-4 col-span-2 bg-white shadow-md md:w-[450px] lg:w-full w-[300px] rounded-lg space-y-4 lg:space-y-0 lg:gap-4">
       <div className="flex lg:flex-row flex-col gap-10">
@@ -111,14 +143,15 @@ const ProfileForm: React.FC<ProfileData> = ({
       <div className="flex lg:flex-row flex-col gap-10">
         <div className="col-span-2">
           <label htmlFor="hobby" className="block text-sm font-medium text-gray-700">
-            I spend most of my time on
+            Email
           </label>
           <Input
             type="text"
             id="hobby"
             name="hobby"
-            value={hobby}
-            onChange={(e) => setHobby(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            readOnly
           />
         </div>
         <div className="col-span-2">
@@ -179,7 +212,7 @@ const ProfileForm: React.FC<ProfileData> = ({
         </div>
       </div>
       <div className="col-span-2">
-        <Button type="submit" variant="submit">
+        <Button type="submit" variant="submit" onClick={updateProfile}>
           Submit
         </Button>
       </div>

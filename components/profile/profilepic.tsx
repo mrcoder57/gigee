@@ -1,11 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { IoCamera } from "react-icons/io5";
 import Image from "next/image";
 import ProfileForm from "./profileio";
 import Profilecomp from "./showprofile";
 import Cookies from "js-cookie";
+import UploadDialog from "../imageUpload/upload-dialog";
+import axios from "axios";
+import { config } from "@/utils/api-handler";
+import { toast } from "sonner";
 
 interface ProfileData {
   city: string;
@@ -32,10 +36,16 @@ const ProfileBody: React.FC<ProfileData> = ({
   userId,
   work
 }) => {
+  const [_profilePic, setProfilePic] = useState("");
   const ruserId = Cookies.get("userId");
 
   // Check if userId matches ruserId
   const isOwner = userId === ruserId;
+
+  const handleImageUpload = (url: string) => {
+    setProfilePic(url);
+    console.log(_profilePic)
+  };
 
   return (
     <div className="flex lg:gap-10 mt-20 justify-center lg:flex-row flex-col">
@@ -51,9 +61,8 @@ const ProfileBody: React.FC<ProfileData> = ({
         </div>
 
         <div className="absolute lg:top-64 top-52 rounded-full bg-slate-500 flex flex-col">
-          <Badge variant="outline" className="w-16 cursor-pointer">
-            <IoCamera size={20} /> Add
-          </Badge>
+        <UploadDialog onImageUpload={handleImageUpload} userId={userId}/>
+          
         </div>
 
         <hr />
@@ -84,6 +93,7 @@ const ProfileBody: React.FC<ProfileData> = ({
                 _name={name}
                 _socials={socials}
                 _work={work}
+                userId={userId}
               />
             ) : (
               <Profilecomp
