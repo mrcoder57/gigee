@@ -28,22 +28,22 @@ const Footer = () => {
             <ul>
               <li>
                 <Link href="/" legacyBehavior>
-                  <a className="text-sm hover:underline">Home</a>
+                 Home
                 </Link>
               </li>
               <li>
                 <Link href="/" legacyBehavior>
-                  <a className="text-sm hover:underline">About Us</a>
+                 About us
                 </Link>
               </li>
               <li>
-                <Link href="/jobs" >
-                  <a className="text-sm hover:underline">Jobs</a>
+                <Link href="/" >
+                 jobs
                 </Link>
               </li>
               <li>
-                <Link href="/contact" >
-                  <a className="text-sm hover:underline">Contact</a>
+                <Link href="/" >
+                 contacts
                 </Link>
               </li>
             </ul>
