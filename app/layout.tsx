@@ -5,9 +5,8 @@ import Navbar from "@/components/navbar/navbar";
 
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
-
 export const metadata: Metadata = {
-  title: "GIGBNB",
+  title: "Gigee",
   description: "An application to get every gig job around u",
 };
 
@@ -24,7 +23,7 @@ export default function RootLayout({
         </div>
         <main> {children}</main>
         <Toaster />
-
+        
         <Footer />
       </body>
     </html>

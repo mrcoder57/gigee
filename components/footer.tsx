@@ -1,12 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Separator } from "../components/ui/separator";
-import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
-
+import { IoLogoFacebook,IoLogoLinkedin,IoLogoTwitter } from "react-icons/io5";
+import { AiFillFacebook } from 'react-icons/ai';
+import { SlSocialFacebook } from "react-icons/sl"
+import { PiTwitterLogoLight } from "react-icons/pi";
+import { RiGithubLine } from "react-icons/ri";
 const Footer = () => {
   return (
-    <footer className="bg-white text-black font-bold py-8 lg:ml-10 lg:mr-10 ">
-      <Separator orientation="horizontal" className="bg-gray-300 mt-4" />
+    <div>
+        <Separator orientation="horizontal" className="bg-gray-200 mt-4 " /> 
+    <footer className="bg-slate-100 font-medium py-8  w-full ">
+     
       <div className="container mx-auto mt-10 px-4">
         <div className="flex flex-col md:flex-row justify-between">
           {/* Logo and Description */}
@@ -49,30 +54,15 @@ const Footer = () => {
             <h3 className="font-bold mb-2">Follow Us</h3>
             <div className="flex space-x-4">
               <a href="#" className="hover:underline">
-                <FaFacebook size={24} />
+                <SlSocialFacebook size={24} />
               </a>
               <a href="#" className="hover:underline">
-                <FaTwitter size={24} />
+                <PiTwitterLogoLight size={24} />
               </a>
               <a href="#" className="hover:underline">
-                <FaLinkedin size={24} />
+                <RiGithubLine size={28} />
               </a>
             </div>
-          </div>
-
-          {/* Newsletter Subscription */}
-          <div>
-            <h3 className="font-bold mb-2">Subscribe</h3>
-            <form className="flex flex-col md:flex-row md:space-x-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="p-2 rounded mb-2 md:mb-0"
-              />
-              <button type="submit" className="bg-blue-500 p-2 rounded text-sm">
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
 
@@ -82,6 +72,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </div>
   );
 };
 
