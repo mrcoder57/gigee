@@ -32,17 +32,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/about" legacyBehavior>
+                <Link href="/" legacyBehavior>
                   <a className="text-sm hover:underline">About Us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/jobs" legacyBehavior>
+                <Link href="/jobs" >
                   <a className="text-sm hover:underline">Jobs</a>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" legacyBehavior>
+                <Link href="/contact" >
                   <a className="text-sm hover:underline">Contact</a>
                 </Link>
               </li>
