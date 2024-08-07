@@ -28,7 +28,7 @@ const Step3: React.FC<Step3Props> = ({ prevStep, handleSubmit, handleChange, val
       </CardContent>
       <div className='flex flex-row justify-between mx-6 mb-5'>
         <Button variant='outline' onClick={prevStep}>Back</Button>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} variant="ghost">Submit</Button>
       </div>
     </div>
   );

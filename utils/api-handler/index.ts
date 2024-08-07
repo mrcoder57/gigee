@@ -2,6 +2,10 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Token = Cookies.get("token");
+
+if(!Token){
+   const loggedIn=false
+}
 export const config = {
   headers: {
     Authorization: `${Token}`,
