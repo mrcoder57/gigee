@@ -65,7 +65,7 @@ size="sm" className="px-3" onClick={copyToClipboard}>
         </div>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
-            <Button type="button" variant="default" >
+            <Button type="button" variant="ghost" >
               Close
             </Button>
           </DialogClose>
