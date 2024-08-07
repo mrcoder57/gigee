@@ -183,6 +183,7 @@ const ProfileForm: React.FC<ProfileData> = ({
           ))}
           <Button
             type="button"
+            variant="link"
             onClick={addSocialInput}
             className="mt-3 rounded-full p-[18px] border-2 border-dotted border-gray-400 shadow-md"
           >
@@ -204,6 +205,7 @@ const ProfileForm: React.FC<ProfileData> = ({
           ))}
           <Button
             type="button"
+            variant="link"
             onClick={addLanguageInput}
             className="mt-3 rounded-full p-[18px] border-2 border-dotted border-gray-400 shadow-md"
           >
