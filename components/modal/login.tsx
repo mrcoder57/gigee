@@ -67,7 +67,7 @@ export function Login() {
     <div className="lg:block bg-white">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="link">Login</Button>
+          <Button variant="ghost">Login</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
@@ -121,11 +121,11 @@ export function Login() {
           </div>
           <DialogFooter>
             {!isVerified ? (
-              <Button type="submit" variant="outline" onClick={handleOtp}>
+              <Button type="submit" variant="ghost" onClick={handleOtp}>
                 Submit OTP
               </Button>
             ) : (
-              <Button type="submit" onClick={handleLogin}>
+              <Button type="submit" variant="ghost" onClick={handleLogin}>
                 Login
               </Button>
             )}
