@@ -12,7 +12,7 @@ const UserMenu = (props: Props) => {
 
   return (
     <div className="relative">
-      <div className=" w-16 h-10 p-3 flex items-center justify-center border-2 rounded-full">
+      <div className=" ">
       <Dropdown/>
       </div>
     </div>
