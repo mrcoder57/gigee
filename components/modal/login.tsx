@@ -77,10 +77,11 @@ export function Login() {
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
+            <div className="grid grid-cols-4 items-center gap-2">
+              <Label htmlFor="email" className="">
                 Email
               </Label>
+              <br />
               <Input
                 id="email"
                 placeholder="example@gmail.com"
@@ -89,10 +90,11 @@ export function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="password" className="text-right">
+            <div className="grid grid-cols-4 items-center gap-2">
+              <Label htmlFor="password" className="">
                 Password
               </Label>
+              <br />
               <Input
                 id="password"
                 placeholder="password"
