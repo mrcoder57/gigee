@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="mb-6 md:mb-0">
               <Link href="/">
               <Image
-                src="/images/logo.png"
+                src="/images/gigee.png"
                 alt="GigBnB Logo"
                 width={150}
                 height={50}

@@ -12,7 +12,7 @@ const Logo = () => {
         alt="Logo" 
         height={100} 
         width={100} 
-        src="/images/logo.png"
+        src="/images/gigee.png"
         layout="fixed" // Assuming you want the logo size to remain constant
       />
       </Link>
