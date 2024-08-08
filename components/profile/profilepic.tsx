@@ -60,10 +60,11 @@ const ProfileBody: React.FC<ProfileData> = ({
           />
         </div>
 
-        <div className="absolute lg:top-64 top-52 rounded-full bg-slate-500 flex flex-col">
-        <UploadDialog onImageUpload={handleImageUpload} userId={userId}/>
-          
-        </div>
+        {isOwner && (
+          <div className="absolute lg:top-64 top-52 rounded-full bg-slate-500 flex flex-col">
+            <UploadDialog onImageUpload={handleImageUpload} userId={userId}/>
+          </div>
+        )}
 
         <hr />
       </div>
