@@ -48,7 +48,7 @@ const ProfileBody: React.FC<ProfileData> = ({
   };
 
   return (
-    <div className="flex lg:gap-10 mt-20 justify-center lg:flex-row flex-col">
+    <div className="flex lg:gap-10 lg:mt-20 mt-28 justify-center lg:flex-row flex-col">
       <div className="relative lg:mt-24 mb-11 justify-center flex">
         <div className="lg:w-72 lg:h-72 h-64 w-64 relative items-center justify-center">
           <Image
