@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { Signupuser, verifyOtp } from "@/utils/api-handler";
 import axios from "axios";
+import { Login } from "./login";
 export function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -158,6 +159,10 @@ export function Signup() {
                 disabled={isDisable}
               />
             </div>
+          </div>
+          <div className=" flex flex-row  items-center gap-6">
+            <p>Already have an Account</p>
+            <Login/>
           </div>
           <DialogFooter>
             {isDisable && (
