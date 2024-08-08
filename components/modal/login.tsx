@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Loginuser, verifyOtp } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
+import { Signup } from "./sign-up";
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,7 +65,7 @@ export function Login() {
     }
   };
   return (
-    <div className="lg:block bg-white">
+    <div className="lg:block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="ghost">Login</Button>
@@ -81,7 +82,7 @@ export function Login() {
               <Label htmlFor="email" className="">
                 Email
               </Label>
-              <br />
+             
               <Input
                 id="email"
                 placeholder="example@gmail.com"
@@ -94,7 +95,6 @@ export function Login() {
               <Label htmlFor="password" className="">
                 Password
               </Label>
-              <br />
               <Input
                 id="password"
                 placeholder="password"
@@ -118,6 +118,10 @@ export function Login() {
                 />
               </div>
             )}
+          </div>
+          <div className=" flex flex-row  items-center">
+            <p>Do not have an Account</p>
+            <Signup/>
           </div>
           <DialogFooter>
             {!isVerified ? (
