@@ -35,9 +35,6 @@ const Dropdown = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>
-          <Signup />
-        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>
           <Login />
@@ -45,7 +42,7 @@ const Dropdown = () => {
         {loggedIn && (
           <DropdownMenuItem className="text-center font-semibold">
             <Link href={`/pages/profile/${userId}`}>
-              <span className="text-center font-semibold">Edit Profile</span>
+              <span className="text-center font-normal ml-2">Edit Profile</span>
             </Link>
           </DropdownMenuItem>
         )}
