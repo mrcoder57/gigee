@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Separator } from "../ui/separator";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,13 +18,13 @@ const Search = () => {
     <div>
       <div className="border-[1px] rounded-full  w-full md:w-auto py-2  shadow-sm hover:shadow-md transition cursor-pointer">
         <div className="flex flex-row items-center justify-between">
-          <div className="sm:block hidden text-sm font-semibold text-center px-6">
-            <Link href="/pages/create-gig"> Create</Link>
+          <div className="sm:block hidden text-sm font-semibold text-center px-6 hover:ml-3 hover:bg-gray-100 hover:p-2 hover:px-6 hover:rounded-full">
+            <Link href="/pages/create-gig"> Create your gig</Link>
           </div>
-
-          <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
+          <Separator orientation="vertical" className=" h-[90%]"/>
+          {/* <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
             Any week
-          </div>
+          </div> */}
           <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
             <form>
               <label
