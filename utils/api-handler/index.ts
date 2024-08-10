@@ -1,10 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 const Token = Cookies.get("token");
 
-if(!Token){
-   const loggedIn=false
+if (!Token) {
+  const loggedIn = false;
 }
 export const config = {
   headers: {
@@ -107,29 +108,42 @@ export const getBids = async (gigId: string) => {
     throw new Error("Network or server error");
   }
 };
-export const getProfile=async(userId:string)=>{
+export const getProfile = async (userId: string) => {
   try {
     const response = await axios.get(`/api/profile/${userId}`);
     return response;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       throw new Error(
-        error.response.data.message || "An error occurred during fetching profile"
+        error.response.data.message ||
+          "An error occurred during fetching profile"
       );
     }
     throw new Error("Network or server error");
   }
-}
-export const getBid=async(bidId:string)=>{
+};
+export const getBid = async (bidId: string) => {
   try {
-    const response = await axios.get(`/api/bids/${bidId}`,config);
+    const response = await axios.get(`/api/bids/${bidId}`, config);
     return response;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       throw new Error(
-        error.response.data.message || "An error occurred during fetching profile"
+        error.response.data.message ||
+          "An error occurred during fetching profile"
       );
     }
     throw new Error("Network or server error");
   }
-}
+};
+export const logOut = async () => {
+  try {
+    Cookies.remove("userId");
+    Cookies.remove("token");
+
+    toast.success("Successfully logged out.");
+  } catch (error) {
+    toast.error("An error occurred while logging out.");
+    console.error("Logout error:", error);
+  }
+};
