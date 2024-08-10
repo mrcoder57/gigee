@@ -17,7 +17,7 @@ Gigee is a modern web application designed to facilitate the creation and manage
 
 - **Frontend**: [Next.js 14](https://nextjs.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Shadcn UI](https://shadcn.dev/)
-- **Backend**: [Node.js](https://nodejs.org/), [Express](https://expressjs.com/)
+- **Backend**: [Next.js](https://nodejs.org/)
 - **Database**: [MongoDB](https://www.mongodb.com/)
 - **Validation**: [Zod](https://zod.dev/)
 - **HTTP Client**: [Axios](https://axios-http.com/)
