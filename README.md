@@ -2,7 +2,7 @@
 
 Gigee is a modern web application designed to facilitate the creation and management of gig-based jobs. It allows job creators to post gigs and enables freelancers to place bids on those jobs, creating a dynamic marketplace for freelance work.
 
-![Gigee Banner](./https://res.cloudinary.com/dtmj58hiu/image/upload/v1723302641/IMG_20240808_183657_h81rrp.png)  
+![Gigee Banner](./images/gigee.png)  
 
 
 ## Features
