@@ -29,6 +29,7 @@ const Cards: React.FC<cardProps> = ({
     <div>
       <div className=" flex h-auto lg:w-72 md:w-[300px] w-[300px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
+        <Link href={`/pages/gig/${gigId}`}>
         {image ? (
             <Image
               src={image}
@@ -46,6 +47,7 @@ const Cards: React.FC<cardProps> = ({
               className="rounded-lg"
             />
           )}
+          </Link>
         </div>
       </div>
       <CardHeader className=" ml-[-17px]">
