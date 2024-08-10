@@ -35,7 +35,7 @@ export function Login() {
         toast.success("Login successful");
         Cookies.set("token", response.token, { expires: 30 });
         Cookies.set("userId", response.userId, { expires: 30 });
-        
+        window.location.reload();
         // console.log(response.userId)
       }
     } catch (error: any) {
@@ -55,6 +55,7 @@ export function Login() {
       Cookies.set("userId", response.userId, { expires: 30 });
       
       toast.success("user verified and Logged In ");
+      window.location.reload();
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);

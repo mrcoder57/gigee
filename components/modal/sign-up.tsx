@@ -59,6 +59,7 @@ export function Signup() {
       toast.success("user verified and Logged In ");
       Cookies.set("token", response.token, { expires: 30 });
       Cookies.set("userId", response.userId, { expires: 30 });
+      window.location.reload();
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
