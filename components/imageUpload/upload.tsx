@@ -3,7 +3,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { uploadImage } from "@/middleware/cloudinary";
 import { toast } from "sonner"
-
+import { Input } from "../ui/input";
 interface UploadComponentProps {
   onImageUpload: (url: string) => void;
 }
@@ -42,7 +42,7 @@ const UploadComponent: React.FC<UploadComponentProps> = ({ onImageUpload }) => {
           >
             Choose an image
           </label>
-          <input
+          <Input
             id="file-upload"
             type="file"
             accept="image/*"
