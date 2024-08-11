@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Step1 from "./step-1";
 import Step2 from "./step-2";
 import Step3 from "./step-3";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { config } from "@/utils/api-handler";
 import Cookies from "js-cookie";
+
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
@@ -16,6 +17,8 @@ const MultiStepForm: React.FC = () => {
     price: 0,
     image: "",
   });
+  const [debouncedFormValues, setDebouncedFormValues] = useState(formValues);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const nextStep = () => setStep((prevStep) => prevStep + 1);
   const prevStep = () => setStep((prevStep) => prevStep - 1);
@@ -24,27 +27,36 @@ const MultiStepForm: React.FC = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: name === "price" ? Number(value) : value });
   };
-  
 
   const handleImageUpload = (url: string) => {
     setFormValues({ ...formValues, image: url });
   };
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedFormValues(formValues);
+    }, 500); // Adjust the debounce delay as needed
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [formValues]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formValues);
+    setIsSubmitting(true);
+    console.log(debouncedFormValues);
     try {
       const Token = Cookies.get("token");
-      const { title, description, location, price, image } = formValues;
-      // console.log(Token)
-      const response = await axios.post("/api/gigs/gig",{
+      const { title, description, location, price, image } = debouncedFormValues;
+      const response = await axios.post("/api/gigs/gig", {
         title,
         description,
         location,
         price,
         image
-      },config)
-      console.log(response);
+      }, config);
+      // console.log(response);
       toast.success("gig created successfully");
     } catch (err: any) {
       if (err.message) {
@@ -53,6 +65,8 @@ const MultiStepForm: React.FC = () => {
       } else {
         toast.error("An unknown error occurred");
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,6 +96,7 @@ const MultiStepForm: React.FC = () => {
           handleChange={handleChange}
           values={formValues}
           onImageUpload={handleImageUpload}
+          isSubmitting={isSubmitting}
         />
       );
     default:

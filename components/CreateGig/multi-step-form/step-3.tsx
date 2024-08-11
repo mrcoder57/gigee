@@ -14,9 +14,17 @@ interface Step3Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   values: any;
   onImageUpload: (url: string) => void;
+  isSubmitting: boolean; // Add this prop to handle submission state
 }
 
-const Step3: React.FC<Step3Props> = ({ prevStep, handleSubmit, handleChange, values, onImageUpload }) => {
+const Step3: React.FC<Step3Props> = ({
+  prevStep,
+  handleSubmit,
+  handleChange,
+  values,
+  onImageUpload,
+  isSubmitting, // Destructure the isSubmitting prop
+}) => {
   return (
     <div className="flex flex-col h-auto mt-16 mb-16 lg:w-[550px] md:w-64 w-64 mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <CardHeader>
@@ -27,8 +35,12 @@ const Step3: React.FC<Step3Props> = ({ prevStep, handleSubmit, handleChange, val
         <UploadComponent onImageUpload={onImageUpload} />
       </CardContent>
       <div className='flex flex-row justify-between mx-6 mb-5'>
-        <Button variant='outline' onClick={prevStep}>Back</Button>
-        <Button onClick={handleSubmit} variant="ghost">Submit</Button>
+        <Button variant='outline' onClick={prevStep} disabled={isSubmitting}>
+          Back
+        </Button>
+        <Button onClick={handleSubmit} variant="ghost" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
       </div>
     </div>
   );
