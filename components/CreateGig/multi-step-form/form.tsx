@@ -7,9 +7,11 @@ import axios from "axios";
 import { toast } from "sonner";
 import { config } from "@/utils/api-handler";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState(1);
+  const router=useRouter()
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
@@ -45,7 +47,7 @@ const MultiStepForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    console.log(debouncedFormValues);
+    // console.log(debouncedFormValues);
     try {
       const Token = Cookies.get("token");
       const { title, description, location, price, image } = debouncedFormValues;
@@ -57,7 +59,10 @@ const MultiStepForm: React.FC = () => {
         image
       }, config);
       // console.log(response);
+      // const {gigId}=response.data.newGig._id;
+      // console.log("gigId",gigId)
       toast.success("gig created successfully");
+     window.location.reload()
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
@@ -67,6 +72,8 @@ const MultiStepForm: React.FC = () => {
       }
     } finally {
       setIsSubmitting(false);
+      toast.success("gig created successfully");
+      
     }
   };
 
