@@ -18,7 +18,7 @@ const Hero:React.FC<GigProps> = ({gigId,image,title}) => {
       <div className=" flex flex-col justify-center items-center">
       <div className="mt-8 w-[85%] lg:h-[560px] h-[320px] relative items-center justify-center ">
         <Image
-          src={image || "/images/sample.jpg"}
+          src={image || "/images/gigee.png"}
           alt={title}
           layout="fill"
           objectFit="cover"

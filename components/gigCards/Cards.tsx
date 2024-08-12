@@ -40,7 +40,7 @@ const Cards: React.FC<cardProps> = ({
             />
           ) : (
             <Image
-              src="/images/sample.jpg"
+              src="/images/gigee.png"
               alt="Sample"
               layout="fill"
               objectFit="cover"
@@ -50,7 +50,7 @@ const Cards: React.FC<cardProps> = ({
           </Link>
         </div>
       </div>
-      <CardHeader className=" ml-[-17px]">
+      <CardHeader className=" lg:ml-[-17px] ml-2">
         <Link href={`/pages/gig/${gigId}`}>
           <CardTitle className=" first-letter:capitalize">{title}</CardTitle>
         </Link>
@@ -58,7 +58,7 @@ const Cards: React.FC<cardProps> = ({
           hosted by <span className="  first-letter:capitalize">{creatorName || "Creator"}</span>{" "}
         </CardDescription>
       </CardHeader>
-      <CardContent className=" ml-[-17px] mt-[-10px]">
+      <CardContent className=" lg:ml-[-17px] mt-[-10px] ml-3">
         <p>${price}</p>
       </CardContent>
       {/* <CardFooter>
