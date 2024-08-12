@@ -64,14 +64,14 @@ const UploadComponent: React.FC<UploadComponentProps> = ({ onImageUpload }) => {
         <div className="mt-4">
           <p className="text-sm text-gray-500">
             Image URL:{" "}
-            <a
+            {/* <a
               href={imageUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500"
             >
               {imageUrl}
-            </a>
+            </a> */}
           </p>
           <img
             src={imageUrl}
