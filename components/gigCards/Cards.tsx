@@ -27,7 +27,7 @@ const Cards: React.FC<cardProps> = ({
 }) => {
   return (
     <div>
-      <div className=" flex h-auto lg:w-72 md:w-[330px] w-[330px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className=" flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
         <Link href={`/pages/gig/${gigId}`}>
         {image ? (
