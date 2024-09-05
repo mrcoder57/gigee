@@ -3,21 +3,22 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-interface cardProps {
+
+interface CardProps {
   gigId: string;
-  image: string;
+  image?: string;
   title: string;
   userId: string;
   price: number;
   creatorName: string;
 }
-const Cards: React.FC<cardProps> = ({
+
+const Cards: React.FC<CardProps> = ({
   gigId,
   image,
   title,
@@ -27,43 +28,43 @@ const Cards: React.FC<cardProps> = ({
 }) => {
   return (
     <div>
-      <div className=" flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
-        <Link href={`/pages/gig/${gigId}`}>
-        {image ? (
-            <Image
-              src={image}
-              alt={title}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-          ) : (
-            <Image
-              src="/images/gigee.png"
-              alt="Sample"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-          )}
+          <Link href={`/pages/gig/${gigId}`}>
+            {image ? (
+              <Image
+                src={image}
+                alt={title}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            ) : (
+              <div className="flex items-center justify-center w-full h-full text-center p-4">
+                <div>
+                  <h2 className="text-xl font-semibold first-letter:capitalize">
+                    {title}
+                  </h2>
+                  <p className="text-gray-500 first-letter:capitalize">
+                    hosted by {creatorName || "Creator"}
+                  </p>
+                </div>
+              </div>
+            )}
           </Link>
         </div>
       </div>
-      <CardHeader className=" lg:ml-[-17px] ml-2">
+      <CardHeader className="lg:ml-[-17px] ml-2">
         <Link href={`/pages/gig/${gigId}`}>
-          <CardTitle className=" first-letter:capitalize">{title}</CardTitle>
+          <CardTitle className="first-letter:capitalize">{title}</CardTitle>
         </Link>
-        <CardDescription className=" first-letter:capitalize">
-          hosted by <span className="  first-letter:capitalize">{creatorName || "Creator"}</span>{" "}
+        <CardDescription className="first-letter:capitalize">
+          hosted by <span className="first-letter:capitalize">{creatorName || "Creator"}</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className=" lg:ml-[-17px] mt-[-10px] ml-3">
+      <CardContent className="lg:ml-[-17px] mt-[-10px] ml-3">
         <p>${price}</p>
       </CardContent>
-      {/* <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter> */}
     </div>
   );
 };
