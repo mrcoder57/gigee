@@ -28,19 +28,22 @@ const Cards: React.FC<CardProps> = ({
 }) => {
   return (
     <div>
-      <div className="flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white rounded-lg overflow-hidden">
         <div className="relative w-full h-[310px]">
           <Link href={`/pages/gig/${gigId}`}>
-            {image ? (
-              <Image
+            {image ?  (
+              <div className=" rounded-xl shadow-lg">
+                    <Image
                 src={image}
                 alt={title}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-lg"
               />
+              </div>
+          
             ) : (
-              <div className="flex items-center justify-center w-full h-full text-center p-4">
+              <div className="flex items-center justify-center shadow-sm w-full h-full text-center p-4">
                 <div>
                   <h2 className="text-xl font-semibold first-letter:capitalize">
                     {title}
@@ -54,7 +57,7 @@ const Cards: React.FC<CardProps> = ({
           </Link>
         </div>
       </div>
-      <CardHeader className="lg:ml-[-17px] ml-2">
+      <CardHeader className="lg:ml-[17px] ml-2">
         <Link href={`/pages/gig/${gigId}`}>
           <CardTitle className="first-letter:capitalize">{title}</CardTitle>
         </Link>
@@ -62,7 +65,7 @@ const Cards: React.FC<CardProps> = ({
           hosted by <span className="first-letter:capitalize">{creatorName || "Creator"}</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="lg:ml-[-17px] mt-[-10px] ml-3">
+      <CardContent className="lg:ml-[17px] mt-[-10px] ml-3">
         <p>${price}</p>
       </CardContent>
     </div>
