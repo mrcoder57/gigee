@@ -7,6 +7,9 @@ export interface IGig extends Document {
   location: string;
   statusActive: boolean;
   creatorName: string;
+  jobStarts:Date;
+  jobEnds:Date;
+  skillRequired:string[];
   createdAt: Date;
   updatedAt: Date;
   userId: IUser["_id"];
@@ -48,12 +51,23 @@ const gigSchema: Schema<IGig> = new Schema(
       type: String,
       required: false,
     },
+    jobStarts: {
+      type: Date,
+      required: false,
+    },
+    jobEnds: {
+      type: Date,
+      required:false,
+    },
+    skillsRequired: {
+      type: [String],
+      required: false,
+    },
   },
   {
     timestamps: true,
   }
 );
-
 const Gig: Model<IGig> =
   mongoose.models.Gig || mongoose.model<IGig>("Gig", gigSchema);
 
