@@ -1,5 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { IUser } from "./userModel";
+
 export interface IGig extends Document {
   title: string;
   description: string;
@@ -7,9 +8,9 @@ export interface IGig extends Document {
   location: string;
   statusActive: boolean;
   creatorName: string;
-  jobStarts:Date;
-  jobEnds:Date;
-  skillRequired:string[];
+  jobStarts: Date;
+  jobEnds: Date;
+  skillsRequired: string[];
   createdAt: Date;
   updatedAt: Date;
   userId: IUser["_id"];
@@ -57,7 +58,7 @@ const gigSchema: Schema<IGig> = new Schema(
     },
     jobEnds: {
       type: Date,
-      required:false,
+      required: false,
     },
     skillsRequired: {
       type: [String],
@@ -68,6 +69,7 @@ const gigSchema: Schema<IGig> = new Schema(
     timestamps: true,
   }
 );
+
 const Gig: Model<IGig> =
   mongoose.models.Gig || mongoose.model<IGig>("Gig", gigSchema);
 
