@@ -5,6 +5,7 @@ import { z } from "zod";
 import Bid from "@/models/bidsModel";
 import Gig from "@/models/gigMOdel";
 import Profile from "@/models/profileModel";
+import { createNotification } from "@/utils/notificationsHandler";
 
 const bidSchema = z.object({
   amount: z.number().positive(),
@@ -51,6 +52,13 @@ export async function POST(
       );
     }
     const { gigId } = params;
+    const gig = await Gig.findById(gigId).select("userId");
+    if (!gig) {
+      return NextResponse.json(
+        { message: "Gig not found" },
+        { status: 404 }
+      );
+    }
     console.log("gig", gigId);
     const bid = await Bid.create({
       gigId,
@@ -59,7 +67,15 @@ export async function POST(
       message,
       biderName:profile.name
     });
+    const notificationMessage = `You have received a new bid of ${amount} for your gig: ${gig.title}`;
+    const link = `/pages/gigs/${gigId}`; 
 
+    await createNotification({
+      message: notificationMessage,
+      userId: gig.userId, 
+      targetUserId: userId, 
+      link: link,
+    });
     return NextResponse.json({ success: true, data: bid }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(

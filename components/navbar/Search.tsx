@@ -4,6 +4,8 @@ import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
+import Notifications from "../notificationns/notification";
+
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +51,9 @@ const Search = () => {
               >
                 <BiSearch size={18} />
               </button>
+              
             </div>
+            
           </div>
         </div>
       </div>

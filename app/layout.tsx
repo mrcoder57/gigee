@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className=" overflow-x-hidden ">
+        <div className=" w-full min-w-screen ">
           <Navbar />
         </div>
         <main> {children}</main>

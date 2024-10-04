@@ -147,3 +147,11 @@ export const logOut = async () => {
     console.error("Logout error:", error);
   }
 };
+export const getNotifications = async () => {
+  try {
+    const response = await axios.get(`/api/notifications`, config);
+   return response;
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+  }
+};
