@@ -44,8 +44,28 @@ export default function Notifications() {
     fetchNotifications();
 
     socketInstance.on('connect', () => {
-      console.log("Socket connected");
+  console.log("Socket connected");
 
+  socketInstance.on("send_notification", (data) => {
+    console.log("Notification received:", data);
+
+    // Extract the intended user ID from the data
+    const intendedUserId = data.userId;
+
+    // Check if the current user's ID matches the intended recipient
+    if (socketInstance.id === intendedUserId) {
+      // Update the local notifications state for the current user
+      setNotifications((prevNotifications) => 
+        prevNotifications ? [...prevNotifications, data] : [data]
+      );
+    }
+
+    // Emit a "receive_notification" event with the data, but only to the intended recipient
+    socketInstance.emit("receive_notification", data, intendedUserId);
+  });
+});
+
+<<<<<<< HEAD
       socketInstance.on("send_notification", (data) => {
 
         console.log("Notification received:", data);
@@ -58,6 +78,8 @@ export default function Notifications() {
         console.log(data);
       });
     });
+=======
+>>>>>>> 4c3308f6c53f5992ed5efab1834cb7cd48ef4f8f
 
     return () => {
       socketInstance.off("send_notification"); // Remove the event listener on cleanup
