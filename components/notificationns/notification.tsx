@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+
 import { getNotifications } from '@/utils/api-handler';
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { socketInstance } from '@/utils/socket';
 
 interface Notification {
   _id: string;
@@ -43,7 +44,6 @@ export default function Notifications() {
   useEffect(() => {
     fetchNotifications();
 
-    const socketInstance = io();
     socketInstance.on('connect', () => {
       console.log("Socket connected");
 
