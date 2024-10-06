@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import { getNotifications } from '@/utils/api-handler';
 import {
   DropdownMenu,
@@ -30,8 +29,8 @@ export default function Notifications() {
     setLoading(true);
     try {
       const response = await getNotifications();
-      console.log('Fetched notifications:', response!.data.notifications);
-      setNotifications(response!.data.notifications);
+      console.log('Fetched notifications:', response?.data.notifications);
+      setNotifications(response?.data.notifications || []);
       setError(null); // Clear any previous error
     } catch (error) {
       console.error('Error fetching notifications:', error);
@@ -48,15 +47,20 @@ export default function Notifications() {
       console.log("Socket connected");
 
       socketInstance.on("send_notification", (data) => {
+
         console.log("Notification received:", data);
+        console.log("Current notifications:", notifications);
         setNotifications((prevNotifications) => 
           prevNotifications ? [...prevNotifications, data] : [data]
+        
         );
         socketInstance.emit("receive_notification", data);
+        console.log(data);
       });
     });
 
     return () => {
+      socketInstance.off("send_notification"); // Remove the event listener on cleanup
       socketInstance.disconnect();
     };
   }, []);
@@ -72,23 +76,24 @@ export default function Notifications() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-center hover:underline hover:text-gray-600 transition-colors duration-200">
-          {loading ? (
-            <div>Loading notifications...</div>
-          ) : error ? (
-            <div className="text-red-600">{error}</div>
-          ) : notifications && notifications.length === 0 ? (
-            <div>No notifications available.</div>
-          ) : (
-            <div className="flex flex-col">
-              {notifications?.map((noti) => (
-                <a key={noti._id} href={noti.link} className="hover:underline">
-                  {noti.message}
-                </a>
-              ))}
-            </div>
-          )}
-        </DropdownMenuItem>
+        {loading ? (
+          <div>Loading notifications...</div>
+        ) : error ? (
+          <div className="text-red-600">{error}</div>
+        ) : notifications && notifications.length === 0 ? (
+          <div>No notifications available.</div>
+        ) : (
+          <div className="flex flex-col">
+            {notifications?.map((noti) => (
+              <DropdownMenuItem
+                key={noti._id} // Provide unique key
+                className="text-center hover:underline hover:text-gray-600 transition-colors duration-200"
+              >
+                {noti.message}
+              </DropdownMenuItem>
+            ))}
+          </div>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
