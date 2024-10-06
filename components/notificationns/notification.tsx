@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { socketInstance } from '@/utils/socket';
-
+import { userId } from '@/utils/api-handler';
 interface Notification {
   _id: string;
   message: string;
@@ -45,15 +45,16 @@ export default function Notifications() {
 
     socketInstance.on('connect', () => {
   console.log("Socket connected");
+  
 
   socketInstance.on("send_notification", (data) => {
     console.log("Notification received:", data);
 
     // Extract the intended user ID from the data
-    const intendedUserId = data.userId;
+    const intendedUserId = data.targetUserId;
 
     // Check if the current user's ID matches the intended recipient
-    if (socketInstance.id === intendedUserId) {
+    if (userId === intendedUserId) {
       // Update the local notifications state for the current user
       setNotifications((prevNotifications) => 
         prevNotifications ? [...prevNotifications, data] : [data]
@@ -65,21 +66,8 @@ export default function Notifications() {
   });
 });
 
-<<<<<<< HEAD
-      socketInstance.on("send_notification", (data) => {
 
-        console.log("Notification received:", data);
-        console.log("Current notifications:", notifications);
-        setNotifications((prevNotifications) => 
-          prevNotifications ? [...prevNotifications, data] : [data]
-        
-        );
-        socketInstance.emit("receive_notification", data);
-        console.log(data);
-      });
-    });
-=======
->>>>>>> 4c3308f6c53f5992ed5efab1834cb7cd48ef4f8f
+
 
     return () => {
       socketInstance.off("send_notification"); // Remove the event listener on cleanup

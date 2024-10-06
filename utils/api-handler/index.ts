@@ -2,6 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
 
+
+export const userId = Cookies.get("userId");
 const Token = Cookies.get("token");
 
 if (!Token) {
