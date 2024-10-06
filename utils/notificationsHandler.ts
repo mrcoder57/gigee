@@ -1,6 +1,6 @@
 import Notification from '@/models/notifiactionModel'; 
 import { IUser } from '@/models/userModel'; 
-import { io } from 'socket.io-client';
+import { socketInstance } from './socket';
 interface CreateNotificationParams {
   message: string;
   userId: IUser['_id'];
@@ -24,7 +24,7 @@ export const createNotification = async ({
 
     await notification.save();
     console.log('Notification created:', notification);
-   
+   socketInstance.emit("send_notification", notification)
   } catch (error) {
     console.error('Error creating notification:', error);
   }
