@@ -12,6 +12,7 @@ interface Gig {
   title: string;
   price: number;
   creatorName:string
+  description:string
 }
 
 interface SearchProps {
@@ -63,7 +64,7 @@ const Searchbody: React.FC<SearchProps> = ({ query }) => {
   if (gigs.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-full w-full">
-        <h2 className="mt-72 text-center text-slate-600 text-2xl mb-52">
+        <h2 className="mt-80 text-center text-slate-600 text-2xl mb-52">
           No results found.
         </h2>
       </div>
@@ -82,6 +83,7 @@ const Searchbody: React.FC<SearchProps> = ({ query }) => {
             title={gig.title}
             price={gig.price}
             creatorName={gig.creatorName}
+            description={gig.description}
           />
         ))}
       </div>
