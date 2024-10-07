@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AiOutlineMenu } from "react-icons/ai";
+import { RxAvatar } from "react-icons/rx";
 import { Login } from "../modal/login";
 import { Signup } from "../modal/sign-up";
 import Cookies from "js-cookie";
@@ -40,8 +40,8 @@ const Dropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="border-blue-50 focus:outline-none">
-        <div className="w-16 h-10 p-3 flex items-center justify-center border-2 rounded-full">
-          <AiOutlineMenu size={16} /> {/* Adjust the size as needed */}
+        <div className="w-16 h-10  flex items-center justify-center ">
+          <RxAvatar size={28} /> {/* Adjust the size as needed */}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
