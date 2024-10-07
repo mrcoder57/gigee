@@ -1,11 +1,4 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,6 +9,7 @@ interface CardProps {
   userId: string;
   price: number;
   creatorName: string;
+  description: string;
 }
 
 const Cards: React.FC<CardProps> = ({
@@ -25,49 +19,32 @@ const Cards: React.FC<CardProps> = ({
   price,
   userId,
   creatorName,
+  description
 }) => {
+  const trimmedDescription = description.slice(0, 500);
+
   return (
-    <div>
-      <div className="flex h-auto lg:w-72 md:w-[330px] w-[320px] mx-auto bg-white rounded-lg overflow-hidden">
-        <div className="relative w-full h-[310px]">
-          <Link href={`/pages/gig/${gigId}`}>
-            {image ?  (
-              <div className=" rounded-xl shadow-lg">
-                    <Image
-                src={image}
-                alt={title}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg"
-              />
-              </div>
-          
-            ) : (
-              <div className="flex items-center justify-center shadow-sm w-full h-full text-center p-4">
-                <div>
-                  <h2 className="text-xl font-semibold first-letter:capitalize">
-                    {title}
-                  </h2>
-                  <p className="text-gray-500 first-letter:capitalize">
-                    hosted by {creatorName || "Creator"}
-                  </p>
-                </div>
-              </div>
-            )}
-          </Link>
+    <div className="flex flex-col  h-[400px] lg:w-[300px] md:w-[330px] w-[320px] gap-y-10 rounded-lg overflow-hidden bg-white">
+      <Link href={`/pages/gig/${gigId}`}>
+        {image && (
+          <div className="relative w-full h-[310px] gap-y-10 rounded-lg">
+            <Image
+              src={image}
+              alt={title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-lg"
+            />
+          </div>
+        )}
+        <div className="py-3 p-1">
+          <h2 className="text-xl font-semibold">{title}</h2>
+          {!image && (
+         <p className="text-sm font-[500] mt-2">{trimmedDescription}</p>
+        )}
+          <p className="text-sm font-[600] mt-2">Hosted by {creatorName}</p>
         </div>
-      </div>
-      <CardHeader className="lg:ml-[17px] ml-2">
-        <Link href={`/pages/gig/${gigId}`}>
-          <CardTitle className="first-letter:capitalize">{title}</CardTitle>
-        </Link>
-        <CardDescription className="first-letter:capitalize">
-          hosted by <span className="first-letter:capitalize">{creatorName || "Creator"}</span>
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="lg:ml-[17px] mt-[-10px] ml-3">
-        <p>${price}</p>
-      </CardContent>
+      </Link>
     </div>
   );
 };
