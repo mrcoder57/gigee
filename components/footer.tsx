@@ -8,13 +8,13 @@ import { PiTwitterLogoLight } from "react-icons/pi";
 import { RiGithubLine } from "react-icons/ri";
 const Footer = () => {
   return (
-    <div>
+    <div className=" w-full ">
       <Separator orientation="horizontal" className="bg-gray-200 mt-4 " />
-      <footer className="bg-slate-100 font-medium py-8 px-4  w-full ">
-        <div className="container mx-auto mt-10 ">
-          <div className="flex flex-col md:flex-row justify-between">
+      <footer className="bg-slate-100 font-medium  flex items-center justify-center w-full h-96 ">
+        <div className="container mx-auto ">
+          <div className="flex flex-col items-center md:flex-row justify-between">
             {/* Logo and Description */}
-            <div className="mb-6 md:mb-0">
+            <div className="mb-6 md:mb-0 flex flex-col">
               <Link href="/">
               <Image
                 src="/images/gigee.png"
@@ -24,13 +24,13 @@ const Footer = () => {
               />
               </Link>
               <p className="mt-3 text-sm ">
-                Your go-to platform for Creating contract jobs for every domain.
+                Your go-to platform <br /> for Creating <br /> contract jobs for every domain.
               </p>
             </div>
 
             {/* Links */}
-            <div className="mb-6 md:mb-0">
-              <h3 className="font-bold mb-2">Contact</h3>
+            <div className="mb-6 md:mb-0 flex flex-col  items-center justify-center">
+              <h3 className="font-bold mb-2">Contact Us</h3>
               <ul>
                 <li>
                   <a href="mailto:gigbnbverifi@gmail.com">
@@ -41,9 +41,9 @@ const Footer = () => {
             </div>
 
             {/* Social Media */}
-            <div className="mb-6 md:mb-0">
+            <div className="mb-6 md:mb-0 flexx flex-col items-center justify-center">
               <h3 className="font-bold mb-2">Follow Us</h3>
-              <div className="flex space-x-4">
+              <div className="flex items-center justify-center gap-3">
                 <a href="#" className="hover:underline">
                   <SlSocialFacebook size={24} />
                 </a>
@@ -58,8 +58,8 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-8 text-center text-sm">
-            &copy; 2024 GigEE. All rights reserved.
+          <div className="mt-8 flex items-center justify-center text-center text-sm">
+            &copy; <p>2024 GigEE. All rights reserved.</p>
           </div>
         </div>
       </footer>
