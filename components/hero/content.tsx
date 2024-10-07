@@ -52,7 +52,7 @@ const Content: React.FC<ContentProps> = ({
   }, [userId]);
 
   return (
-    <div className="flex flex-col justify-center lg:ml-5 max-w-[750px] mb-20">
+    <div className="flex flex-col justify-center lg:ml-5 max-w-[750px] mb-20 ">
       {/* Location */}
       <div className="flex flex-col justify-center ">
         <div>
