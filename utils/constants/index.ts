@@ -55,4 +55,9 @@ type City = {
   ];
   
   export default citiesInIndia;
+
+  export const NavLinks=[
+    {name:"Create Ur Gig",Link:"create-gig"},
+    {name:"Anything",Link:"create-gig"},
+  ]
   
