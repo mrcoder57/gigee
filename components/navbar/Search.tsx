@@ -1,11 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
-import Notifications from "../notificationns/notification";
-
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,48 +13,39 @@ const Search = () => {
       router.push(`/pages/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
+
   return (
-    <div>
-      <div className="border-[1px] rounded-full  w-full md:w-auto py-2  shadow-sm hover:shadow-md transition cursor-pointer">
-        <div className="flex flex-row items-center justify-between">
-          <div className="sm:block hidden text-sm font-semibold text-center px-6 hover:ml-3 hover:bg-gray-100 hover:p-2 hover:px-6 hover:rounded-full">
-            <Link href="/pages/create-gig"> Create your gig</Link>
-          </div>
-          <Separator orientation="vertical" className=" h-[90%]"/>
-          {/* <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center">
-            Any week
-          </div> */}
-          <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-            <form>
-              <label
-                htmlFor="search"
-                className="block text-sm font-medium text-gray-700"
-              ></label>
-              <input
-                type="text"
-                id="search"
-                className="mt-1 block w-full py-2 px-3  bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                placeholder="search "
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                }}
-              />
-            </form>
-            <div className=" bg-rose-500 rounded-full text-white">
-              <button
-                className=" p-2 h-full w-full rounded-full"
-                onClick={handleSearch}
-              >
-                <BiSearch size={18} />
-              </button>
-              
-            </div>
-            
-          </div>
+    <div className="flex flex-row justify-between">
+  <div className="rounded-full w-96 h-14 my-2 cursor-pointer border-[1px] shadow-md hover:border-gray-400 transition">
+    <div className="flex flex-row items-center justify-between py-[3px] px-3">
+      <Separator orientation="vertical" className="h-[90%]" />
+      <div className="text-sm text-gray-600 flex w-full items-center justify-between">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex-grow"
+        >
+          <input
+            type="text"
+            id="search"
+            className="w-full h-12 ml-3 text-lg border-none outline-none"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </form>
+        <div className="flex items-center justify-center h-10 w-10 ml-2 bg-rose-500 rounded-full text-white">
+          <button
+            className="rounded-full"
+            onClick={handleSearch}
+          >
+            <BiSearch size={20} />
+          </button>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 
