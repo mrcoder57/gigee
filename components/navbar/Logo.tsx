@@ -6,7 +6,7 @@ const Logo = () => {
 //const router = useRouter();
 
   return (
-    <div className="hidden md:block cursor-pointer ">
+    <div className="block cursor-pointer ">
       <Link href='/'>
       <Image 
         alt="Logo" 
