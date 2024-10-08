@@ -16,7 +16,7 @@ const Search = () => {
 
   return (
     <div className="flex flex-row justify-between">
-  <div className="rounded-full w-96 h-14 my-2 cursor-pointer border-[1px] shadow-md hover:border-gray-400 transition">
+  <div className="rounded-full w-96 h-14 my-2 cursor-pointer border-[1px] shadow-md hover:border-[#e1dbdb] transition">
     <div className="flex flex-row items-center justify-between py-[3px] px-3">
       <Separator orientation="vertical" className="h-[90%]" />
       <div className="text-sm text-gray-600 flex w-full items-center justify-between">
@@ -27,7 +27,7 @@ const Search = () => {
           <input
             type="text"
             id="search"
-            className="w-full h-12 ml-3 text-lg border-none outline-none"
+            className="w-full h-12 ml-3 text-[15px] border-none outline-none"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
