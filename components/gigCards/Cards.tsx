@@ -38,11 +38,11 @@ const Cards: React.FC<CardProps> = ({
           </div>
         )}
         <div className="py-3 p-1">
-          <h2 className="text-xl font-semibold">{title}</h2>
+          <h2 className="text-xl font-[500]">{title}</h2>
           {!image && (
-         <p className="text-sm font-[500] mt-2">{trimmedDescription}</p>
+         <p className="text-sm font-[400] mt-2">{trimmedDescription}</p>
         )}
-          <p className="text-sm font-[600] mt-2">Hosted by {creatorName}</p>
+          <p className="text-sm font-[500] mt-2">Hosted by {creatorName}</p>
         </div>
       </Link>
     </div>
