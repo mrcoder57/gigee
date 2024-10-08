@@ -14,7 +14,7 @@ import { Login } from "../modal/login";
 import { Signup } from "../modal/sign-up";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { logOut } from "@/utils/api-handler"; 
+import { logOut } from "@/utils/api-handler";
 import { useRouter } from "next/navigation";
 
 const Dropdown = () => {
@@ -40,7 +40,7 @@ const Dropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="border-blue-50 focus:outline-none">
-        <div className="w-16 h-10  flex items-center justify-center ">
+        <div className="w-10 h-10  flex items-center justify-center ">
           <RxAvatar size={28} /> {/* Adjust the size as needed */}
         </div>
       </DropdownMenuTrigger>
@@ -48,9 +48,11 @@ const Dropdown = () => {
         <DropdownMenuSeparator />
         {loggedIn ? (
           <>
-            <DropdownMenuItem className="text-center hover:underline hover:text-gray-600 transition-colors duration-200">
+            <DropdownMenuItem className="text-center hover:text-gray-600 transition-colors duration-200">
               <Link href={`/pages/profile/${userId}`}>
-                <span className="text-center font-normal ml-2">Edit Profile</span>
+                <span className="text-center font-normal ml-2">
+                  Edit Profile
+                </span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem

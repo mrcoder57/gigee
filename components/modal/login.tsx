@@ -53,7 +53,7 @@ export function Login() {
       // console.log(response.userId);
       Cookies.set("token", response.token, { expires: 30 });
       Cookies.set("userId", response.userId, { expires: 30 });
-      
+
       toast.success("user verified and Logged In ");
       window.location.reload();
     } catch (err: any) {
@@ -69,7 +69,7 @@ export function Login() {
     <div className="lg:block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="ghost">Login</Button>
+          <span className=" text-[14px] hover:cursor-pointer">Login</span>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
@@ -83,7 +83,7 @@ export function Login() {
               <Label htmlFor="email" className="">
                 Email
               </Label>
-             
+
               <Input
                 id="email"
                 placeholder="example@gmail.com"
@@ -122,7 +122,7 @@ export function Login() {
           </div>
           <div className=" flex flex-row  items-center">
             <p>Do not have an Account</p>
-            <Signup/>
+            <Signup />
           </div>
           <DialogFooter>
             {!isVerified ? (
