@@ -78,8 +78,8 @@ export default function Notifications() {
   console.log('Current notifications:', notifications);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="focus:outline-none outline-none overflow-x-hidden">
+    <DropdownMenu >
+      <DropdownMenuTrigger className="focus:outline-none outline-none overflow-x-hidden hidden lg:block">
         <div className="w-16 h-10 p-3 flex items-center justify-center">
           <IoMdNotificationsOutline size={22} /> {/* Adjust the size as needed */}
         </div>
