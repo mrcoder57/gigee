@@ -37,7 +37,7 @@ const Body = () => {
     return <Skeletons />;
   }
   return (
-    <div className="mb-12 mt-20 py-1 bg-white overflow-x-hidden">
+    <div className=" mt-20 py-1 bg-white overflow-x-hidden">
       {gigs.length === 0 ? (
         <div className="text-center">No gigs available at the moment.</div>
       ) : (
