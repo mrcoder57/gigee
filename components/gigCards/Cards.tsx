@@ -27,7 +27,7 @@ const Cards: React.FC<CardProps> = ({
     <div className="flex flex-col  h-[400px] lg:w-[300px] md:w-[330px] w-[320px] gap-y-10 rounded-lg overflow-hidden bg-white">
       <Link href={`/pages/gig/${gigId}`}>
         {image && (
-          <div className="relative w-full h-[310px] gap-y-10 rounded-lg">
+          <div className="relative w-full h-[270px] gap-y-10 rounded-lg">
             <Image
               src={image}
               alt={title}
