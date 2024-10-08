@@ -8,6 +8,7 @@ import Usermenu from "./Usermenu";
 import Notifications from "../notificationns/notification";
 import Link from "next/link";
 import { NavLinks } from "@/utils/constants";
+import MobileSearch from "./mobileSearch";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,6 +59,7 @@ function Navbar() {
           )}
         </div>
         <div className="flex flex-row items-center justify-center gap-1">
+          <MobileSearch/>
           <Notifications />
           <Usermenu />
         </div>
