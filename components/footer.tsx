@@ -1,69 +1,95 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "../components/ui/separator";
-import { IoLogoFacebook, IoLogoLinkedin, IoLogoTwitter } from "react-icons/io5";
+
 import { AiFillFacebook } from "react-icons/ai";
 import { SlSocialFacebook } from "react-icons/sl";
 import { PiTwitterLogoLight } from "react-icons/pi";
 import { RiGithubLine } from "react-icons/ri";
+import { quickLinks } from "@/utils/constants";
+import { BiSearch } from "react-icons/bi";
 const Footer = () => {
   return (
-    <div className=" w-full ">
-      <Separator orientation="horizontal" className="bg-gray-200 mt-4 " />
-      <footer className="bg-slate-100 font-medium  flex items-center justify-center w-full h-96 ">
-        <div className="container mx-auto ">
-          <div className="flex flex-col items-center md:flex-row justify-between">
-            {/* Logo and Description */}
-            <div className="mb-6 md:mb-0 flex flex-col">
-              <Link href="/">
-              <Image
-                src="/images/gigee.png"
-                alt="GigBnB Logo"
-                width={150}
-                height={50}
-              />
-              </Link>
-              <p className="mt-3 text-sm ">
-                Your go-to platform <br /> for Creating <br /> contract jobs for every domain.
-              </p>
-            </div>
+    <div className="w-full border-t-2 h-[350px] flex items-center justify-center">
+  <footer className="flex flex-col gap-2 items-center justify-between h-full w-full">
+    <div className="flex lg:flex-row flex-col items-center w-full justify-center lg:gap-48 gap-y-7 mt-auto mb-auto px-4">
+      <div className="flex flex-col justify-center items-center lg:gap-7 gap-4">
+        <Link href="/">
+          <Image
+            src="/images/gigee.png"
+            alt="GigBnB Logo"
+            width={150}
+            height={50}
+          />
+        </Link>
+        <a
+          href="mailto:gigbnbverifi@gmail.com"
+          className="text-[12px] font-semibold"
+        >
+          gigbnbverifi@gmail.com
+        </a>
+      </div>
 
-            {/* Links */}
-            <div className="mb-6 md:mb-0 flex flex-col  items-center justify-center">
-              <h3 className="font-bold mb-2">Contact Us</h3>
-              <ul>
-                <li>
-                  <a href="mailto:gigbnbverifi@gmail.com">
-                    gigbnbverifi@gmail.com
-                  </a>
-                </li>
-              </ul>
-            </div>
+      <div className="flex flex-col justify-center lg:gap-y-4">
+        <h3 className="text-[12px] font-medium">Quick Links</h3>
+        {quickLinks.map((links, ind) => (
+          <a href="#" className="text-[12px] text-[#909090]" key={ind}>
+            {links.name}
+          </a>
+        ))}
+      </div>
 
-            {/* Social Media */}
-            <div className="mb-6 md:mb-0 flexx flex-col items-center justify-center">
-              <h3 className="font-bold mb-2">Follow Us</h3>
-              <div className="flex items-center justify-center gap-3">
-                <a href="#" className="hover:underline">
-                  <SlSocialFacebook size={24} />
-                </a>
-                <a href="#" className="hover:underline">
-                  <PiTwitterLogoLight size={24} />
-                </a>
-                <a href="#" className="hover:underline">
-                  <RiGithubLine size={28} />
-                </a>
-              </div>
-            </div>
-          </div>
+      <div className="flex flex-col justify-center mt-4 lg:gap-y-7">
+        {quickLinks.map((links, ind) => (
+          <a href="#" className="text-[12px] text-[#909090]" key={ind}>
+            {links.name}
+          </a>
+        ))}
+      </div>
 
-          {/* Copyright */}
-          <div className="mt-8 flex items-center justify-center text-center text-sm">
-            &copy; <p>2024 GigEE. All rights reserved.</p>
+      <div className="flex flex-col items-center justify-center lg:gap-y-6 gap-y-2">
+        <h3 className="text-[12px] font-medium">Search products</h3>
+        <div className="flex items-center justify-between h-12 w-full max-w-xs rounded-lg border border-gray-200">
+          <input
+            type="text"
+            className="w-[70%] ml-2 h-full border-none outline-none focus:outline-none"
+          />
+          <div className="flex items-center justify-center h-full w-[30%] bg-rose-500 rounded-md text-white">
+            <button className="rounded-full">
+              <BiSearch size={20} />
+            </button>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
+
+    <div className="flex flex-col gap-4 w-full justify-between items-center px-4 mb-6">
+      <hr className="lg:flex border-[#909090] lg:w-[80%] w-[50%]" />
+      <div className="flex lg:flex-row flex-col items-center justify-between lg:gap-[340px] gap-y-3">
+        <div className="flex flex-row items-center justify-center gap-3">
+          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
+            <SlSocialFacebook size={18} />
+          </div>
+          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
+            <PiTwitterLogoLight size={18} />
+          </div>
+          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
+            <RiGithubLine size={18} />
+          </div>
+        </div>
+
+        <div className="text-center flex items-center justify-center">
+          <p className="text-[12px]">A product of GIGEE</p>
+        </div>
+        <div className="text-center flex items-center justify-center">
+          <p className="text-[12px]">© 2024 all rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
   );
 };
 
