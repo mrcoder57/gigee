@@ -61,3 +61,7 @@ type City = {
     {name:"Anything",Link:"create-gig"},
   ]
   
+  export const quickLinks=[
+  {name:"Product"},
+  {name:"information"}
+  ]
