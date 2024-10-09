@@ -57,9 +57,9 @@ const Page = () => {
 
  
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col lg:mt-10">
       <Hero gigId={gigId} image={gig.image} title={gig.title} />
-      <div className="flex lg:flex-row flex-col-reverse justify-around lg:gap-20 gap-7 lg:mx-15 mx-5">
+      <div className="flex lg:flex-row flex-col-reverse lg:justify-around lg:gap-20 gap-7 lg:mx-15 mx-5">
         <Content
           location={gig.location}
           gigId={gigId}
@@ -67,7 +67,9 @@ const Page = () => {
           description={gig.description}
           creatorName={gig.creatorName}
         />
+        <div className=" flex lg:items-x-center justify-center lg:ml-10 lg:w-full">
         <Status amount={gig.price} isDisable={gig.statusActive} gigId={gigId} />
+        </div>
       </div>
     </div>
   );

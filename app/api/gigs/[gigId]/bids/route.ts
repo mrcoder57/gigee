@@ -76,7 +76,7 @@ export async function POST(
       targetUserId: userId, 
       link: link,
     });
-    return NextResponse.json({ success: true, data: bid }, { status: 201 });
+    return NextResponse.json({ success: true, data: bid}, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
       { message: "error creating Bid", error: error.message },
