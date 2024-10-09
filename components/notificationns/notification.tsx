@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getNotifications } from '@/utils/api-handler';
+import { useState, useEffect } from "react";
+import { getNotifications } from "@/utils/api-handler";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,8 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { socketInstance } from '@/utils/socket';
-import { userId } from '@/utils/api-handler';
+import { socketInstance } from "@/utils/socket";
+import { userId } from "@/utils/api-handler";
 interface Notification {
   _id: string;
   message: string;
@@ -21,7 +21,9 @@ interface Notification {
 }
 
 export default function Notifications() {
-  const [notifications, setNotifications] = useState<Notification[] | null>(null); 
+  const [notifications, setNotifications] = useState<Notification[] | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,12 +31,12 @@ export default function Notifications() {
     setLoading(true);
     try {
       const response = await getNotifications();
-      console.log('Fetched notifications:', response?.data.notifications);
+      console.log("Fetched notifications:", response?.data.notifications);
       setNotifications(response?.data.notifications || []);
       setError(null); // Clear any previous error
     } catch (error) {
-      console.error('Error fetching notifications:', error);
-      setError('Failed to fetch notifications. Please try again later.');
+      console.error("Error fetching notifications:", error);
+      setError("Failed to fetch notifications. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -43,45 +45,35 @@ export default function Notifications() {
   useEffect(() => {
     fetchNotifications();
 
-    socketInstance.on('connect', () => {
-  console.log("Socket connected");
-  
+    socketInstance.on("connect", () => {
+      console.log("Socket connected");
+        
+      socketInstance.on("send_notification", (data) => {
+        console.log("Notification received:", data);
 
-  socketInstance.on("send_notification", (data) => {
-    console.log("Notification received:", data);
+        const intendedUserId = data.targetUserId;
 
-    // Extract the intended user ID from the data
-    const intendedUserId = data.targetUserId;
+        if (userId === intendedUserId) {
+          
+          setNotifications((prevNotifications) =>
+            prevNotifications ? [...prevNotifications, data] : [data]
+          );
+        }
+        socketInstance.emit("receive_notification", data, intendedUserId);
+      });
+    });
 
-    // Check if the current user's ID matches the intended recipient
-    if (userId === intendedUserId) {
-      // Update the local notifications state for the current user
-      setNotifications((prevNotifications) => 
-        prevNotifications ? [...prevNotifications, data] : [data]
-      );
-    }
-
-    // Emit a "receive_notification" event with the data, but only to the intended recipient
-    socketInstance.emit("receive_notification", data, intendedUserId);
-  });
-});
-
-
-
-
-    return () => {
-      socketInstance.off("send_notification"); // Remove the event listener on cleanup
-      socketInstance.disconnect();
-    };
+   
   }, []);
 
-  console.log('Current notifications:', notifications);
+  console.log("Current notifications:", notifications);
 
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none outline-none overflow-x-hidden hidden lg:block">
         <div className="w-16 h-10 p-3 flex items-center justify-center">
-          <IoMdNotificationsOutline size={22} /> {/* Adjust the size as needed */}
+          <IoMdNotificationsOutline size={22} />{" "}
+          {/* Adjust the size as needed */}
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
