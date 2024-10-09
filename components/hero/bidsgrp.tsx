@@ -46,8 +46,7 @@ const Bidcards: React.FC<BidProps> = ({ gigId }) => {
     }
  
   return (
-    <div className="flex flex-col ">
-        <Separator/>
+    <div className="flex lg:w-full  flex-col ">
       {bids.map((bid) => (
         <Bids
           key={bid._id}
