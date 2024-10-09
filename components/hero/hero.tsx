@@ -11,7 +11,7 @@ interface GigProps {
 const Hero:React.FC<GigProps> = ({gigId,image,title}) => {
   return (
     <div className="flex flex-col w-full mx-auto ">
-      <div className=" flex flex-row mt-10 justify-between lg:mx-20 mx-5">
+      <div className=" flex flex-row mt-10 justify-between lg:mx-20 mx-10">
         <p className=" mt-16 text-2xl font-semibold ">{title}</p>
         <div className=" mt-16"><Share gigId={gigId}/></div>
       </div>
