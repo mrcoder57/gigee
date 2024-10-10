@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const People = () => {
   return (
-    <div className="flex flex-col lg:w-96 w-[280px] h-full mt-5 lg:mx-6 mx-4">
+    <div className="flex flex-col lg:w-96 w-[320px] h-full mt-5 lg:mx-6 mx-4">
       <Header />
       <div className="mt-2 flex-grow">
         <ScrollArea className="w-full h-screen">
