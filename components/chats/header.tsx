@@ -7,7 +7,7 @@ import { LuMessageSquarePlus } from "react-icons/lu";
 const Header = () => {
   return (
     <div className=' flex flex-col items-center justify-between gap-y-5'>
-        <div className=' flex flex-row  items-center justify-between lg:gap-x-64 gap-x-40 w-full '>
+        <div className=' flex flex-row  items-center justify-between lg:gap-x-64 gap-x-48 w-full '>
             <h2 className=' text-xl font-semibold'>Chats</h2>
             <div className=' flex flex-row w-full gap-3'>
              <LuMessageSquarePlus size={24}/>
