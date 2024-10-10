@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import Usermenu from "./Usermenu";
@@ -27,9 +26,11 @@ function Navbar() {
   }, []);
 
   const isHomePage = pathName === "/";
+  const isChatsPage= pathName==="/pages/chats"
+  if (isChatsPage) return null;
 
   return (
-    <div className={`fixed flex flex-col top-0 left-0 w-full z-50 transition-all duration-300 bg-white`}>
+    <div className={`fixed flex flex-col top-0 left-0 w-full z-50 transition-all duration-300 bg-white  `}>
       {/* Navbar starts */}
       <div className="flex flex-row items-center justify-between mt-4 mb-4 lg:mx-9 mx-4">
         <div className="flex items-center justify-center">

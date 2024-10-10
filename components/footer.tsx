@@ -9,7 +9,11 @@ import { PiTwitterLogoLight } from "react-icons/pi";
 import { RiGithubLine } from "react-icons/ri";
 import { quickLinks } from "@/utils/constants";
 import { BiSearch } from "react-icons/bi";
+import { usePathname } from "next/navigation";
 const Footer = () => {
+  const pathName = usePathname();
+  const isChatsPage= pathName==="/pages/chats"
+  if (isChatsPage) return null;
   return (
     <div className="w-full border-t-2 h-[350px] flex items-center justify-center">
   <footer className="flex flex-col gap-2 items-center justify-between h-full w-full">
