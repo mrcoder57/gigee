@@ -49,7 +49,7 @@ const Dropdown = () => {
         {loggedIn ? (
           <>
             <DropdownMenuItem className="text-center hover:text-gray-600 transition-colors duration-200">
-              <Link href={`/pages/profile/${userId}`}>
+              <Link href={`/profile/${userId}`}>
                 <span className="text-center font-normal ml-2">
                   Edit Profile
                 </span>
