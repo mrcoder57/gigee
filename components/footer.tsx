@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Separator } from "../components/ui/separator";
+import { Separator } from "./ui/separator";
 
 import { AiFillFacebook } from "react-icons/ai";
 import { SlSocialFacebook } from "react-icons/sl";
@@ -12,7 +12,7 @@ import { BiMailSend } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathName = usePathname();
-  const isChatsPage= pathName==="/pages/chats"
+  const isChatsPage= pathName==="/chats"
   if (isChatsPage) return null;
   return (
     <div className="w-full border-t-2 h-[350px] flex items-center justify-center">
