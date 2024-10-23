@@ -10,7 +10,7 @@ const Search = () => {
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      router.push(`/pages/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 

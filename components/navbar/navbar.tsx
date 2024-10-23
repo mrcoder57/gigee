@@ -26,7 +26,7 @@ function Navbar() {
   }, []);
 
   const isHomePage = pathName === "/";
-  const isChatsPage= pathName==="/pages/chats"
+  const isChatsPage= pathName==="/chats"
   if (isChatsPage) return null;
 
   return (
