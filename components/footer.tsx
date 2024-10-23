@@ -8,7 +8,7 @@ import { SlSocialFacebook } from "react-icons/sl";
 import { PiTwitterLogoLight } from "react-icons/pi";
 import { RiGithubLine } from "react-icons/ri";
 import { quickLinks } from "@/utils/constants";
-import { BiSearch } from "react-icons/bi";
+import { BiMailSend } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathName = usePathname();
@@ -53,15 +53,15 @@ const Footer = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center lg:gap-y-6 gap-y-2">
-        <h3 className="text-[12px] font-medium">Search products</h3>
+        <h3 className="text-[12px] font-medium">Request call back</h3>
         <div className="flex items-center justify-between h-12 w-full max-w-xs rounded-lg border border-gray-200">
           <input
             type="text"
             className="w-[70%] ml-2 h-full border-none outline-none focus:outline-none"
           />
-          <div className="flex items-center justify-center h-full w-[30%] bg-rose-500 rounded-md text-white">
+          <div className="flex items-center justify-center h-full w-[25%] bg-rose-500 rounded-md text-white">
             <button className="rounded-full">
-              <BiSearch size={20} />
+              <BiMailSend size={20} />
             </button>
           </div>
         </div>
