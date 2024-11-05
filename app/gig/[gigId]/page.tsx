@@ -17,7 +17,7 @@ interface Gig {
   location: string;
   price: number;
   userId: string;
-  creatorName:string
+  creatorName: string;
 }
 
 const Page = () => {
@@ -25,15 +25,15 @@ const Page = () => {
   const gigId = Array.isArray(params.gigId) ? params.gigId[0] : params.gigId;
 
   const [gig, setGig] = useState<Gig | null>(null);
-  
-  const [loading,setLoading]=useState(true)
+
+  const [loading, setLoading] = useState(true);
 
   const getGig = async () => {
     try {
       const response = await getGigbyId(gigId);
       console.log(response.data);
       setGig(response.data.gig);
-      setLoading(false)
+      setLoading(false);
     } catch (err: any) {
       if (err.message) {
         toast.error(err.message);
@@ -55,20 +55,25 @@ const Page = () => {
     return <div>Loading...</div>;
   }
 
- 
   return (
     <div className="flex flex-col lg:mt-10">
       <Hero gigId={gigId} image={gig.image} title={gig.title} />
-      <div className="flex lg:flex-row flex-col-reverse lg:justify-around lg:gap-20 gap-7 lg:mx-15 mx-5">
-        <Content
-          location={gig.location}
-          gigId={gigId}
-          userId={gig.userId}
-          description={gig.description}
-          creatorName={gig.creatorName}
-        />
-        <div className=" flex lg:items-x-center justify-center lg:ml-10 lg:w-full">
-        <Status amount={gig.price} isDisable={gig.statusActive} gigId={gigId} />
+      <div className="w-full mx-auto flex justify-center">
+        <div className="flex lg:flex-row flex-col-reverse justify-center  max-w-6xl w-full mx-4 lg:mx-0 md:mx-0">
+          <Content
+            location={gig.location}
+            gigId={gigId}
+            userId={gig.userId}
+            description={gig.description}
+            creatorName={gig.creatorName}
+          />
+          <div className="flex lg:ml-10 lg:justify-normal justify-center lg:w-auto w-full">
+            <Status
+              amount={gig.price}
+              isDisable={gig.statusActive}
+              gigId={gigId}
+            />
+          </div>
         </div>
       </div>
     </div>
