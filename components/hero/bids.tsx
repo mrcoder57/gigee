@@ -21,7 +21,7 @@ const Bids: React.FC<Ibids> = ({ bidId, userId, message, createdAt,biderName }) 
   const formattedDate = new Date(createdAt).toLocaleDateString();
   const slicedMessage = message.length > 100 ? `${message.slice(0, 100)}...` : message;
   return (
-    <div className=" mt-5 w-[360px] h-[180px] shadow-md border-gray-400 rounded-lg ">
+    <div className=" mt-5 w-[400px] h-[150px] shadow-md border-gray-400 rounded-lg ">
       <CardHeader className=" my-4">
         <CardTitle className=" first-letter:capitalize">{biderName}</CardTitle>
         <CardDescription>
