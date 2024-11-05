@@ -4,10 +4,11 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import Search from "./Search";
 import Usermenu from "./Usermenu";
-import Notifications from "../notificationns/notification";
+import Notifications from "./notificationns/notification";
 import Link from "next/link";
 import { NavLinks } from "@/utils/constants";
 import MobileSearch from "./mobileSearch";
+import Usersheet from "./userSidebar/usersheet";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,39 +20,44 @@ function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const isHomePage = pathName === "/";
-  const isChatsPage= pathName==="/chats"
+  const isChatsPage = pathName === "/chats";
   if (isChatsPage) return null;
 
   return (
-    <div className={`fixed flex flex-col top-0 left-0 w-full z-50 transition-all duration-300 bg-white  `}>
+    <div className="flex items-center justify-center w-full h-auto  bg-white ">
+    <div
+      className={` flex flex-col fixed top-0 z-50 w-full justify-center bg-white px-2  `}
+    >
       {/* Navbar starts */}
-      <div className="flex flex-row items-center justify-between mt-4 mb-4 lg:mx-9 mx-4">
+      <div className="flex flex-row items-center justify-between max-w-7xl py-2 w-full mx-auto">
         <div className="flex items-center justify-center">
           <Logo />
         </div>
         <div className="flex flex-row items-center justify-center gap-3">
           {isHomePage ? (
             // Show NavLinks only on the home page
-            (!isScrolled ? NavLinks.map((link, index) => (
-              <div
-                key={index}
-                className="lg:block hidden text-[14px] font-semibold text-center px-6 p-2 hover:bg-gray-100 hover:p-2 hover:px-6 hover:rounded-full"
-              >
-                <Link href={`/pages/${link.Link}`}>{link.name}</Link>
-              </div>
-            )) : (
+            !isScrolled ? (
+              NavLinks.map((link, index) => (
+                <div
+                  key={index}
+                  className="lg:block hidden text-[14px] font-semibold text-center px-6 p-2 hover:bg-gray-100 hover:p-2 hover:px-6 hover:rounded-full"
+                >
+                  <Link href={`/${link.Link}`}>{link.name}</Link>
+                </div>
+              ))
+            ) : (
               // Show Search when scrolled on home page
               <div className="hidden sm:flex flex-row items-center">
                 <Search />
               </div>
-            ))
+            )
           ) : (
             // Show Search on non-home pages
             <div className="hidden sm:flex flex-row items-center">
@@ -59,19 +65,20 @@ function Navbar() {
             </div>
           )}
         </div>
-        <div className="flex flex-row items-center justify-center gap-1">
-          <MobileSearch/>
+        <div className="flex flex-row items-center justify-center lg:gap-x-7 gap-x-3 ">
+          <MobileSearch />
           <Notifications />
-          <Usermenu />
+          <Usersheet />
         </div>
       </div>
       {/* Navbar ends */}
-      {(!isScrolled && isHomePage) && (
-        <div className="lg:flex hidden items-center justify-center mt-0 mb-2">
+      {!isScrolled && isHomePage && (
+        <div className="lg:flex hidden items-center justify-center mt-3 mb-2">
           <Search />
         </div>
       )}
       <hr />
+    </div>
     </div>
   );
 }
