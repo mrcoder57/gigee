@@ -6,6 +6,9 @@ import Cookies from "js-cookie";
 import { getProfile } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Link from "next/link";
+import Activities from "./activities";
+import { Separator } from "../ui/separator";
+import Host from "./host";
 
 interface ContentProps {
   location: string;
@@ -50,44 +53,71 @@ const Content: React.FC<ContentProps> = ({
   }, [userId]);
 
   return (
-    <div className="flex flex-col lg:justify-between max-w-screen lg:w-full lg:mx-16 mx-5  mb-20 ">
-      {/* Location */}
-      <div className="flex flex-col lg:justify-center ">
-        <div>
-          <p className="mt-10 text-2xl font-semibold">{location}</p>
+    <div className=" w-full">
+      <div className="flex flex-col lg:justify-between max-w-6xl mx-auto   mb-20 ">
+        {/* Location */}
+        <div className="flex flex-col lg:justify-center ">
+          <div>
+            <p className="lg:mt-10  mt-2 lg:text-[28px] text-[20px] font-[500]">
+              {location}
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* User Portion */}
-      <div className=" flex flex-col justify-center my-auto max-h-[75px] mt-2 ">
-        <hr className=" lg:w-[80vh] " />
-        <div className="flex flex-row h-24 gap-x-4 items-center  my-auto">
-          <div className="w-12 h-12 relative flex items-center justify-center">
-            {profile && (
-              <Image
-                src={profile.profilePic || "/images/sample.jpg"}
-                alt={`Profile picture of ${creatorName}`}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-full"
-              />
-            )}
+        {/* User Portion */}
+        <div className=" flex flex-col justify-center my-auto max-w-2xl max-h-[75px] mt-2 ">
+          <hr className=" w-full " />
+          <div className="flex flex-row h-24 gap-x-4 items-center  my-auto">
+            <div className="w-12 h-12 relative flex items-center justify-center">
+              {profile && (
+                <Image
+                  src={profile.profilePic || "/images/sample.jpg"}
+                  alt={`Profile picture of ${creatorName}`}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full"
+                />
+              )}
+            </div>
+            <div className="flex flex-col">
+              <Link href={`/profile/${userId}`}>
+                <p className="text-lg font-[600] first-letter:capitalize">
+                  Hosted by{" "}
+                  <span className=" first-letter:capitalize">
+                    {creatorName}
+                  </span>{" "}
+                </p>
+              </Link>
+              <p className="text-gray-600 text-sm">{creatorName}</p>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <Link href={`/pages/profile/${userId}`}>
-              <p className="text-lg font-semibold">Hosted by {creatorName}</p>
-            </Link>
-            <p className="text-gray-600 text-sm">{creatorName}</p>
-          </div>
+          <hr className="w-full" />
         </div>
-        <hr className=" lg:w-[80vh]" />
-        
-      </div>
-      <div>
-          <p className="text-sm mt-8">{description}</p>
+        <div className=" max-w-2xl">
+          <Activities />
+          <Separator />
         </div>
-      <div className="flex flex-row items-center mt-5">
+
+        <div className=" max-w-2xl py-2 ">
+          <p className="text-[15.9px] py-3 font-[500] max-w-[660px] ">
+            {description}
+          </p>
+          <Separator className=" my-5" />
+        </div>
+        <div className=" max-w-2xl  ">
+          {profile && (
+            <Host
+              image={profile.profilePic || "/images/sample.jpg"}
+              creatorName={creatorName}
+              userId={userId}
+            />
+          )}
+        </div>
+        {/* dashboard m jayega
+         */}
+        {/* <div className="flex flex-row items-center mt-5">
         {isOwner && <Bidcards gigId={gigId} />}
+      </div> */}
       </div>
     </div>
   );
