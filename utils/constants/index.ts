@@ -117,3 +117,10 @@ type City = {
     { id: 27, text: "Nice! We should meet up sometime." },
     { id: 28, text: "Definitely! Let's plan something soon." }
   ];
+  export const activities=[
+    {id:1,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
+    {id:2,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"}, 
+    {id:3,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
+    {id:4,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
+   
+  ]
