@@ -12,7 +12,7 @@ const Hero: React.FC<GigProps> = ({ gigId, image, title }) => {
   return (
     <div className=" w-full">
     <div className="flex lg:flex-col flex-col-reverse w-full max-w-6xl lg:mx-auto  ">
-      <div className=" flex flex-row mt-4 justify-between px-4  ">
+      <div className=" flex flex-row mt-4 justify-between lg:px-0 px-2  ">
         <p className=" lg:mt-12 text-[28px] font-[500] ">{title}</p>
         <div className=" lg:mt-12 lg:block hidden">
           <Share gigId={gigId} />
