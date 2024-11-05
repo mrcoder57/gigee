@@ -99,12 +99,11 @@ const Host: React.FC<hostProps> = ({ userId, image, creatorName }) => {
           </div>
         </div>
         <p className=" text-[16px] font-[500] text-[#222222] mt-4">
-          Hey—it' s Wendy and Lisa. We're an award-winning music duo, childhood
-          friends, and proud members of the legendary rock band The Revolution.
-          Back in the '80s, we teamed up with our close friend and Revolution
-          frontman, Prince, to bring the iconic “Purple Rain” song and film to
-          life. We're psyched to go back in time at the scene of the crime and
-          share even more incredible memories with u!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
+          voluptatibus accusamus, ab velit corrupti sunt consectetur quia
+          aliquid repellat blanditiis error quasi, tempora amet, dolor dolorum
+          asperiores aspernatur pariatur harum dolorem et sequi ratione. Quia
+          suscipit officiis voluptas voluptate doloribus perspiciatis qui ipsam?
         </p>
       </div>
     </div>
