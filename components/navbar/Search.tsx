@@ -16,24 +16,24 @@ const Search = () => {
 
   return (
     <div className="flex flex-row justify-between">
-  <div className="rounded-lg w-96 h-12 my-2 cursor-pointer border-[1px] shadow-md hover:border-[#e1dbdb] transition">
+  <div className="rounded-full w-[370px] h-12 my-2 cursor-pointer border-[1px] shadow-md hover:border-[#e1dbdb] transition">
     <div className="flex flex-row items-center justify-between py-1 px-3">
       <Separator orientation="vertical" className="h-[90%]" />
-      <div className="text-sm text-gray-600 flex w-full items-center justify-between">
+      <div className="text-sm  flex w-full items-center justify-between">
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="flex-grow"
+          className="flex-grow items-center justify-center"
         >
           <input
             type="text"
             id="search"
-            className="w-full h-auto ml-3 text-[15px] border-none outline-none"
+            className="w-full h-auto ml-3 text-[15px] mt-0.5 placeholder:text-gray-600 border-none outline-none"
             placeholder="Search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </form>
-        <div className="flex items-center justify-center h-8 w-8 ml-2 bg-rose-500 rounded-full text-white">
+        <div className="flex items-center justify-center h-8 w-8 ml-2 mt-0.5 bg-rose-500 rounded-full text-white">
           <button
             className="rounded-full"
             onClick={handleSearch}
