@@ -33,7 +33,7 @@ const Share: React.FC<GigProps> = ({ gigId }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="link" className=" flex items-center justify-center gap-x-2">
+        <Button variant="link" className=" flex items-center justify-center gap-x-2 font-semibold">
           <AiOutlineShareAlt size={20} />
           Share
         </Button>
@@ -53,7 +53,7 @@ const Share: React.FC<GigProps> = ({ gigId }) => {
             <Input
               id="link"
               ref={inputRef}
-              defaultValue={`https://gigbnb.vercel.app/pages/gig/${gigId}`}
+              defaultValue={`https://gigbnb.vercel.app/gig/${gigId}`}
               readOnly
             />
           </div>
