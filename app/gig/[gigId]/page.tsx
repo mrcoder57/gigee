@@ -8,7 +8,7 @@ import { getGigbyId } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Bidcards from "@/components/hero/bidsgrp";
 import Gigskeleton from "@/components/skeleton/Gigskeleton";
-import Map from "@/components/hero/map/map";
+import Map from "@/components/map/map";
 
 interface Gig {
   image: string;
