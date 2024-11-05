@@ -54,7 +54,7 @@ const Bid: React.FC<BidProps> = ({ isDisable, gigId }) => {
     <div className="lg:block">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="Bid" disabled={isDisable}>Bid</Button>
+          <Button  disabled={isDisable}>Bid</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
