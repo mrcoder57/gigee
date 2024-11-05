@@ -119,8 +119,8 @@ type City = {
   ];
   export const activities=[
     {id:1,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
-    {id:2,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"}, 
-    {id:3,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
-    {id:4,title:"New activity",description:"New activity",icon:"/bed.svg",date:"2023-05-01"},
+    {id:2,title:"Dance party",description:"New activity",icon:"/dancing.svg",date:"2023-05-01"}, 
+    {id:3,title:"New activity",description:"New activity",icon:"/flower.svg",date:"2023-05-01"},
+    {id:4,title:"New activity",description:"New activity",icon:"/music.svg",date:"2023-05-01"},
    
   ]
