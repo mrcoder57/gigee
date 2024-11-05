@@ -54,7 +54,7 @@ const Content: React.FC<ContentProps> = ({
 
   return (
     <div className=" w-full">
-      <div className="flex flex-col lg:justify-between max-w-6xl mx-auto   mb-20 ">
+      <div className="flex flex-col lg:justify-between max-w-6xl mx-auto mb-8 ">
         {/* Location */}
         <div className="flex flex-col lg:justify-center ">
           <div>
