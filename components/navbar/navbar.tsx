@@ -31,9 +31,9 @@ function Navbar() {
   if (isChatsPage) return null;
 
   return (
-    <div className="flex items-center justify-center w-full h-auto  bg-white ">
+    <div className="flex items-center justify-center w-full   bg-white shadow-lg ">
     <div
-      className={` flex flex-col fixed top-0 z-50 w-full justify-center items-center bg-white px-2 h-[70px] lg:h-auto `}
+      className={` flex flex-col fixed top-0 z-50 w-full justify-center items-center bg-white px-2 h-[70px] lg:h-auto shadow-md `}
     >
       {/* Navbar starts */}
       <div className="flex flex-row items-center justify-between max-w-7xl py-2 w-full mx-auto">
