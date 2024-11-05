@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Loginuser, verifyOtp } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
+import Image from "next/image";
 import { Signup } from "./sign-up";
 export function Login() {
   const [email, setEmail] = useState("");
@@ -69,7 +70,12 @@ export function Login() {
     <div className="lg:block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
-          <span className=" text-[14px] hover:cursor-pointer">Login</span>
+        <div className=' flex flex-row cursor-pointer items-center justify-center gap-x-2'>
+            <Image src="/login.svg" alt="delete" width={23} height={23} /> 
+           
+              <span className=' text-center text-[16px] font-[500] '> Login</span>
+           
+          </div>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
