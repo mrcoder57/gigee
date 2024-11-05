@@ -5,11 +5,17 @@ import Navbar from "@/components/navbar/navbar";
 
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
-import { Poppins } from "next/font/google";
+import { Poppins, Montserrat } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400","500","600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500","600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -28,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       
-      <body className={`${poppins.className}`}>
+      <body className={`${montserrat.className}`}>
         <div className=" w-full min-w-screen ">
           <Navbar />
         </div>
