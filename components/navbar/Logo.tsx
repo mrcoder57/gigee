@@ -6,7 +6,7 @@ const Logo = () => {
 //const router = useRouter();
 
   return (
-    <div className="block cursor-pointer ">
+    <div className="flex items-center justify-center">
       <Link href='/'>
       <Image 
         alt="Logo" 
