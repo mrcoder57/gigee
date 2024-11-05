@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         submit: "bg-primary text-primary-foreground hover:bg-primary/80",
+        Bid:"border text-white w-64 bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold rounded-lg transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg",
       },
       size: {
         default: "h-10 px-4 py-2",
