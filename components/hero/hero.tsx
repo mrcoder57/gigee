@@ -1,31 +1,35 @@
 // components/Hero.tsx
 
 import Image from "next/image";
-import Share  from "./share";
+import Share from "./share";
 import React from "react";
 interface GigProps {
-  gigId: string ;
-  image:string;
-  title:string
+  gigId: string;
+  image: string;
+  title: string;
 }
-const Hero:React.FC<GigProps> = ({gigId,image,title}) => {
+const Hero: React.FC<GigProps> = ({ gigId, image, title }) => {
   return (
-    <div className="flex flex-col w-full mx-auto ">
-      <div className=" flex flex-row mt-10 justify-between lg:mx-20 mx-10">
-        <p className=" mt-16 text-2xl font-semibold ">{title}</p>
-        <div className=" mt-16"><Share gigId={gigId}/></div>
+    <div className=" w-full">
+    <div className="flex lg:flex-col flex-col-reverse w-full max-w-6xl lg:mx-auto  ">
+      <div className=" flex flex-row mt-4 justify-between px-4  ">
+        <p className=" lg:mt-12 text-[28px] font-[500] ">{title}</p>
+        <div className=" lg:mt-12 lg:block hidden">
+          <Share gigId={gigId} />
+        </div>
       </div>
       <div className=" flex flex-col justify-center items-center">
-      <div className="mt-8 w-[85%] lg:h-[560px] h-[320px] relative items-center justify-center ">
-        <Image
-          src={image || "/images/gigee.png"}
-          alt={title}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-        />
+        <div className="lg:mt-8 mt-14 w-full lg:h-[560px] h-[320px] relative items-center justify-center ">
+          <Image
+            src={image || "/images/gigee.png"}
+            alt={title}
+            layout="fill"
+            objectFit="cover"
+            className="lg:rounded-lg"
+          />
+        </div>
       </div>
-      </div>
+    </div>
     </div>
   );
 };
