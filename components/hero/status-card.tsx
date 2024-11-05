@@ -29,7 +29,7 @@ const Status: React.FC<StatusProps> = ({ amount, isDisable, gigId }) => {
   }, [isDisable]);
 
   return (
-    <div className="flex flex-col lg:w-[360px] w-[250px] h-[160px] items-center rounded-lg border shadow-md shadow-slate-400 mt-10">
+    <div className="lg:flex md:flex hidden flex-col lg:w-[400px] w-[250px] h-[160px] items-center rounded-lg border shadow-[0_0_15px_5px_rgba(0,0,0,0.2)] mt-10">
       <div className="mt-5 text-center">
         <p className="text-3xl font-semibold">{status}: </p>
         <span className="text-lg text-center">$ {amount}</span>
