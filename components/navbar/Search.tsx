@@ -16,7 +16,7 @@ const Search = () => {
 
   return (
     <div className="flex flex-row justify-between">
-  <div className="rounded-lg w-96 h-11 my-2 cursor-pointer border-[1px] shadow-md hover:border-[#e1dbdb] transition">
+  <div className="rounded-lg w-96 h-12 my-2 cursor-pointer border-[1px] shadow-md hover:border-[#e1dbdb] transition">
     <div className="flex flex-row items-center justify-between py-1 px-3">
       <Separator orientation="vertical" className="h-[90%]" />
       <div className="text-sm text-gray-600 flex w-full items-center justify-between">
