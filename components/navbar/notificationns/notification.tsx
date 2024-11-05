@@ -48,14 +48,14 @@ export default function Notifications() {
 
   //   socketInstance.on("connect", () => {
   //     console.log("Socket connected");
-        
+
   //     socketInstance.on("send_notification", (data) => {
   //       console.log("Notification received:", data);
 
   //       const intendedUserId = data.targetUserId;
 
   //       if (userId === intendedUserId) {
-          
+
   //         setNotifications((prevNotifications) =>
   //           prevNotifications ? [...prevNotifications, data] : [data]
   //         );
@@ -64,7 +64,6 @@ export default function Notifications() {
   //     });
   //   });
 
-   
   // }, []);
 
   // console.log("Current notifications:", notifications);
@@ -75,7 +74,7 @@ export default function Notifications() {
       icon: "/setting-white.svg",
       gradient: "from-[#4E96FF] to-[#80C9FC]",
     },
-   
+
     {
       title: "Event Update",
       description: "An event date update",
@@ -98,33 +97,53 @@ export default function Notifications() {
 
   return (
     <DropdownMenu>
-    <DropdownMenuTrigger className="focus:outline-none">
-    <Image src="/notification-bell.svg" alt="notification bell" width={23} height={23} />
-     
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-[230px] h-[300px]">
-      <DropdownMenuLabel className={` text-sm`}>
-        Notifications
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      {notifications.map((notification, index) => (
-        <DropdownMenuItem key={index} className="h-[50px] mt-[3px] flex justify-between px-4 gap-x-2">
-          <div className="flex flex-row gap-x-4 items-center justify-center">
-            <div className={`w-10 h-10 bg-gradient-to-r ${notification.gradient} flex items-center justify-center rounded-full`}>
-              <Image src={notification.icon} alt={notification.title} height={20} width={20} />
+      <DropdownMenuTrigger className="focus:outline-none lg:block hidden">
+        <Image
+          src="/notification-bell.svg"
+          alt="notification bell"
+          width={23}
+          height={23}
+        />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[230px] h-[300px]">
+        <DropdownMenuLabel className={` text-sm`}>
+          Notifications
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {notifications.map((notification, index) => (
+          <DropdownMenuItem
+            key={index}
+            className="h-[50px] mt-[3px] flex justify-between px-4 gap-x-2"
+          >
+            <div className="flex flex-row gap-x-4 items-center justify-center">
+              <div
+                className={`w-10 h-10 bg-gradient-to-r ${notification.gradient} flex items-center justify-center rounded-full`}
+              >
+                <Image
+                  src={notification.icon}
+                  alt={notification.title}
+                  height={20}
+                  width={20}
+                />
+              </div>
+              <div className="flex flex-col justify-start">
+                <h4 className={` text-[14px] font-medium`}>
+                  {notification.title}
+                </h4>
+                <span className={`text-[#B5B5B5] text-[12px]`}>
+                  {notification.description}
+                </span>
+              </div>
             </div>
-            <div className="flex flex-col justify-start">
-              <h4 className={` text-[14px] font-medium`}>{notification.title}</h4>
-              <span className={`text-[#B5B5B5] text-[12px]`}>{notification.description}</span>
-            </div>
-          </div>
-        </DropdownMenuItem>
-      ))}
-      <DropdownMenuSeparator className=" bg-[#B5B5B5]" />
-      <div className="flex items-center justify-center">
-        <p className={`text-[#B5B5B5] mt-1 text-[14px]`}>See All Notifications</p>
-      </div>
-    </DropdownMenuContent>
-  </DropdownMenu>
+          </DropdownMenuItem>
+        ))}
+        <DropdownMenuSeparator className=" bg-[#B5B5B5]" />
+        <div className="flex items-center justify-center">
+          <p className={`text-[#B5B5B5] mt-1 text-[14px]`}>
+            See All Notifications
+          </p>
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
