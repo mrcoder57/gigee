@@ -41,7 +41,7 @@ const Body = () => {
       {gigs.length === 0 ? (
         <div className="text-center">No gigs available at the moment.</div>
       ) : (
-        <div className="grid mt-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-y-5 gap-y-4 lg:mx-6 overflow-x-hidden">
+        <div className="grid lg:mt-24 mt-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-y-5 gap-y-4 lg:mx-6 overflow-x-hidden">
           {gigs.map((gig) => (
             <Cards
               key={gig._id}
