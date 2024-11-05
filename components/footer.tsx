@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <div className="w-full  border-t-2 h-[350px] flex mx-auto">
   <footer className="flex flex-col gap-2 h-full w-full max-w-7xl mx-auto">
-    <div className="flex lg:flex-row flex-col  w-full items-center justify-between l mt-auto mb-auto px-4">
+    <div className="flex lg:flex-row flex-col  w-full items-center justify-between gap-y-6 mt-auto mb-auto px-4">
       <div className="flex flex-col justify-center items-center lg:gap-7 gap-4">
         <Link href="/">
           <Image
@@ -29,14 +29,14 @@ const Footer = () => {
         </Link>
         <a
           href="mailto:gigbnbverifi@gmail.com"
-          className="text-[14px] font-semibold"
+          className="text-[12px] font-semibold"
         >
           gigbnbverifi@gmail.com
         </a>
       </div>
-
-      <div className="flex flex-col justify-center lg:gap-y-4">
-        <h3 className="text-[14px] font-medium">Quick Links</h3>
+      <div className=" flex lg:flex-row w-full lg:w-auto lg:justify-between lg:gap-x-48 justify-between">
+      <div className="flex flex-col lg:justify-center w-full lg:w-auto justify-start py-6 lg:gap-y-4">
+        <h3 className="text-[12px] font-medium">Quick Links</h3>
         {quickLinks.map((links, ind) => (
           <a href="#" className="text-[14px] text-[#909090]" key={ind}>
             {links.name}
@@ -44,16 +44,16 @@ const Footer = () => {
         ))}
       </div>
 
-      <div className="flex flex-col justify-center mt-4 lg:gap-y-7">
+      <div className="flex flex-col lg:justify-center justify-start w-full lg:w-auto items-end mt-4 py-6 lg:gap-y-7">
         {quickLinks.map((links, ind) => (
-          <a href="#" className="text-[14px] text-[#909090]" key={ind}>
+          <a href="#" className="text-[12px] text-[#909090]" key={ind}>
             {links.name}
           </a>
         ))}
       </div>
-
+      </div>
       <div className="flex flex-col items-center justify-center lg:gap-y-6 gap-y-2">
-        <h3 className="text-[14px] font-medium">Request call back</h3>
+        <h3 className="text-[12px] font-medium">Request call back</h3>
         <div className="flex items-center justify-between h-12 w-full max-w-xs rounded-lg border border-gray-200">
           <input
             type="text"
@@ -84,10 +84,10 @@ const Footer = () => {
         </div>
 
         <div className="text-center flex items-center justify-center">
-          <p className="text-[14px]">A product of GIGEE</p>
+          <p className="text-[12px]">A product of GIGEE</p>
         </div>
         <div className="text-center flex items-center justify-center">
-          <p className="text-[14px]">© 2024 all rights reserved</p>
+          <p className="text-[12px]">© 2024 all rights reserved</p>
         </div>
       </div>
     </div>
