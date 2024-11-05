@@ -8,6 +8,7 @@ import { getGigbyId } from "@/utils/api-handler";
 import { toast } from "sonner";
 import Bidcards from "@/components/hero/bidsgrp";
 import Gigskeleton from "@/components/skeleton/Gigskeleton";
+import Map from "@/components/hero/map/map";
 
 interface Gig {
   image: string;
@@ -75,6 +76,9 @@ const Page = () => {
             />
           </div>
         </div>
+      </div>
+      <div className="w-full mx-auto flex justify-center">
+        <Map />
       </div>
     </div>
   );
