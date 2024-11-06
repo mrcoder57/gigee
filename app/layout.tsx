@@ -36,10 +36,10 @@ export default function RootLayout({
     <html lang="en">
       
       <body className={`${montserrat.className}`}>
-        <div className=" w-full min-w-screen ">
+      
           <Navbar />
           <MobileNavbar/>
-        </div>
+      
         <main> {children}</main>
         <Toaster />
         
