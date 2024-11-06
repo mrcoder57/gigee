@@ -72,7 +72,7 @@ export function Signup() {
     <div className=" block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="link">Signup</Button>
+          <Button variant={"outline"} className=" text-[13px] font-[500]"  >Sign Up</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -161,13 +161,13 @@ export function Signup() {
               />
             </div>
           </div>
-          <div className=" flex flex-row  items-center gap-6">
+          <div className=" flex flex-row justify-between w-full items-center gap-6">
             <p>Already have an Account</p>
             <Login/>
           </div>
           <DialogFooter>
             {isDisable && (
-              <Button variant="ghost" type="submit" onClick={handleSubmit}>
+              <Button type="submit" onClick={handleSubmit}>
                 Send-otp
               </Button>
             )}

@@ -70,12 +70,11 @@ export function Login() {
     <div className="lg:block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
-        <div className=' flex flex-row cursor-pointer items-center justify-center gap-x-2'>
-            <Image src="/login.svg" alt="delete" width={23} height={23} /> 
-           
-              <span className=' text-center text-[16px] font-[500] '> Login</span>
-           
-          </div>
+          <Button variant={"outline"} className=" flex shadow-sm flex-row cursor-pointer w-auto items-center justify-center gap-x-[10px] rounded-[4px]  p-2 ">
+            <Image src="/login.svg" alt="delete" width={23} height={23} />
+
+            <span className=" text-center text-[16px] font-[500] "> Login</span>
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[350px]">
           <DialogHeader>
@@ -126,17 +125,17 @@ export function Login() {
               </div>
             )}
           </div>
-          <div className=" flex flex-row  items-center">
+          <div className=" flex flex-row justify-between w-full  items-center">
             <p>Do not have an Account</p>
             <Signup />
           </div>
           <DialogFooter>
             {!isVerified ? (
-              <Button type="submit" variant="ghost" onClick={handleOtp}>
+              <Button type="submit" onClick={handleOtp}>
                 Submit OTP
               </Button>
             ) : (
-              <Button type="submit" variant="ghost" onClick={handleLogin}>
+              <Button type="submit" onClick={handleLogin}>
                 Login
               </Button>
             )}
