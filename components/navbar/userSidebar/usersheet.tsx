@@ -65,6 +65,20 @@ const Usersheet = () => {
                 </span>
               </Link>
             </div>
+            <div className=" flex flex-row items-center justify-center gap-x-[10px]">
+              <Image
+                src="/event.svg"
+                alt="delete"
+                width={23}
+                height={23}
+              />
+               <Link href={`/create-gig`}>
+                <span className=" text-center text-[16px] font-[500] ">
+                  {" "}
+                  Create ur Event
+                </span>
+              </Link>
+            </div>
             <Login />
           </div>
           <div className=" absolute bottom-3 flex flex-col items-start py-10 gap-y-4 justify-start w-full ">
