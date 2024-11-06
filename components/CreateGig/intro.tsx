@@ -12,7 +12,7 @@ const Intro = () => {
   };
 
   return (
-    <div className=" flex lg:flex-row flex-col w-full max-w-7xl items-center justify-between mx-auto h-full lg:pt-36 pt-24 "> 
+    <div className=" flex lg:flex-row flex-col w-full max-w-7xl items-center justify-between mx-auto h-full lg:pt-36 pt-28 "> 
     <div className="flex flex-col items-center  ">
       <div className=" lg:max-w-sm items-center">
         <h2 className="text-red-400 lg:text-[34px] text-[24px] font-bold text-center">
