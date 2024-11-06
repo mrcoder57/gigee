@@ -37,11 +37,11 @@ const Body = () => {
     return <Skeletons />;
   }
   return (
-    <div className=" mt-20 py-1 bg-white overflow-x-hidden">
+    <div className=" py-[134px] bg-white overflow-x-hidden">
       {gigs.length === 0 ? (
         <div className="text-center">No gigs available at the moment.</div>
       ) : (
-        <div className="grid lg:mt-24 mt-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-y-5 gap-y-4 lg:mx-6 overflow-x-hidden">
+        <div className="grid lg:mt-24 mt-9 grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap items-center justify-between  gap-x-8 lg:gap-y-5 gap-y-4 lg:mx-6 overflow-x-hidden">
           {gigs.map((gig) => (
             <Cards
               key={gig._id}

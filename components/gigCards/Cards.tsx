@@ -24,7 +24,7 @@ const Cards: React.FC<CardProps> = ({
   const trimmedDescription = description.slice(0, 500);
 
   return (
-    <div className="flex flex-col  h-[400px] lg:w-[300px] md:w-[330px] w-[320px] gap-y-10 rounded-lg overflow-hidden bg-white">
+    <div className="flex flex-col  h-auto lg:w-[300px] md:w-[330px] w-[320px] gap-y-10 rounded-lg overflow-hidden bg-white">
       <Link href={`/gig/${gigId}`}>
         {image && (
           <div className="relative w-full h-[270px] gap-y-10 rounded-lg">
@@ -38,7 +38,7 @@ const Cards: React.FC<CardProps> = ({
           </div>
         )}
         <div className="py-3 p-1">
-          <h2 className="text-xl font-[500]">{title}</h2>
+          <h2 className="text-xl font-[600]">{title}</h2>
           {!image && (
          <p className="text-sm font-[400] mt-2">{trimmedDescription}</p>
         )}

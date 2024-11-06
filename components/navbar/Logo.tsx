@@ -6,7 +6,7 @@ const Logo = () => {
 //const router = useRouter();
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="lg:flex items-center justify-center hidden">
       <Link href='/'>
       <Image 
         alt="Logo" 

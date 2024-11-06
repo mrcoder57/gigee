@@ -36,7 +36,9 @@ const Usersheet = () => {
   return (
     <Sheet>
       <SheetTrigger>
+        <div className="w-[36px] h-[36px]  lg:border-none border border-[#D9d9d9] rounded-full flex items-center justify-center">
         <Image src="/menu.svg" alt="delete" width={23} height={23} />
+        </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
