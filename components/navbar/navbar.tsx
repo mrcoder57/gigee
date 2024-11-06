@@ -11,6 +11,7 @@ import { NavLinks } from "@/utils/constants";
 import Usersheet from "./userSidebar/usersheet";
 import BackButton from "./back";
 import { Separator } from "../ui/separator";
+import CategoriesToggles from "../categories/categoriesToggles";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -80,8 +81,14 @@ function Navbar() {
           <Search />
         </div>
       )}
-      <Separator />
+      <Separator className=" h-[0.5px]" />
+      <div className=" w-full flex  max-w-7xl h-auto">
+        <CategoriesToggles />
+
+      </div>
+     
     </div>
+    
     </div>
   );
 }
