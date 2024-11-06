@@ -58,7 +58,7 @@ const CategoriesToggles = () => {
         {categories.map((category, index) => (
           <CarouselItem
             key={index}
-            className=" basis-[32%] flex flex-col items-center justify-center"
+            className=" basis-[32%] sm:basis-[25%] md:basis-[20%] flex flex-col items-center justify-center"
           >
             <div className="pb-2  flex items-center justify-center h-auto">
               <CategoryItem
