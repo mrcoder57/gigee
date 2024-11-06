@@ -128,7 +128,7 @@ export function Login() {
           </div>
           <div className=" flex flex-row  items-center">
             <p>Do not have an Account</p>
-            <Signup />
+          <Button className=' ml-2' variant="ghost" onClick={() => {}}>Sign up</Button>
           </div>
           <DialogFooter>
             {!isVerified ? (
