@@ -24,7 +24,7 @@ function MobileNavbar() {
           <div className="flex items-center justify-center">
             <BackButton />
           </div>
-          <div className="flex flex-row items-center justify-center gap-3">
+          <div className="flex flex-row items-center justify-center gap-x-1">
             <Search />
           </div>
           <div className="flex flex-row items-center justify-center lg:gap-x-7 gap-x-3 ">
