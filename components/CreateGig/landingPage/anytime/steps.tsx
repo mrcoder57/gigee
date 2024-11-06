@@ -3,7 +3,7 @@ import React from "react";
 
 const Steps = () => {
   return (
-    <div className=" flex lg:flex flex-wrap justify-between w-full mx-auto max-w-5xl py-7">
+    <div className=" flex lg:flex-row flex-col gap-y-3 justify-between items-center w-full mx-auto max-w-5xl py-7">
       <div className=" flex flex-col gap-y-3 items-center justify-center max-w-[240px]">
         <div className=" w-16 h-16 rounded-full bg-[#f7f7f7] flex justify-center items-center ">
           <Image src="/register.svg" alt="1" width={30} height={30} />
