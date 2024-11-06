@@ -21,7 +21,7 @@ const CategoriesToggles = () => {
 
     const categories = [
         { name: 'Jobs', icon: FiBriefcase },
-        { name: 'Gigs', icon: FiClipboard },
+        { name: 'Gig Jobs', icon: FiClipboard },
         { name: 'Sports', icon: MdOutlineSportsBaseball },
         { name: 'Coding Contest', icon: FaLaptopCode },
         {name:"Cultural Events",icon:BiSolidParty},
