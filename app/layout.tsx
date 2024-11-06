@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Poppins, Montserrat } from "next/font/google";
+import MobileNavbar from "@/components/navbar/mobileNavbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className={`${montserrat.className}`}>
         <div className=" w-full min-w-screen ">
           <Navbar />
+          <MobileNavbar/>
         </div>
         <main> {children}</main>
         <Toaster />
