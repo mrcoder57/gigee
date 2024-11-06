@@ -58,7 +58,7 @@ const Content: React.FC<ContentProps> = ({
         {/* Location */}
         <div className="flex flex-col lg:justify-center ">
           <div>
-            <p className="lg:mt-10  mt-2 lg:text-[28px] text-[20px] font-[500]">
+            <p className="lg:mt-10 lg:text-[28px] text-[18px] font-[600]">
               {location}
             </p>
           </div>
