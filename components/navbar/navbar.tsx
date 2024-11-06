@@ -34,7 +34,7 @@ function Navbar() {
   if (isChatsPage) return null;
 
   return (
-    <div className="lg:flex md:flex hidden items-center justify-center w-full   bg-white  ">
+    <div className="lg:flex hidden items-center justify-center w-full   bg-white  ">
       <div
         className={` flex flex-col fixed top-0 z-50 w-full justify-center items-center bg-white px-2 h-auto lg:h-auto shadow-sm `}
       >

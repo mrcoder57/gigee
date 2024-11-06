@@ -15,7 +15,7 @@ function MobileNavbar() {
   if (isChatsPage) return null;
 
   return (
-    <div className="flex lg:hidden md:hidden items-center justify-center w-full bg-white  ">
+    <div className="flex lg:hidden items-center justify-center w-full bg-white  ">
       <div
         className={` flex flex-col fixed top-0 z-50 w-full justify-center items-center bg-white px-3 h-auto lg:h-auto shadow-sm `}
       >
