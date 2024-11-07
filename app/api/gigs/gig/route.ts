@@ -10,7 +10,10 @@ const gigSchema = z.object({
   description: z.string().nonempty(),
   location: z.string(),
   price: z.number().positive(),
-  image: z.string(),
+  image: z.string().optional(),
+  category: z.string().optional(),
+  jobStarts: z.string().optional(),
+  jobEnds: z.string().optional(),
 });
 
 export async function POST(req: any) {
@@ -21,22 +24,24 @@ export async function POST(req: any) {
   if (tokenError) {
     return tokenError;
   }
-  const parsedBody = await req.json();
 
-  const { title, description, price, image, location } =
-    gigSchema.parse(parsedBody);
-  const userId = req.userId;
-
-  console.log("user", userId);
-
-  if (!userId) {
-    return NextResponse.json(
-      { message: "userId is required" },
-      { status: 400 }
-    );
-  }
-
+  let parsedBody;
   try {
+    parsedBody = await req.json();
+    const { title, description, price, image, location, category, jobStarts, jobEnds } =
+      gigSchema.parse(parsedBody); // This could throw an error if invalid
+
+    const userId = req.userId;
+
+    console.log("user", userId);
+
+    if (!userId) {
+      return NextResponse.json(
+        { message: "userId is required" },
+        { status: 400 }
+      );
+    }
+
     const profile = await Profile.findOne({ userId }).select("name");
     if (!profile) {
       return NextResponse.json(
@@ -44,28 +49,35 @@ export async function POST(req: any) {
         { status: 404 }
       );
     }
+
     const newGig = new Gig({
-      title: title,
-      description: description,
-      price: price,
+      title,
+      description,
+      price,
       userId,
-      location: location,
+      location,
       creatorName: profile.name,
-      image: image,
+      image,
+      category,
+      jobStarts:jobStarts,
+      jobEnds: jobEnds,
     });
 
     await newGig.save();
+
     return NextResponse.json(
       { message: "Gig created successfully", newGig },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Error creating gig:", error.message || error);
     return NextResponse.json(
-      { message: "Error creating gig", error: error },
+      { message: "Error creating gig", error: error.message || "An unknown error occurred" },
       { status: 500 }
     );
   }
 }
+
 export async function GET(req: NextRequest) {
   await connectToDb();
 

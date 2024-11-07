@@ -33,7 +33,7 @@ const Cards: React.FC<CardProps> = ({
               alt={title}
               layout="fill"
               objectFit="cover"
-              className="rounded-t-lg"
+              className="rounded-lg"
             />
           </div>
         )}

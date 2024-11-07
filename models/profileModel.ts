@@ -10,6 +10,7 @@ interface IProfile extends Document {
   city?: string;
   work?: string;
   education?: string;
+  description?: string;
   profilePic?:string
   languages: string[];
   socials: string[];
@@ -32,6 +33,10 @@ const ProfileSchema: Schema<IProfile> = new Schema({
     required: true,
   },
   phone: {
+    type: String,
+    required: false,
+  },
+  description: {
     type: String,
     required: false,
   },
