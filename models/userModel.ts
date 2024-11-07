@@ -3,7 +3,7 @@ import mongoose, { Document, Model, Schema } from "mongoose";
 export interface IUser extends Document {
   username: string;
   email: string;
-  password: string;
+  password?: string;
   isVerified: boolean;
   otp?: string;
   otpExpiry?: Date;
@@ -24,8 +24,6 @@ const userSchema: Schema<IUser> = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    unique: true,
   },
   isVerified: {
     type:Boolean,
