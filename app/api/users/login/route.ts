@@ -5,10 +5,11 @@ import connectToDb from "@/dbConfig/dbCon";
 import User from "@/models/userModel";
 import { generateToken } from "@/utils/jwtHandler";
 import { generateOtp, sendOtpEmail } from "@/utils/otpHnadler";
+import { use } from "react";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
+  password: z.string().min(6, "Password must be at least 6 characters long").optional(),
 });
 
 export async function POST(req: Request) {
@@ -22,6 +23,9 @@ export async function POST(req: Request) {
 
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+    if (!password || user.password === undefined) {
+      return NextResponse.json({ message: "Password required" }, { status: 401 });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
