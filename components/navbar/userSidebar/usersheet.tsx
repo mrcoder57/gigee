@@ -37,7 +37,7 @@ const Usersheet = () => {
     <Sheet>
       <SheetTrigger>
         <div className="w-[36px] h-[36px]  lg:border-none border border-[#D9d9d9] rounded-full flex items-center justify-center">
-        <Image src="/menu.svg" alt="delete" width={23} height={23} />
+          <Image src="/menu.svg" alt="delete" width={23} height={23} />
         </div>
       </SheetTrigger>
       <SheetContent>
@@ -53,35 +53,35 @@ const Usersheet = () => {
                 </span>
               </Link>
             </div>
+
             <div className=" flex flex-row items-center justify-center gap-x-[10px]">
-              <Image
-                src="/profile-circle.svg"
-                alt="delete"
-                width={23}
-                height={23}
-              />
-               <Link href={`/profile/${userId}`}>
-                <span className=" text-center text-[16px] font-[500] ">
-                  {" "}
-                  Edit Profile
-                </span>
-              </Link>
-            </div>
-            <div className=" flex flex-row items-center justify-center gap-x-[10px]">
-              <Image
-                src="/event.svg"
-                alt="delete"
-                width={23}
-                height={23}
-              />
-               <Link href={`/create-gig`}>
+              <Image src="/event.svg" alt="delete" width={23} height={23} />
+              <Link href={`/create-gig`}>
                 <span className=" text-center text-[16px] font-[500] ">
                   {" "}
                   Create ur Event
                 </span>
               </Link>
             </div>
-            <Login />
+            <div className="flex flex-row items-center justify-center gap-x-[10px]">
+              {userId ? (
+                <>
+                  <Image
+                    src="/profile-circle.svg"
+                    alt="profile-circle"
+                    width={23}
+                    height={23}
+                  />
+                  <Link href={`/profile/${userId}`}>
+                    <span className="text-center text-[16px] font-[500]">
+                      Edit Profile
+                    </span>
+                  </Link>
+                </>
+              ) : (
+                <Login />
+              )}
+            </div>
           </div>
           <div className=" absolute bottom-3 flex flex-col items-start py-10 gap-y-4 justify-start w-full ">
             <div className=" flex flex-row items-center justify-center gap-x-[10px]">
