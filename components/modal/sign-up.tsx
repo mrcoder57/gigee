@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { Signupuser, verifyOtp } from "@/utils/api-handler";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { Login } from "./login";
 export function Signup() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ export function Signup() {
   const [otp, setOtp] = useState("");
   const [userRole, setUserRole] = useState("");
   const [isDisable, setIsdisable] = useState(true);
-
+const router = useRouter();
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -48,7 +49,27 @@ export function Signup() {
       }
     }
   };
+  const handleGoogleSignUp = async () => {
+    try {
+      // Redirect the user to the Google OAuth2 authentication endpoint
+      const response = await fetch("/api/users/google/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
+      if (response.ok) {
+        // Redirect the user to the Google authentication page
+        router.push(response.url);
+      } else {
+        // Handle the error
+        console.error("Error signing up with Google:", response.status);
+      }
+    } catch (error) {
+      console.error("Error signing up with Google:", error);
+    }
+  };
   const handleOtp = async (event: any) => {
     event.preventDefault();
 
@@ -176,6 +197,7 @@ export function Signup() {
                 Signup
               </Button>
             )}
+            <Button onClick={ handleGoogleSignUp}>Signup using google</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
