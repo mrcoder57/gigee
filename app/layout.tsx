@@ -10,17 +10,16 @@ import MobileNavbar from "@/components/navbar/mobileNavbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400","500","600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500","600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
-
 
 export const metadata: Metadata = {
   title: "Gigee",
@@ -34,15 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
       <body className={`${montserrat.className}`}>
-      
-          <Navbar />
-          <MobileNavbar/>
-      
+        <Navbar />
+        <MobileNavbar />
+
         <main> {children}</main>
         <Toaster />
-        
+
         <Footer />
       </body>
     </html>
