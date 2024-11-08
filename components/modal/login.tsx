@@ -1,145 +1,232 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Loginuser, verifyOtp } from "@/utils/api-handler";
-import { toast } from "sonner";
-import Cookies from "js-cookie";
-import Image from "next/image";
-import { Signup } from "./sign-up";
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Separator } from "@/components/ui/separator"
+import { toast } from 'sonner'
+import { getSession, signIn } from 'next-auth/react'
+import { Github } from 'lucide-react'
+import { Dialog, DialogContent, DialogFooter, DialogTrigger } from '../ui/dialog'
+import Image from 'next/image'
+  
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
-  const [isVerified, setIsVerified] = useState(true);
-  const [error, setError] = useState(null);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [username, setName] = useState('')
+  const [otp, setOtp] = useState('')
+  const [isOtpSent, setIsOtpSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isOtpVerified, setIsOtpVerified] = useState(false)
+  const router = useRouter()
 
-  const handleLogin = async (event: any) => {
-    event.preventDefault();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
     try {
-      const response = await Loginuser(email, password);
-      if (response.user && !response.user.isVerified) {
-        setIsVerified(false);
-        toast.success("OTP sent successfully, please verify");
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      })
+      if (result?.error) {
+        setError(result.error)
+        toast.error(result.error)
       } else {
-        toast.success("Login successful");
-        Cookies.set("token", response.token, { expires: 30 });
-        Cookies.set("userId", response.userId, { expires: 30 });
-        window.location.reload();
-        // console.log(response.userId)
+        toast.success("Logged in successfully")
+        const session = await getSession()
+        console.log("User info:", session?.user)
+      }
+    } catch (error) {
+      setError("An error occurred during login")
+      toast.error("An error occurred during login")
+    }
+  }
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/users/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }),
+      })
+      const data = await response.json()
+      if (response.ok) {
+        setIsOtpSent(true)
+        toast.success('OTP sent to your email')
+      } else {
+        toast.error(data.message)
       }
     } catch (error: any) {
-      setError(error.message || "An error occurred during login");
-      toast.error(error.message || "An error occurred during login");
+      toast.error(error.message)
     }
-  };
-  const handleOtp = async (event: any) => {
-    event.preventDefault();
+  }
 
+  const handleOtpVerification = async (e: React.FormEvent) => {
+    e.preventDefault()
     try {
-      const response = await verifyOtp(email, otp);
-
-      // console.log(response.token);
-      // console.log(response.userId);
-      Cookies.set("token", response.token, { expires: 30 });
-      Cookies.set("userId", response.userId, { expires: 30 });
-
-      toast.success("user verified and Logged In ");
-      window.location.reload();
-    } catch (err: any) {
-      if (err.message) {
-        toast.error(err.message);
-        console.log(err.message);
+      const response = await fetch('/api/users/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+      })
+      const data = await response.json()
+      if (response.ok) {
+        setIsOtpVerified(true)
+        toast.success('OTP verified successfully')
+        await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        })
+        router.push('/dashboard')
       } else {
-        toast.error("An unknown error occurred");
+        toast.error(data.message || 'OTP verification failed')
       }
+    } catch (error: any) {
+      toast.error(error.message || 'An error occurred during OTP verification')
     }
-  };
+  }
   return (
     <div className="lg:block bg-white ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant={"outline"} className=" flex shadow-sm flex-row cursor-pointer w-auto items-center justify-center gap-x-[10px] rounded-[4px]  p-2 ">
+          <Button
+            variant={"outline"}
+            className=" flex shadow-sm flex-row cursor-pointer w-auto items-center justify-center gap-x-[10px] rounded-[4px]  p-2 "
+          >
             <Image src="/login.svg" alt="delete" width={23} height={23} />
 
             <span className=" text-center text-[16px] font-[500] "> Login</span>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[350px]">
-          <DialogHeader>
-            <DialogTitle>Login</DialogTitle>
-            <DialogDescription>
-              Please provide your login credentials
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-2">
-              <Label htmlFor="email" className="">
-                Email
-              </Label>
-
-              <Input
-                id="email"
-                placeholder="example@gmail.com"
-                className="col-span-3"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-2">
-              <Label htmlFor="password" className="">
-                Password
-              </Label>
-              <Input
-                id="password"
-                placeholder="password"
-                className="col-span-3"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {!isVerified && (
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="otp" className="text-right">
-                  OTP
-                </Label>
-                <Input
-                  id="otp"
-                  placeholder="Enter OTP"
-                  className="col-span-3"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                />
+        <DialogContent className="w-[350px] flex items-center justify-center">
+          <div className="w-full h-full shadow-none border-none">
+            <CardHeader>
+              <CardTitle>Authentication</CardTitle>
+              <CardDescription>Login or create a new account.</CardDescription>
+            </CardHeader>
+            <CardContent className=' w-full h-full'>
+              <div className="space-y-4">
+                <Button
+                  variant="outline"
+                  className="w-full flex items-center justify-center space-x-2"
+                  onClick={() => signIn("github")}
+                >
+                  <Github className="w-5 h-5" />
+                  <span>Continue with GitHub</span>
+                </Button>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
               </div>
-            )}
+              <Tabs defaultValue="login" className="mt-4">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="login">Login</TabsTrigger>
+                  <TabsTrigger value="signup">Signup</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="login">
+                  <form onSubmit={handleLogin} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <Button type="submit" className="w-full">
+                      Login
+                    </Button>
+                  </form>
+                </TabsContent>
+
+                <TabsContent value="signup">
+                  <form onSubmit={handleSignup} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="signupEmail">Email</Label>
+                      <Input
+                        id="signupEmail"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="signupPassword">Password</Label>
+                      <Input
+                        id="signupPassword"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <Button type="submit" className="w-full">
+                      Sign Up
+                    </Button>
+                  </form>
+
+                  {isOtpSent && !isOtpVerified && (
+                    <form
+                      onSubmit={handleOtpVerification}
+                      className="space-y-4 mt-4"
+                    >
+                      <div className="space-y-2">
+                        <Label htmlFor="otp">Enter OTP</Label>
+                        <Input
+                          id="otp"
+                          type="text"
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <Button type="submit" className="w-full">
+                        Verify OTP
+                      </Button>
+                    </form>
+                  )}
+                </TabsContent>
+              </Tabs>
+            </CardContent>
           </div>
-          <div className=" flex flex-row justify-between w-full  items-center">
-            <p>Do not have an Account</p>
-          <Button className=' ml-2' variant="ghost" onClick={() => {}}>Sign up</Button>
-          </div>
-          <DialogFooter>
-            {!isVerified ? (
-              <Button type="submit" onClick={handleOtp}>
-                Submit OTP
-              </Button>
-            ) : (
-              <Button type="submit" onClick={handleLogin}>
-                Login
-              </Button>
-            )}
-          </DialogFooter>
+   
         </DialogContent>
       </Dialog>
     </div>
