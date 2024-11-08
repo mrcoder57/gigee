@@ -14,25 +14,31 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Login } from "@/components/modal/login";
 import { logOut } from "@/utils/api-handler";
+import { getSession, signOut } from "next-auth/react";
 const Usersheet = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
   const router = useRouter();
   useEffect(() => {
-    const token = Cookies.get("token");
-    const userId = Cookies.get("userId");
-    if (token) {
-      setLoggedIn(true);
-      setUserId(userId || "");
-    }
+    // Fetch session and get the userId from the session data
+    const fetchSession = async () => {
+      const session = await getSession();
+      if (session?.user) {
+        setLoggedIn(true);
+        setUserId(session.user.id); // Assuming session.user contains id
+        console.log(session.user.id);
+      }
+    };
+
+    fetchSession();
   }, []);
 
   const handleLogout = async () => {
-    await logOut();
-    setLoggedIn(false);
-    setUserId("");
-    router.push("/");
+    await signOut({
+      callbackUrl: "/", // Redirect to homepage or any other route after logout
+    });
   };
+  
   return (
     <Sheet>
       <SheetTrigger>
@@ -86,7 +92,7 @@ const Usersheet = () => {
           <div className=" absolute bottom-3 flex flex-col items-start py-10 gap-y-4 justify-start w-full ">
             <div className=" flex flex-row items-center justify-center gap-x-[10px]">
               <Image src="/logout.svg" alt="delete" width={23} height={23} />
-              <button onClick={logOut}>
+              <button onClick={handleLogout}>
                 <span className=" text-center text-[16px] font-[500] ">
                   {" "}
                   Logout
