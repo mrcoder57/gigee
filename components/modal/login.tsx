@@ -39,6 +39,7 @@ export function Login() {
         toast.success("Logged in successfully")
         const session = await getSession()
         console.log("User info:", session?.user)
+        window.location.reload()
       }
     } catch (error) {
       setError("An error occurred during login")
