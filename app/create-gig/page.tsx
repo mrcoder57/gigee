@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import { Login } from "@/components/modal/login";
 import Anytime from "@/components/CreateGig/landingPage/anytime/anytime";
+import AuthForm from "@/components/authform/authForm";
 
 const Creategig = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,7 +27,7 @@ const Creategig = () => {
           {loggedIn ? (
             <MultiStepForm />
           ) : (
-           <Login/>
+           <AuthForm/>
           )}
         </div>
       </div>
