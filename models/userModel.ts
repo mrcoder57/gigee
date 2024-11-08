@@ -40,7 +40,7 @@ const userSchema: Schema<IUser> = new Schema({
   },
   userRole: {
     type: String,
-    required: true,
+    default:'consumer',
     enum: ['seller', 'consumer'],
   },
   isAdmin: {
