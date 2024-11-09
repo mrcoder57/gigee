@@ -9,6 +9,7 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
     };
+    token?: string; // Add token to the Session type
   }
 
   interface User {
