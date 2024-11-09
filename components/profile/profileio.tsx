@@ -5,7 +5,8 @@ import { Button } from "../ui/button";
 import { IoAdd } from "react-icons/io5";
 import { toast } from "sonner";
 import axios from "axios";
-import { config } from "@/utils/api-handler";
+import { getSession } from "next-auth/react";
+
 
 interface ProfileData {
   _city: string;
@@ -38,6 +39,7 @@ const ProfileForm: React.FC<ProfileData> = ({
   const [email, setEmail] = useState(_email); 
   const [socials, setSocials] = useState<string[]>(_socials);
   const [languages, setLanguages] = useState<string[]>(_languages);
+ 
 
   const handleSocialChange = (index: number, value: string) => {
     const newSocials = [...socials];
@@ -59,7 +61,10 @@ const ProfileForm: React.FC<ProfileData> = ({
     setLanguages([...languages, ""]);
   };
   const updateProfile = async (e: FormEvent) => {
+   
     e.preventDefault();
+    const session = await getSession()
+    const token = session?.token
     try {
       const response = await axios.put(
         `/api/profile/${userId}`,
@@ -73,7 +78,11 @@ const ProfileForm: React.FC<ProfileData> = ({
           userId:userId,
           work: work,
         },
-        config
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,  // Make sure you're passing the correct token if available
+          },
+        }
       );
 
       toast.success("profile updated successfully");
