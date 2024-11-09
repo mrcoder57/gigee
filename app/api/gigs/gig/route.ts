@@ -4,7 +4,8 @@ import Gig from "@/models/gigMOdel";
 import { z } from "zod";
 import { verifyToken } from "@/middleware/auth";
 import Profile from "@/models/profileModel";
-
+import { getServerSession } from "next-auth";
+import { AuthOptions } from "next-auth";
 const gigSchema = z.object({
   title: z.string().nonempty(),
   description: z.string().nonempty(),
@@ -19,10 +20,20 @@ const gigSchema = z.object({
 export async function POST(req: any) {
   await connectToDb();
 
+  // Fetch token from the Authorization header
+  const token = req.headers.get("Authorization")?.replace("Bearer ", "");
+  // console.log(token);
+  if (!token) {
+    return NextResponse.json(
+      { message: "Token is missing from Authorization header" },
+      { status: 401 }
+    );
+  }
+
   // Verify the token
-  const tokenError = verifyToken(req);
+  const tokenError = verifyToken(req);  // Assuming your verifyToken function takes the token string
   if (tokenError) {
-    return tokenError;
+    return tokenError;  // Return the error response if the token is invalid
   }
 
   let parsedBody;
@@ -31,10 +42,9 @@ export async function POST(req: any) {
     const { title, description, price, image, location, category, jobStarts, jobEnds } =
       gigSchema.parse(parsedBody); // This could throw an error if invalid
 
-    const userId = req.userId;
-
-    console.log("user", userId);
-
+    // Extract userId from the token (usually from the payload)
+    const userId = req.userId;  // Assuming verifyToken sets req.userId or returns it
+      console.log("user", userId);
     if (!userId) {
       return NextResponse.json(
         { message: "userId is required" },
@@ -59,8 +69,8 @@ export async function POST(req: any) {
       creatorName: profile.name,
       image,
       category,
-      jobStarts:jobStarts,
-      jobEnds: jobEnds,
+      jobStarts,
+      jobEnds,
     });
 
     await newGig.save();
