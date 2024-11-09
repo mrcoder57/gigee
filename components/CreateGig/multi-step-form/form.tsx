@@ -5,13 +5,15 @@ import Step2 from "./step-2";
 import Step3 from "./step-3";
 import axios from "axios";
 import { toast } from "sonner";
-import { config } from "@/utils/api-handler";
+
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const MultiStepForm: React.FC = () => {
+  const { data: session, status } = useSession();  // Call useSession at the top of the component
+  const router = useRouter();
   const [step, setStep] = useState(1);
-  const router=useRouter()
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
@@ -47,54 +49,55 @@ const MultiStepForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // console.log(debouncedFormValues);
+
     try {
-      const Token = Cookies.get("token");
-      const { title, description, location, price, image } = debouncedFormValues;
-      const response = await axios.post("/api/gigs/gig", {
-        title,
-        description,
-        location,
-        price,
-        image
-      }, config);
-      // console.log(response);
-      // const {gigId}=response.data.newGig._id;
-      // console.log("gigId",gigId)
-      toast.success("gig created successfully");
-     window.location.reload()
-    } catch (err: any) {
-      if (err.message) {
-        toast.error(err.message);
-        console.log(err);
-      } else {
-        toast.error("An unknown error occurred");
+      // Check if session is authenticated
+      if (status !== "authenticated" || !session?.token) {
+        toast.error("You must be logged in to create a gig.");
+        setIsSubmitting(false);
+        return;
       }
+
+      const { title, description, location, price, image } = debouncedFormValues;
+
+      // Send a POST request to create the gig
+      const response = await axios.post(
+        "/api/gigs/gig",
+        {
+          title,
+          description,
+          location,
+          price,
+          image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session.token}`,  // Make sure you're passing the correct token if available
+          },
+        }
+      );
+
+      console.log(response);
+      const { gigId } = response.data.newGig._id;
+      console.log("gigId", gigId);
+
+      // You may want to handle successful gig creation here, e.g., by redirecting
+      toast.success("Gig created successfully!");
+      router.push(`/gigs/${gigId}`);  // Optionally navigate to the new gig page
+
+    } catch (err: any) {
+      toast.error(err?.message || "An unknown error occurred");
+      console.error(err);
     } finally {
       setIsSubmitting(false);
-      toast.success("gig created successfully");
-      
     }
   };
 
   switch (step) {
     case 1:
-      return (
-        <Step1
-          nextStep={nextStep}
-          handleChange={handleChange}
-          values={formValues}
-        />
-      );
+      return <Step1 nextStep={nextStep} handleChange={handleChange} values={formValues} />;
     case 2:
-      return (
-        <Step2
-          nextStep={nextStep}
-          prevStep={prevStep}
-          handleChange={handleChange}
-          values={formValues}
-        />
-      );
+      return <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} values={formValues} />;
     case 3:
       return (
         <Step3
