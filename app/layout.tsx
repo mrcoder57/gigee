@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Poppins, Montserrat } from "next/font/google";
 import MobileNavbar from "@/components/navbar/mobileNavbar";
+import ReactQueryProvider from "@/utils/provider/ReactQueryProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,13 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.className}`}>
-        
         <Navbar />
         <MobileNavbar />
-
-        <main> {children}</main>
-        <Toaster />
-
+        <ReactQueryProvider>
+          <main> {children}</main>
+          <Toaster />
+        </ReactQueryProvider>
         <Footer />
       </body>
     </html>
