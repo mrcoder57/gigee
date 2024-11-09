@@ -6,14 +6,18 @@ import { getSession } from "next-auth/react";
 export const userId = Cookies.get("userId");
 const Token = Cookies.get("token");
 
-if (!Token) {
-  const loggedIn = false;
-}
-export const config = {
-  headers: {
-    Authorization: `${Token}`,
-  },
-};
+const session =  getSession(); // This is an asynchronous call to get the session  
+    // If session is valid, configure the headers for your API request
+   export const config = {
+      headers: {
+        Authorization: `Bearer ${Token}`,  // Make sure you're passing the correct token if available
+      },
+    };
+
+    // Example API call with the session token in the Authorization header
+    // For demonstration, assuming you're making a PUT request to update the profile
+
+
 export const Loginuser = async (email: string, password: string) => {
   try {
     const response = await axios.post("/api/users/login", {
@@ -99,7 +103,7 @@ export const getGigbyId = async (gigId: string) => {
 };
 export const getBids = async (gigId: string) => {
   try {
-    const response = await axios.get(`/api/gigs/${gigId}/bids`, config);
+    const response = await axios.get(`/api/gigs/${gigId}/bids`, );
     return response;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -126,7 +130,7 @@ export const getProfile = async (userId: string) => {
 };
 export const getBid = async (bidId: string) => {
   try {
-    const response = await axios.get(`/api/bids/${bidId}`, config);
+    const response = await axios.get(`/api/bids/${bidId}`, );
     return response;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -151,7 +155,7 @@ export const logOut = async () => {
 };
 export const getNotifications = async () => {
   try {
-    const response = await axios.get(`/api/notifications`, config);
+    const response = await axios.get(`/api/notifications`, );
    return response;
   } catch (error) {
     console.error("Error fetching notifications:", error);
