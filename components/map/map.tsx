@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 
 const Map = () => {
   return (
-    <div id="map" className="flex flex-col w-full lg:pt-2 lg:mt-2 py-2 my-2 justify-between lg:max-w-6xl z-10  h-full">
+    <div id="map" className="flex lg:px-4 px-0 flex-col w-full lg:pt-2 lg:mt-2 py-2 my-2 justify-between lg:max-w-6xl z-10  h-full">
         <Separator className="mb-8" />
       <div className="flex flex-col gap-y-4  justify-center w-full h-full lg:px-0 px-2 py-4">
         <h1
