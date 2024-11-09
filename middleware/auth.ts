@@ -11,7 +11,7 @@ export interface CustomNextRequest extends NextRequest {
 }
 
 export function verifyToken(req: CustomNextRequest) {
-  const authHeader = req.headers.get("Authorization");
+  const authHeader = req.headers.get("Authorization")?.replace("Bearer ", "");
   
   const token = authHeader;
   
