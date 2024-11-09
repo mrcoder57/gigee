@@ -30,6 +30,8 @@ export default function AuthForm() {
         email,
         password,
       })
+      const session = await getSession()
+      console.log("User info:", session?.user)
       if (result?.error) {
         setError(result.error)
         toast.error(result.error)
@@ -37,6 +39,7 @@ export default function AuthForm() {
         toast.success("Logged in successfully")
         const session = await getSession()
         console.log("User info:", session?.user)
+
         window.location.reload();
         
       }
@@ -83,7 +86,7 @@ export default function AuthForm() {
           email,
           password,
         })
-        router.push('/dashboard')
+        window.location.reload()
       } else {
         toast.error(data.message || 'OTP verification failed')
       }
