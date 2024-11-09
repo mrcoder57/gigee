@@ -4,7 +4,7 @@ const JWT_SECRET = process.env.jwt_secret!;
 export const generateToken = (user: any) => {
  
   const payload = {
-    userId: user._id,
+    userId: user.id,
     email: user.email,
   };
 
