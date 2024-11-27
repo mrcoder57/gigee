@@ -15,7 +15,7 @@ const Footer = () => {
   const isChatsPage= pathName==="/chats"
   if (isChatsPage) return null;
   return (
-    <div className="w-full  border-t-2 h-[350px] bg-[#aeaeae] flex mx-auto">
+    <div className="w-full  border-t-2 h-[350px] bg-[#eeeeee] flex mx-auto">
   <footer className="flex flex-col gap-2 h-full w-full max-w-7xl mx-auto">
     <div className="flex lg:flex-row flex-col  w-full items-center justify-between gap-y-6 mt-auto mb-auto px-4">
       <div className="flex flex-col justify-center items-center lg:gap-7 gap-4">
