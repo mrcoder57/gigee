@@ -1,98 +1,104 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Separator } from "./ui/separator";
-
-import { AiFillFacebook } from "react-icons/ai";
-import { SlSocialFacebook } from "react-icons/sl";
-import { PiTwitterLogoLight } from "react-icons/pi";
-import { RiGithubLine } from "react-icons/ri";
-import { quickLinks } from "@/utils/constants";
-import { BiMailSend } from "react-icons/bi";
+import { Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathName = usePathname();
   const isChatsPage= pathName==="/chats"
   if (isChatsPage) return null;
   return (
-    <div className="w-full  border-t-2 h-[350px] bg-[#eeeeee] flex mx-auto">
-  <footer className="flex flex-col gap-2 h-full w-full max-w-7xl mx-auto">
-    <div className="flex lg:flex-row flex-col  w-full items-center justify-between gap-y-6 mt-auto mb-auto px-4">
-      <div className="flex flex-col justify-center items-center lg:gap-7 gap-4">
-        <Link href="/">
+    <footer className="bg-gray-50 text-gray-600">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full ">
+      <div className="flex flex-col items-center mb-8">
+        <Link href="/" className="mb-4">
           <Image
             src="/images/gigee.png"
-            alt="GigBnB Logo"
+            alt="Company Logo"
             width={150}
             height={50}
+            className="h-12 w-auto"
           />
         </Link>
-        <a
-          href="mailto:gigbnbverifi@gmail.com"
-          className="text-[12px] font-semibold"
-        >
-          gigbnbverifi@gmail.com
-        </a>
+        <p className="text-sm text-gray-500 text-center">Host any Jobs or Events</p>
       </div>
-      <div className=" flex lg:flex-row w-full lg:w-auto lg:justify-between lg:gap-x-48 justify-between">
-      <div className="flex flex-col lg:justify-center w-full lg:w-auto justify-start py-6 lg:gap-y-4">
-        <h3 className="text-[12px] font-medium">Quick Links</h3>
-        {quickLinks.map((links, ind) => (
-          <a href="#" className="text-[14px] text-[#909090]" key={ind}>
-            {links.name}
+      {/* links  */}
+      <div className="grid grid-cols-1 gap-y-8 md:grid-cols-3 lg:flex justify-between w-full mx-auto px-auto">
+        <div>
+          <h2 className="text-gray-900 text-lg font-semibold mb-4">Quick Links</h2>
+          <ul className="space-y-2">
+            <li><Link href="/" className="text-sm hover:text-gray-900 transition-colors">Home</Link></li>
+            <li><Link href="/products" className="text-sm hover:text-gray-900 transition-colors">Products</Link></li>
+            <li><Link href="/services" className="text-sm hover:text-gray-900 transition-colors">Services</Link></li>
+            <li><Link href="/contact" className="text-sm hover:text-gray-900 transition-colors">Contact</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-gray-900 text-lg font-semibold mb-4">Resources</h2>
+          <ul className="space-y-2">
+            <li><Link href="/blog" className="text-sm hover:text-gray-900 transition-colors">Blog</Link></li>
+            <li><Link href="/faq" className="text-sm hover:text-gray-900 transition-colors">FAQ</Link></li>
+            <li><Link href="/support" className="text-sm hover:text-gray-900 transition-colors">Support</Link></li>
+          </ul>
+        </div>
+        <div className=" lg:max-w-sm">
+          <h2 className="text-gray-900 text-lg font-semibold mb-4">Get a Call Back</h2>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            // Handle form submission here
+            console.log('Form submitted')
+          }}>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input 
+                type="tel" 
+                id="phone" 
+                placeholder="Enter your phone number" 
+                required 
+              />
+            </div>
+            <Button type="submit" className="mt-2 w-full bg-rose-500 hover:bg-rose-400">
+              Request Call Back
+            </Button>
+          </form>
+        </div>
+      </div>
+      <div className="mt-8 pt-8 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+          <div className="mt-4 sm:mt-0">
+            <Link href="/privacy" className="text-sm text-gray-500 hover:text-gray-700 transition-colors mr-4">Privacy Policy</Link>
+            <Link href="/terms" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">Terms of Service</Link>
+          </div>
+        </div>
+        <div className="mt-4 flex justify-center space-x-4">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Facebook className="w-6 h-6" />
+            <span className="sr-only">Facebook</span>
           </a>
-        ))}
-      </div>
-
-      <div className="flex flex-col lg:justify-center justify-start w-full lg:w-auto items-end mt-4 py-6 lg:gap-y-7">
-        {quickLinks.map((links, ind) => (
-          <a href="#" className="text-[12px] text-[#909090]" key={ind}>
-            {links.name}
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Twitter className="w-6 h-6" />
+            <span className="sr-only">Twitter</span>
           </a>
-        ))}
-      </div>
-      </div>
-      <div className="flex flex-col items-center justify-center lg:gap-y-6 gap-y-2">
-        <h3 className="text-[12px] font-medium">Request call back</h3>
-        <div className="flex items-center justify-between h-12 w-full max-w-xs rounded-lg border border-gray-200">
-          <input
-            type="text"
-            className="w-[70%] ml-2 h-full border-none outline-none focus:outline-none"
-          />
-          <div className="flex items-center justify-center h-full w-[25%] bg-rose-500 rounded-md text-white">
-            <button className="rounded-full">
-              <BiMailSend size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="flex flex-col gap-4 w-full justify-between items-center px-4 mb-6">
-      <hr className="lg:flex border-[#909090] lg:w-full w-[50%]" />
-      <div className="flex lg:flex-row flex-col w-full justify-between  gap-y-3">
-        <div className="flex flex-row items-center justify-center gap-3">
-          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
-            <SlSocialFacebook size={18} />
-          </div>
-          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
-            <PiTwitterLogoLight size={18} />
-          </div>
-          <div className="h-[28px] w-[28px] hover:cursor-pointer flex items-center justify-center border border-[#909090] rounded-full">
-            <RiGithubLine size={18} />
-          </div>
-        </div>
-
-        <div className="text-center flex items-center justify-center">
-          <p className="text-[12px]">A product of GIGEE</p>
-        </div>
-        <div className="text-center flex items-center justify-center">
-          <p className="text-[12px]">© 2024 all rights reserved</p>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Instagram className="w-6 h-6" />
+            <span className="sr-only">Instagram</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Linkedin className="w-6 h-6" />
+            <span className="sr-only">LinkedIn</span>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Github className="w-6 h-6" />
+            <span className="sr-only">GitHub</span>
+          </a>
         </div>
       </div>
     </div>
   </footer>
-</div>
 
   );
 };
