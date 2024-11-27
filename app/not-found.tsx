@@ -18,7 +18,7 @@ export default function NotFound() {
             </p>
             <div className="space-y-4">
               <p className="text-lg text-gray-600 text-center md:text-left">Possible reasons:</p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2 flex items-center flex-col w-full text-center md:text-left">
+              <ul className="list-disc list-inside text-gray-600 space-y-2 flex  flex-col w-full text-center md:text-left">
                 <li>The page may have been moved or deleted</li>
                 <li>You might have typed the wrong URL</li>
               </ul>
