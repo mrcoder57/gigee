@@ -4,7 +4,9 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { LatLngTuple } from "leaflet";
 
-
+interface Props {
+  coords: [number, number] | null;
+}
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(
@@ -28,13 +30,12 @@ const Popup = dynamic(
 );
 
 // Default coordinates (fallback)
-
 const DEFAULT_CENTER: LatLngTuple = [51.505, -0.09];
-const LeafletMap = () => {
+
+const CLeafletMap = ({ coords }: Props) => {
   const [mounted, setMounted] = useState(false);
   const [position, setPosition] = useState<LatLngTuple>(DEFAULT_CENTER);
   const [map, setMap] = useState<L.Map | null>(null);
-  const DEFAULT_center: LatLngTuple = [51.505, -0.09];
 
   // Define custom marker icon
   const customIcon = L.icon({
@@ -45,25 +46,25 @@ const LeafletMap = () => {
   });
 
   // Handle position updates
-  // useEffect(() => {
-  //   if (coords) {
-  //     setPosition(coords);
-  //     // If map exists, pan to new position
-  //     map?.setView(coords, map.getZoom());
-  //   }
-  // }, [coords, map]);
+  useEffect(() => {
+    if (coords) {
+      setPosition(coords);
+      // If map exists, pan to new position
+      map?.setView(coords, map.getZoom());
+    }
+  }, [coords, map]);
 
   // Handle client-side mounting
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted || !coords) return null;
 
   return (
     <div className="relative w-full h-full min-h-[400px] rounded-lg overflow-hidden">
       <MapContainer
-        center={DEFAULT_center}
+        center={position}
         zoom={13}
         scrollWheelZoom={true}
         className="h-full w-full"
@@ -89,6 +90,6 @@ const LeafletMap = () => {
   );
 };
 
-export default LeafletMap;
+export default CLeafletMap;
 
 

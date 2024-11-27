@@ -20,7 +20,7 @@ const Map = () => {
         </h1>
         <p className=" text-[16px] font-[500]">Delhi,IN</p>
         <div className="flex lg:w-full w-[337px] justify-center items-center mx-auto lg:h-[397px] h-[257px] sm:w-[550px] sm:h-[266px] md:w-[833px] md:h-[310px] mt-2 rounded-lg">
-          <LeafletMap/>
+          {/* <LeafletMap/> */}
         </div>
       </div>
       <Separator  className=" my-7" />

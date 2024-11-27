@@ -70,13 +70,13 @@ export async function POST(
     const notificationMessage = `You have received a new bid of ${amount} for your gig: ${gig.title}`;
     const link = `/pages/gigs/${gigId}`; 
 
-    await createNotification({
+   const newNotification= await createNotification({
       message: notificationMessage,
       userId: gig.userId, 
       targetUserId: userId, 
       link: link,
     });
-    return NextResponse.json({ success: true, data: bid}, { status: 201 });
+    return NextResponse.json({ success: true, data: bid,notification:newNotification}, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
       { message: "error creating Bid", error: error.message },

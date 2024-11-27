@@ -32,6 +32,7 @@ export default function AuthForm() {
       })
       const session = await getSession()
       console.log("User info:", session?.user)
+      console.log("User info:", session?.token)
       if (result?.error) {
         setError(result.error)
         toast.error(result.error)
@@ -39,8 +40,8 @@ export default function AuthForm() {
         toast.success("Logged in successfully")
         const session = await getSession()
         console.log("User info:", session?.user)
-
-        window.location.reload();
+        console.log("User info:", session?.token)
+        // window.location.reload();
         
       }
     } catch (error) {

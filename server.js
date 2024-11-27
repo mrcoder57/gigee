@@ -16,15 +16,21 @@ app.prepare().then(() => {
 
   const io = new Server(httpServer);
 
+  io.emit("test", { message: "Hello World!" });
+
+
   io.on("connection", (socket) => {
     console.log("New client connected:", socket.id);
+
+    // Emit a test message once when a client connects
+   
 
     // Listen for the 'send_notification' event from the client
     socket.on("send_notification", (data) => {
       console.log("Notification received:", data);
 
-      // Emit the notification to all connected clients
-      io.emit("receive_notification", data);
+      // Emit the notification to all other connected clients except the sender
+      socket.broadcast.emit("receive_notification", data);
     });
 
     // Handle client disconnection
