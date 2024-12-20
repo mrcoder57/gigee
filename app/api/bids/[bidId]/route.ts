@@ -1,5 +1,5 @@
 import connectToDb from '@/dbConfig/dbCon';
-import { CustomNextRequest, verifyToken } from '@/middleware/auth';
+import {  verifyToken } from '@/middleware/auth';
 import { NextResponse, NextRequest } from 'next/server';
 import Bid from '@/models/bidsModel';
 import { z } from 'zod';
@@ -9,13 +9,9 @@ const paramsSchema = z.object({
   bidId: z.string().nonempty(),
 });
 
-export async function GET(req: CustomNextRequest, { params }: { params: { bidId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { bidId: string } }) {
   await connectToDb();
 
-  const tokenError = verifyToken(req);
-  if (tokenError) {
-    return tokenError;
-  }
 
   const validation = paramsSchema.safeParse(params);
   if (!validation.success) {
@@ -41,12 +37,24 @@ export async function GET(req: CustomNextRequest, { params }: { params: { bidId:
   }
 }
 
-export async function DELETE(req: CustomNextRequest, { params }: { params: { bidId: string } }) {
+export async function DELETE(req: any, { params }: { params: { bidId: string } }) {
     await connectToDb();
   
-    const tokenError = verifyToken(req);
-    if (tokenError) {
-      return tokenError;
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { message: "Token is missing or invalid in the Authorization header" },
+        { status: 401 }
+      );
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const decoded = verifyToken(token);
+    if (!decoded || !decoded.userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: Invalid token" },
+        { status: 401 }
+      );
     }
   
     const validation = paramsSchema.safeParse(params);
@@ -55,7 +63,7 @@ export async function DELETE(req: CustomNextRequest, { params }: { params: { bid
     }
   
     const { bidId } = validation.data;
-    const userId = req.userId;
+    const userId = decoded.userId;  
   
     try {
       const bid = await Bid.findById(bidId);
