@@ -5,30 +5,19 @@ interface JwtPayload {
   userId: string;
   isAdmin: boolean;
 }
-export interface CustomNextRequest extends NextRequest {
-  userId?: string;
-  isAdmin?: boolean;
-}
 
-export function verifyToken(req: CustomNextRequest) {
-  const authHeader = req.headers.get("Authorization")?.replace("Bearer ", "");
-  
-  const token = authHeader;
-  
-  if (!token) {
-    return NextResponse.json(
-      { message: "Access denied. No token provided." },
-      { status: 401 }
-    );
+export function verifyToken(token: string): JwtPayload {
+  const JWT_SECRET = process.env.jwt_secret!;
+  if (!JWT_SECRET) {
+    throw new Error('JWT secret is not defined in environment variables.');
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.jwt_secret!) as JwtPayload;
-
-    req.userId = decoded.userId;
-    req.isAdmin = decoded.isAdmin;
-    return null; // No error, proceed
+    const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
+    // console.log('Decoded token:', decoded);  // Log the decoded token
+    return decoded;
   } catch (error) {
-    return NextResponse.json({ message: "Invalid token." }, { status: 400 });
+    console.error('Error verifying token:', error);
+    throw new Error('Invalid or expired token');
   }
 }
