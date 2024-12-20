@@ -4,18 +4,21 @@ import { IUser } from "./userModel";
 export interface IGig extends Document {
   title: string;
   description: string;
-  price: number;
-  location: string;
+  price?: number;
+  location?: {
+    name: string;
+    coordinates: [number, number]; // [latitude, longitude]
+  };
   statusActive: boolean;
   creatorName: string;
-  jobStarts: Date;
-  jobEnds: Date;
-  skillsRequired: string[];
+  jobStarts?: Date;
+  jobEnds?: Date;
+  activities?: string[]; // Fixed typo
   category: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date; // From timestamps
+  updatedAt: Date; // From timestamps
   userId: IUser["_id"];
-  image: string;
+  image?: string;
 }
 
 const gigSchema: Schema<IGig> = new Schema(
@@ -30,11 +33,26 @@ const gigSchema: Schema<IGig> = new Schema(
     },
     price: {
       type: Number,
-      required: true,
+      required: false,
     },
     location: {
-      type: String,
-      required: true,
+      name: { type: String, required: true },
+      coordinates: {
+        type: [Number], // Array with two numbers: [latitude, longitude]
+        validate: {
+          validator: function (val: number[]) {
+            return (
+              val.length === 2 &&
+              val[0] >= -90 &&
+              val[0] <= 90 &&
+              val[1] >= -180 &&
+              val[1] <= 180
+            );
+          },
+          message: "Coordinates must be [latitude, longitude] within valid ranges",
+        },
+        required: true,
+      },
     },
     statusActive: {
       type: Boolean,
@@ -61,7 +79,7 @@ const gigSchema: Schema<IGig> = new Schema(
       type: Date,
       required: false,
     },
-    skillsRequired: {
+    activities: {
       type: [String],
       required: false,
     },
@@ -82,10 +100,11 @@ const gigSchema: Schema<IGig> = new Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Automatically adds createdAt and updatedAt
   }
 );
 
+// Create or reuse the model
 const Gig: Model<IGig> =
   mongoose.models.Gig || mongoose.model<IGig>("Gig", gigSchema);
 
