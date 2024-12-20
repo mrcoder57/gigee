@@ -27,7 +27,10 @@ interface Gig {
   title: string;
   description: string;
   statusActive: boolean;
-  location: string;
+  location: {
+    name: string;
+    coordinates: [number, number];
+  };
   price: number;
   userId: string;
   creatorName: string;
@@ -58,7 +61,7 @@ const Page = () => {
       <div className="w-full mx-auto flex justify-center">
         <div className="flex lg:flex-row flex-col-reverse justify-center max-w-6xl w-full mx-4 lg:mx-0 md:mx-0">
           <Content
-            location={gig.location}
+            location={gig.location.name}
             gigId={gigId}
             userId={gig.userId}
             description={gig.description}
