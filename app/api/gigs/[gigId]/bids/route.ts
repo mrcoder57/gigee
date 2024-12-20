@@ -1,5 +1,5 @@
 import connectToDb from "@/dbConfig/dbCon";
-import { CustomNextRequest, verifyToken } from "@/middleware/auth";
+import {  verifyToken } from "@/middleware/auth";
 import { NextResponse, NextRequest } from "next/server";
 import { z } from "zod";
 import Bid from "@/models/bidsModel";
@@ -17,13 +17,25 @@ export async function POST(
 ) {
   await connectToDb();
 
-  const tokenError = verifyToken(req);
-  if (tokenError) {
-    return tokenError;
-  }
+  const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { message: "Token is missing or invalid in the Authorization header" },
+        { status: 401 }
+      );
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const decoded = verifyToken(token);
+    if (!decoded || !decoded.userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: Invalid token" },
+        { status: 401 }
+      );
+    }
 
   const parsedBody = bidSchema.safeParse(await req.json());
-  const userId = req.userId;
+  const userId = decoded.userId;
   // console.log("user", userId);
   // const { gigId } = params;
   // console.log("gig", gigId);
@@ -87,15 +99,26 @@ export async function POST(
 export async function GET(req: any, { params }: { params: { gigId: string } }) {
   await connectToDb();
 
-  // Verify the token
-  const tokenError = verifyToken(req);
-  if (tokenError) {
-    return tokenError;
+  const authHeader = req.headers.get("Authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return NextResponse.json(
+      { message: "Token is missing or invalid in the Authorization header" },
+      { status: 401 }
+    );
+  }
+
+  const token = authHeader.replace("Bearer ", "");
+  const decoded = verifyToken(token);
+  if (!decoded || !decoded.userId) {
+    return NextResponse.json(
+      { message: "Unauthorized: Invalid token" },
+      { status: 401 }
+    );
   }
 
   const { gigId } = params;
-  const userId = req.userId;
-  const isAdmin = req.isAdmin;
+  const userId = decoded.userId;
+  const isAdmin = decoded.isAdmin;
   const gig = await Gig.findById(gigId);
   if ((gig as any).userId.toString() !== userId && !isAdmin) {
     return NextResponse.json(
