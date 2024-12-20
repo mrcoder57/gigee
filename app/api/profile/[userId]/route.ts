@@ -28,14 +28,26 @@ export async function PUT(
   try {
     await connectToDb();
 
-    const tokenError = verifyToken(req);
-    if (tokenError) {
-      return tokenError;
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { message: "Token is missing or invalid in the Authorization header" },
+        { status: 401 }
+      );
     }
 
-    const ruserId = req.userId;
+    const token = authHeader.replace("Bearer ", "");
+    const decoded = verifyToken(token);
+    if (!decoded || !decoded.userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: Invalid token" },
+        { status: 401 }
+      );
+    }
+
+    const ruserId = decoded.userId;
     const { userId } = params;
-    const isAdmin = req.isAdmin;
+    const isAdmin = decoded.isAdmin;
     const body = await req.json();
 
     const parsedBody = profileSchema.parse(body);
