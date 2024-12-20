@@ -32,7 +32,7 @@ export default function AuthForm() {
       })
       const session = await getSession()
       console.log("User info:", session?.user)
-      console.log("User info:", session?.token)
+      console.log("User token:", session?.token)
       if (result?.error) {
         setError(result.error)
         toast.error(result.error)
@@ -73,7 +73,7 @@ export default function AuthForm() {
   const handleOtpVerification = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('/api/users/verify-otp', {
+      const response = await fetch('/api/users/verifyOtp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp })
