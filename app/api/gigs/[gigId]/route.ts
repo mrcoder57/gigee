@@ -4,7 +4,7 @@ import Gig from "@/models/gigMOdel";
 import { verifyToken } from "@/middleware/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { CustomNextRequest } from "@/middleware/auth";
+
 
 const gigSchema = z.object({
   title: z.string().nonempty(),
@@ -44,16 +44,26 @@ export async function DELETE(
   { params }: { params: { gigId: string } }
 ) {
   await connectToDb();
+  const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { message: "Token is missing or invalid in the Authorization header" },
+        { status: 401 }
+      );
+    }
 
-  const tokenError = verifyToken(req);
-
-  if (tokenError) {
-    return NextResponse.json({ message: tokenError }, { status: 401 });
-  }
-
+    const token = authHeader.replace("Bearer ", "");
+    const decoded = verifyToken(token);
+    if (!decoded || !decoded.userId) {
+      return NextResponse.json(
+        { message: "Unauthorized: Invalid token" },
+        { status: 401 }
+      );
+    }
+    const userId = decoded.userId;
   const { gigId } = params;
-  const userId = req.userId;
-  const isAdmin = req.isAdmin;
+
+  const isAdmin = decoded.isAdmin;
 
   try {
     const gig = await Gig.findById(gigId);
@@ -113,7 +123,7 @@ export async function PUT(req: any, { params }: { params: { gigId: string } }) {
     gig.title = parsedData.title;
     gig.description = parsedData.description;
     gig.price = parsedData.price;
-    gig.location=parsedData.location;
+    // gig.location=parsedData.location;
     gig.statusActive=parsedData.statusActive;
     (gig as any).image = parsedData.image;
 
