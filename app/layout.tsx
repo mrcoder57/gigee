@@ -23,8 +23,13 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Gigee",
-  description: "An application to get every gig job around u",
+  title: "Evention",
+  description: "An Ai driven platform for events and enclusive career building",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
