@@ -10,9 +10,9 @@ const Logo = () => {
       <Link href='/'>
       <Image 
         alt="Logo" 
-        height={100} 
-        width={100} 
-        src="/images/gigee.png"
+        height={120} 
+        width={120} 
+        src="/logo.png"
         layout="fixed" // Assuming you want the logo size to remain constant
       />
       </Link>

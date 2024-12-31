@@ -33,7 +33,7 @@ function MobileNavbar() {
         </div>
         {/* Navbar ends */}
 
-        <CategoriesToggles />
+        {/* <CategoriesToggles /> */}
       </div>
     </div>
   );

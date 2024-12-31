@@ -16,10 +16,10 @@ const Footer = () => {
       <div className="flex flex-col items-center mb-8">
         <Link href="/" className="mb-4">
           <Image
-            src="/images/gigee.png"
+            src="/logo.png"
             alt="Company Logo"
-            width={150}
-            height={50}
+            width={250}
+            height={100}
             className="h-12 w-auto"
           />
         </Link>

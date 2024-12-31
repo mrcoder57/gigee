@@ -58,7 +58,7 @@ type City = {
 
   export const NavLinks=[
     {name:"Create an Event",Link:"create-gig"},
-    {name:"Anything",Link:"create-gig"},
+    {name:"DashB",Link:"create-gig"},
   ]
   
   export const quickLinks=[
