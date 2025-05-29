@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Intro from "@/components/CreateGig/intro";
-
+import MultiStepForm from "@/components/CreateGig/multi-step-form/form";
 import Anytime from "@/components/CreateGig/landingPage/anytime/anytime";
 import AuthForm from "@/components/authform/authForm";
 import { SessionProvider, useSession } from "next-auth/react";
-import MultiStepForm from "@/components/CreateGig/multisteps-forms/gigForms";
 
 // The component wrapped inside SessionProvider to access session state
 const Creategig = () => {
