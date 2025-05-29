@@ -23,7 +23,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Evention",
+  title: "Gigee",
   description: "An Ai driven platform for events and enclusive career building",
   icons: {
     icon: "/favicon.ico",
